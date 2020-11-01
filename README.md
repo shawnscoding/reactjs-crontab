@@ -12,18 +12,12 @@ npm install --save reactjs-crontab
 
 ## Usage
 
-```jsx
-import React, { Component } from 'react'
+This is currently only alpha version.
+Thus, it won't work properly.
+Please give me some time to complete.
+Stable release is expected to be by November 2020
 
-import MyComponent from 'reactjs-crontab'
-import 'reactjs-crontab/dist/index.css'
-
-class Example extends Component {
-  render() {
-    return <MyComponent />
-  }
-}
-```
+Light-weight crontab for handling repetitive tasks in React js
 
 ## License
 

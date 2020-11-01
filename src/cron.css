@@ -1,4 +1,143 @@
-/* 
+html {
+  font-size: 62.5%;
+}
+body {
+  position: relative;
+  min-height: 100%;
+  line-height: 1.1;
+  color: #000;
+  font-family: 'Noto Sans KR', sans-serif, Apple Gothic;
+}
+
+/*  Media Query */
+
+/* Tablet */
+@media only screen and (max-width: 768px) {
+  html {
+    font-size: 9px;
+  }
+}
+
+/* Phone */
+@media only screen and (max-width: 320px) {
+  html {
+    font-size: 8px;
+  }
+}
+* {
+  word-break: break-word;
+  font-size: 1.3rem;
+  font-family: 'Noto Sans KR', sans-serif, Apple Gothic;
+}
+* {
+  -webkit-text-size-adjust: none;
+  word-break: break-all;
+}
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  vertical-align: middle;
+  -webkit-appearance: none;
+  appearance: none;
+  -moz-appearance: none;
+  resize: none;
+  outline: 0;
+}
+html,
+body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+body,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div,
+span,
+p,
+blockquote,
+pre,
+abbr,
+acronym,
+address,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+figure,
+ins,
+kbd,
+q,
+samp,
+small,
+strong,
+sub,
+sup,
+var,
+b,
+i,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+form,
+fieldset,
+legend,
+a,
+textarea,
+input,
+select,
+option,
+button,
+label,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
 audio:not([controls]) {
   display: none;
   height: 0;
@@ -130,14 +269,14 @@ abbr[title] {
 ::-webkit-input-placeholder {
   color: #666;
 }
-input[type="search"]::-webkit-search-decoration,
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-results-button,
-input[type="search"]::-webkit-search-results-decoration {
+input[type='search']::-webkit-search-decoration,
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-results-button,
+input[type='search']::-webkit-search-results-decoration {
   -webkit-appearance: none;
 }
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
 }
 
@@ -252,42 +391,42 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .pys {
   padding: 1rem 0;
-} */
+}
 
-.daily-form {
+.cron-daily-form {
   margin: 0 50px;
 }
 
-.daily-form__header {
+.cron-daily-form__header {
   background-color: grey;
   padding: 10px;
   text-align: center;
 }
 
-.daily-form__radiocontainer {
+.cron-daily-form__radiocontainer {
   display: flex;
   justify-content: center;
   background: #eee;
   padding: 20px;
 }
 
-.daily-form__radiobox {
+.cron-daily-form__radiobox {
   width: 800px;
   background: grey;
   padding: 20px;
 }
 
-.daily-form__radiowrapper {
+.cron-daily-form__radiowrapper {
   display: flex;
   justify-content: center;
 }
 
-.daily-form__radio {
+.cron-daily-form__radio {
   margin: 15px 0;
 }
 
 /* The container */
-.radio__container {
+.cron-radio__container {
   display: block;
   position: relative;
   padding-left: 35px;
@@ -301,14 +440,14 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 /* Hide the browser's default radio button */
-.radio__container input {
+.cron-radio__container input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
 }
 
 /* Create a custom radio button */
-.radio__checkmark {
+.cron-radio__checkmark {
   position: absolute;
   top: 0;
   left: 0;
@@ -319,29 +458,29 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 /* On mouse-over, add a grey background color */
-.radio__container:hover input ~ .radio__checkmark {
+.cron-radio__container:hover input ~ .cron-radio__checkmark {
   background-color: #ccc;
 }
 
 /* When the radio button is checked, add a blue background */
-.radio__container input:checked ~ .radio__checkmark {
+.cron-radio__container input:checked ~ .cron-radio__checkmark {
   background-color: #2196f3;
 }
 
 /* Create the indicator (the dot/circle - hidden when not checked) */
-.radio__checkmark:after {
+.cron-radio__checkmark:after {
   content: '';
   position: absolute;
   display: none;
 }
 
 /* Show the indicator (dot/circle) when checked */
-.radio__container input:checked ~ .radio__checkmark:after {
+.cron-radio__container input:checked ~ .cron-radio__checkmark:after {
   display: block;
 }
 
 /* Style the indicator (dot/circle) */
-.radio__container .radio__checkmark:after {
+.cron-radio__container .cron-radio__checkmark:after {
   top: 9px;
   left: 9px;
   width: 8px;
@@ -351,50 +490,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 /* indicator */
-
-.dashboard {
-  display: flex;
-  justify-content: center;
-  font-size: 10px;
-}
-
-.dashboard table {
-  border-spacing: 0px;
-  display: table;
-  box-sizing: border-box;
-  border-color: unset;
-}
-
-.dashboard__container {
-  width: 90em;
-  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
-    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
-  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-}
-
-.dashboard__container td,
-tr,
-th,
-thead {
-  vertical-align: baseline;
-  text-align: center;
-}
-
-.dashboard__container td,
-th {
-  padding: 0.8em;
-  font-size: 15px;
-}
-
-.dashboard__title__container {
-  background: #1976d2;
-  padding: 1.5em;
-  text-align: left;
-}
-
-.dashboard__title {
-  margin: 0;
-  background: #1976d2;
-  color: #fff;
-  font-size: 15px;
+.cron-indicator__container {
+  margin: 4rem;
+  background: skyblue;
 }
