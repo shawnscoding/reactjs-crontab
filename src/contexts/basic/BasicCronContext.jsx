@@ -80,13 +80,12 @@ const handleAllAsterisks = (task) => {
 
 const detectNecessaryTask = (splitted) => {
   const utcTime = new Date(new Date().toUTCString().slice(0, -3))
-  // console.log("utc::", utc);
   const currentMin = format(utcTime, 'm')
   const currentHour = format(utcTime, 'H')
   const currentDom = format(utcTime, 'd')
   const currentMon = format(utcTime, 'M')
   const currentDow = format(utcTime, 'i')
-  console.log('utc::', utcTime)
+  // console.log('utc::', utcTime)
   // console.log("m::", currentMin, currentHour, currentDom, currentMon);
 
   const min = splitted[0]
@@ -95,7 +94,6 @@ const detectNecessaryTask = (splitted) => {
   const mon = splitted[3]
   const dow = splitted[4]
 
-  // console.log('currentDow', currentDow, typeof currentDow)
   if (min !== '*' && min !== currentMin) {
     return { error: true, col: 'min' }
   }
@@ -130,7 +128,7 @@ const handleSetTimer = (task) => {
     .slice(0, splitted.length - 1)
     .find((item) => item !== '*')
   if (!notAsterisk) {
-    console.log('all asterisk ::', task)
+    // console.log('all asterisk ::', task)
     handleAllAsterisks(task)
   } else {
     // means there is something particular
@@ -138,7 +136,7 @@ const handleSetTimer = (task) => {
 
     setInterval(() => {
       const res = detectNecessaryTask(splitted)
-      console.log('validation res ::', res)
+      // console.log('validation res ::', res)
       if (!res.error) {
         // console.log('utc::', utcTime)
 

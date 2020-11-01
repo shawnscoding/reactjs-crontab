@@ -5,7 +5,7 @@ import { BasicCronProvider } from './contexts/basic/BasicCronContext.jsx'
 import BasicCron from './components/basicCron/Index.jsx'
 
 export const BisicCronTab = ({ tasks }) => {
-  console.log('styles ::', styles.indicator__container)
+  // console.log('styles ::', styles.indicator__container)
   return (
     <React.Fragment>
       <BasicCronProvider tasks={tasks}>

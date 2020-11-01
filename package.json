@@ -1,6 +1,6 @@
 {
   "name": "reactjs-crontab",
-  "version": "0.5.5",
+  "version": "0.6.0",
   "description": "Light-weight Crontab for handling repetitive tasks",
   "author": "shawnscoding",
   "license": "MIT",
@@ -34,12 +34,12 @@
   },
   "peerDependencies": {
     "react": "^16.0.0",
-    "date-fns": "2.x.x"
+    "date-fns": "^2.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
     "cross-env": "^7.0.2",
-    "date-fns": "2.x.x",
+    "date-fns": "^2.16.1",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.7.0",
     "eslint-config-standard": "^14.1.0",

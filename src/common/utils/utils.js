@@ -398,7 +398,7 @@ export const formatMonth = (mon) => {
 }
 
 export const formatDOW = (dow) => {
-  console.log('dow::', dow)
+  // console.log('dow::', dow)
   if (dow === '*') return dow
   switch (dow) {
     case '01':
