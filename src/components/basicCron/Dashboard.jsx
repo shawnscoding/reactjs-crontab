@@ -2,54 +2,12 @@ import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { BasicCronContext } from '../../contexts/basic/BasicCronContext'
 import styles from '../../styles.module.css'
-
-const formatMonth = (mon) => {
-  switch (mon) {
-    case '01':
-      return 'January'
-    case '02':
-      return 'Faburary'
-    case '03':
-      return 'March'
-    case '04':
-      return 'April'
-    case '05':
-      return 'May'
-    case '06':
-      return 'June'
-    case '07':
-      return 'July'
-    case '08':
-      return 'Augest'
-    case '09':
-      return 'September'
-    case '10':
-      return 'October'
-    case '11':
-      return 'November'
-    case '12':
-      return 'December'
-    default:
-      throw Error('in formatMonth fn')
-  }
-}
-
-const insertZero = (arr) => {
-  console.log('arr ', arr)
-  const result = arr.map((item) => {
-    if (item.length === 1 && item !== '*') {
-      return (item = `0${item}`)
-    } else if (item === '*') {
-      return item
-    } else {
-      return item
-    }
-  })
-
-  console.log('result', result)
-
-  return result
-}
+import {
+  insertZero,
+  formatHour,
+  getHRtime,
+  formatMonth
+} from '../../common/utils/utils'
 
 const addHrTime = (tasks) => {
   // console.log("res", res);
@@ -57,42 +15,21 @@ const addHrTime = (tasks) => {
   const result = tasks.map((task) => {
     // let convertDateOrder;
     // let year = "2020";
-    let hrTime = 'at '
+    let hrTime = ''
     const { config } = task
     const splitted = config.split('-')
     const inserted = insertZero(splitted)
     const min = inserted[0]
-    const hour = inserted[1]
+    const { hour, hourFormat } = formatHour(inserted[1])
+
     const dom = inserted[2]
-    const mon = inserted[3]
+    const mon = formatMonth(inserted[3])
+    const dow = inserted[4]
+    // since we have 32 possibilities, we are gonna have 32 if statements
+    const conditions = { min, hour, dom, mon, dow }
+    const res = getHRtime(hrTime, conditions, hourFormat)
 
-    // convertDateOrder = `${year}-${mon}-${dom}T${hour}:${min}`;
-
-    if (hour === '*') {
-      hrTime = hrTime + 'every hour '
-    } else {
-      hrTime = hrTime + `${hour}:`
-    }
-
-    if (min === '*') {
-      hrTime = hrTime + 'every minute '
-    } else {
-      hrTime = hrTime + `${min} `
-    }
-    if (dom === '*') {
-      hrTime = hrTime + 'everyday '
-    } else {
-      hrTime = hrTime + `${dom}th `
-    }
-
-    if (mon === '*') {
-      hrTime = hrTime + 'every month '
-    } else {
-      const month = formatMonth(mon)
-      hrTime = hrTime + `${month} `
-    }
-
-    return { ...task, hrTime }
+    return { ...task, hrTime: res }
   })
 
   return result
@@ -114,21 +51,21 @@ const Indicator = (props) => {
             <th>ID</th>
             <th>Name</th>
             <th>Schedule</th>
+            <th>Schedule (HR)</th>
             <th>Description</th>
           </tr>
         </thead>
         {crons.length &&
           crons.map((cron, index) => (
-            <React.Fragment>
-              <tbody key={index}>
-                <tr>
-                  <td>{cron.id}</td>
-                  <td>{cron.name}</td>
-                  <td>expected to run {cron.hrTime}</td>
-                  <td>{cron.description}</td>
-                </tr>
-              </tbody>
-            </React.Fragment>
+            <tbody key={index}>
+              <tr>
+                <td>{cron.id}</td>
+                <td>{cron.name}</td>
+                <td>{cron.config}</td>
+                <td>expected to run {cron.hrTime}</td>
+                <td>{cron.description}</td>
+              </tr>
+            </tbody>
           ))}
       </table>
     </div>

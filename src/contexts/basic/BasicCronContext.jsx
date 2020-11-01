@@ -33,14 +33,14 @@ const defaultTasks = [
     id: '1',
     config: '*-*-*-*-*-utc',
     name: 'Alert 1',
-    description: 'say Hello'
+    description: 'Say Hello'
   },
   {
     fn: testFn_2,
     id: '2',
-    config: '5-11-18-10-*-utc',
+    config: '5-20-18-10-*-utc',
     name: 'Alert 2',
-    description: 'say Goodbye'
+    description: 'Say Goodbye'
   },
   {
     fn: testFn_3,
