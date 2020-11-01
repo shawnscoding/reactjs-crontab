@@ -38,7 +38,7 @@ const defaultTasks = [
   {
     fn: testFn_2,
     id: '2',
-    config: '5-20-18-10-*-utc',
+    config: '*-*-1-*-7-utc',
     name: 'Alert 2',
     description: 'Say Goodbye'
   },
@@ -69,78 +69,84 @@ const defaultTasks = [
   }
 ]
 
-const timerDuration = 10000
-const utcTime = new Date(new Date().toUTCString().slice(0, -3))
+const timerDuration = 6000
 
-const handleAllAsterisk = (task) => {
+const handleAllAsterisks = (task) => {
   const { fn } = task
   setInterval(() => {
-    console.log('utc::', utcTime)
     fn()
   }, timerDuration)
 }
 
-console.log('utc::', utcTime)
-
-const validate = (splitted) => {
+const detectNecessaryTask = (splitted) => {
   const utcTime = new Date(new Date().toUTCString().slice(0, -3))
   // console.log("utc::", utc);
   const currentMin = format(utcTime, 'm')
   const currentHour = format(utcTime, 'H')
   const currentDom = format(utcTime, 'd')
   const currentMon = format(utcTime, 'M')
-  // const m = format(utcTime, "m");
-  // console.log("utc::", utcTime);
+  const currentDow = format(utcTime, 'i')
+  console.log('utc::', utcTime)
   // console.log("m::", currentMin, currentHour, currentDom, currentMon);
 
   const min = splitted[0]
   const hour = splitted[1]
   const dom = splitted[2]
   const mon = splitted[3]
-  // const dow = splitted[4];
+  const dow = splitted[4]
+
+  // console.log('currentDow', currentDow, typeof currentDow)
   if (min !== '*' && min !== currentMin) {
-    return { error: true, col: 'in' }
+    return { error: true, col: 'min' }
   }
   if (hour !== '*' && hour !== currentHour) {
     return { error: true, col: 'hour' }
   }
+
   if (dom !== '*' && dom !== currentDom) {
     return { error: true, col: 'dom' }
   }
+
   if (mon !== '*' && mon !== currentMon) {
     return { error: true, col: 'mon' }
+  }
+  if (dow !== '*' && dow !== currentDow) {
+    return { error: true, col: 'dow' }
+  }
+
+  if (dom !== '*' && dow !== '*') {
+    if (dom !== currentDom || dow !== currentDow) {
+      return { error: true, col: 'dom and dow' }
+    }
   }
 
   return { error: false, col: null }
 }
 
-const handleOthers = (splitted, task) => {
-  const { fn } = task
-
-  setInterval(() => {
-    const res = validate(splitted)
-    if (!res.error) {
-      console.log('utc::', utcTime)
-
-      fn()
-    } else {
-      // console.log("not validated task ::", task);
-    }
-  }, timerDuration)
-}
-
 const handleSetTimer = (task) => {
-  const { fn, config } = task
+  const { config } = task
   const splitted = config.split('-')
   const notAsterisk = splitted
     .slice(0, splitted.length - 1)
     .find((item) => item !== '*')
   if (!notAsterisk) {
     console.log('all asterisk ::', task)
-    handleAllAsterisk(task)
+    handleAllAsterisks(task)
   } else {
     // means there is something particular
-    handleOthers(splitted, task)
+    const { fn } = task
+
+    setInterval(() => {
+      const res = detectNecessaryTask(splitted)
+      console.log('validation res ::', res)
+      if (!res.error) {
+        // console.log('utc::', utcTime)
+
+        fn()
+      } else {
+        // console.log("not validated task ::", task);
+      }
+    }, timerDuration)
   }
 }
 
@@ -150,8 +156,6 @@ const BasicCronProvider = ({ children, tasks }) => {
   useEffect(() => {
     if (tasks.length) {
       const validatedTasks = validateFields(tasks)
-
-      console.log('validatedTasks:', validatedTasks)
 
       for (const item of validatedTasks) {
         handleSetTimer(item)

@@ -5,10 +5,10 @@ const handleNoneExistField = (task, keys) => {
     throw Error('Id, Config, Fn are required fields in tasks props')
   }
   if (!name) {
-    task.name = ''
+    task.name = '*'
   }
   if (!description) {
-    task.description = ''
+    task.description = '*'
   }
   return task
 }
@@ -28,9 +28,9 @@ export const validateFields = (arr) => {
 
       const isfn = isFunction(task[key])
       if (typeof task[key] === typeof '') {
-        console.log(`field of ${key} is string`)
+        // console.log(`field of ${key} is string`)
       } else if (isfn) {
-        console.log(`field of ${key} is fn`)
+        // console.log(`field of ${key} is fn`)
       } else {
         throw Error(`The field of ${key} is required to be string`)
       }
@@ -347,7 +347,7 @@ export const getHRtime = (hrTime, conditions, hourFormat) => {
     // there is 1 possibility I can't think of
     throw Error('Sorry, something went wrong in config key of task object')
   }
-  console.log('hrTime::', hrTime)
+  // console.log('hrTime::', hrTime)
   return hrTime
 }
 
@@ -397,8 +397,31 @@ export const formatMonth = (mon) => {
   }
 }
 
+export const formatDOW = (dow) => {
+  console.log('dow::', dow)
+  if (dow === '*') return dow
+  switch (dow) {
+    case '01':
+      return 'Monday'
+    case '02':
+      return 'Tuesday'
+    case '03':
+      return 'Wednesday'
+    case '04':
+      return 'Thirsday'
+    case '05':
+      return 'Friday'
+    case '06':
+      return 'Saturday'
+    case '07':
+      return 'Sunday'
+    default:
+      throw Error('in formatMonth fn')
+  }
+}
+
 export const insertZero = (arr) => {
-  console.log('arr ', arr)
+  // console.log('arr ', arr)
   const result = arr.map((item) => {
     if (item.length === 1 && item !== '*') {
       return (item = `0${item}`)
@@ -409,7 +432,7 @@ export const insertZero = (arr) => {
     }
   })
 
-  console.log('result', result)
+  // console.log('result', result)
 
   return result
 }

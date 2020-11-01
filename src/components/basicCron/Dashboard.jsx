@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { BasicCronContext } from '../../contexts/basic/BasicCronContext'
 import styles from '../../styles.module.css'
 import {
+  formatDOW,
   insertZero,
   formatHour,
   getHRtime,
@@ -13,7 +14,6 @@ const addHrTime = (tasks) => {
   // console.log("res", res);
   if (!tasks.length) return []
   const result = tasks.map((task) => {
-    // let convertDateOrder;
     // let year = "2020";
     let hrTime = ''
     const { config } = task
@@ -24,7 +24,7 @@ const addHrTime = (tasks) => {
 
     const dom = inserted[2]
     const mon = formatMonth(inserted[3])
-    const dow = inserted[4]
+    const dow = formatDOW(inserted[4])
     // since we have 32 possibilities, we are gonna have 32 if statements
     const conditions = { min, hour, dom, mon, dow }
     const res = getHRtime(hrTime, conditions, hourFormat)
@@ -35,11 +35,12 @@ const addHrTime = (tasks) => {
   return result
 }
 
-const Indicator = (props) => {
+const Dashboard = (props) => {
   const { tasks } = useContext(BasicCronContext)
-  console.log('tasks::', tasks)
+  // console.log('tasks in Dashboard', tasks)
 
   const crons = addHrTime(tasks)
+  // console.log('crons :::')
   return (
     <div className={styles['dashboard']}>
       <table className={styles['dashboard__container']}>
@@ -72,6 +73,6 @@ const Indicator = (props) => {
   )
 }
 
-Indicator.propTypes = {}
+Dashboard.propTypes = {}
 
-export default Indicator
+export default Dashboard
