@@ -37,10 +37,9 @@ The good-looking dashboard that I've created with crontab will be very helpful f
 
 ## Basic Example
 
-Reactjs-crontab has very similar pattern to Linux Crontab.
-The difference is that this uses dash between arguments like this `*-*-*-*-*-*` when you set time that you want it to run, Whereas Linux crontab uses white space like this `* * * * * *`
-
+Reactjs-crontab has very similar pattern to [Linux Crontab](https://www.geeksforgeeks.org/crontab-in-linux-with-examples).
 To learn linux crontab [Linux Crontab](https://www.geeksforgeeks.org/crontab-in-linux-with-examples)
+The difference is that this uses dash between arguments like this `*-*-*-*-*-*`. Whereas Linux crontab uses white space like this `* * * * * *`
 
 ```jsx
 import React from 'react'
@@ -119,10 +118,10 @@ const App = () => {
 
 // config 1-1-1-1-1-utc
 // the first number represent minute(s), can be 0-59. '*' means every minute
-// the second 1 represent hour(s) of a day, can be 0-23. '*' means every hour
-// the third 1 represent dom(day of month), can be 1-31. '*' means everyday
-// the forth 1 represent month, can be 1-12. '*' means every month
-// the forth 1 represent dow(day of week), can be 1-7. 1 is Monday, 2 is Tusday and so on. '*' means everyday
+// the second number represent hour(s) of a day, can be 0-23. '*' means every hour
+// the third number represent dom(day of month), can be 1-31. '*' means everyday
+// the forth number represent month, can be 1-12. '*' means every month
+// the forth number represent dow(day of week), can be 1-7. 1 is Monday, 2 is Tusday and so on. '*' means everyday
 // the 'utc' after fifth dash represent the timezone is set as utc. Unfortunately no other timezone is supported at the monent. but we're working hard to improve this.
 export default App
 ```
