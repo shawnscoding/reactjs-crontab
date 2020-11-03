@@ -41,12 +41,12 @@ The good-looking dashboard that I've created with crontab will be very helpful f
 MIN-HOUR-DOM-MON-DOW-TIMEZONE
 ```
 
-- MIN represent minute(s), can be 0 through 59. `*` means every minute
-- HOUR represent hour(s) of a day, can be 0 through 23. `*` means every hour
-- DOM represent day of month, can be 1 through 31. `*` means everyday
-- MON represent month, can be 1 through 12. `*` means every month
-- DOW represent day of week, can be 1 through 7. 1 is Monday, 2 is Tusday and so on. `*` means everyday
-- TIMEZONE represent the timezone that crontab will refer when it triggers tasks. Unfortunately, We only support 'utc timezone'. But we're working hard to improve this.
+- MIN represents minute(s), can be 0 through 59. `*` means every minute
+- HOUR represents hour(s) of a day, can be 0 through 23. `*` means every hour
+- DOM represents day of month, can be 1 through 31. `*` means every day
+- MON represents month, can be 1 through 12. `*` means every month
+- DOW represents day of week, can be 1 through 7. 1 is Monday, 2 is Tusday and so on. `*` means every day
+- TIMEZONE represent the timezone that crontab will refer to when it triggers tasks. Unfortunately, We only support 'utc timezone'. But we're working hard to improve this.
 
 ## Basic Example
 
@@ -95,7 +95,7 @@ const defaultTasks = [
     fn: sayGoobye,
     id: '2',
     config: '15-30-*-*-*-utc',
-    // expected to run at 18:15P.M  everyday (utc)
+    // expected to run at 18:15P.M  every day (utc)
     name: 'Say Goodbye',
     description: 'Say Goodbye on console'
   },
@@ -103,7 +103,7 @@ const defaultTasks = [
     fn: RequestSomething,
     id: '3',
     config: '15-*-*-*-*-utc',
-    // expected to run everyday, every hour as long as it's 15 minute (utc)
+    // expected to run every day, every hour as long as it's 15 minute (utc)
     name: 'Request Something',
     description: 'Send API'
   },
@@ -152,8 +152,9 @@ BasicCron Props {
 
 ## note
 
-This will work well for simple crontab task but I have a tons of features that I'd like to add. So stay tuned!
-Thank you so much for your attention!
+- This will work well for simple crontab task but I have tons of features that I'd like to add. So stay tuned!
+  Thank you so much for your attention!
+- feel free to open issue. Any idea that could improve this package or bug report will be highly appreciated.
 
 ## License
 
