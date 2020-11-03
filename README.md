@@ -81,7 +81,7 @@ const logUserOut = () => {
 
 // these are the functions which will run according to your settings
 
-const defaultTasks = [
+const tasks = [
   // just put this array into BasicCron component as a props and it will work like magic!
   {
     fn: sayHello,
