@@ -3,69 +3,63 @@ import PropTypes from 'prop-types'
 import { format } from 'date-fns'
 import { validateFields } from '../../common/utils/utils'
 
-const testFn_1 = () => {
+const sayHello = () => {
   console.log('Hello')
 }
 
-const testFn_2 = () => {
+const sayGoobye = () => {
   console.log('Goodbye')
 }
 
-const testFn_3 = () => {
+const RequestSomething = () => {
   console.log('Api request has been sent')
 }
 
-const testFn_4 = () => {
+const sendNotification = () => {
   console.log('Send Event Notification')
 }
 
-const testFn_5 = () => {
-  console.log('do something 5')
+const logUserOut = () => {
+  console.log('log user out')
 }
 
-const testFn_6 = () => {
-  console.log('do something 6')
-}
+// these are the functions which will run according to your settings
 
 const defaultTasks = [
+  // tasks props should be array
   {
-    fn: testFn_1,
+    fn: sayHello,
     id: '1',
     config: '*-*-*-*-*-utc',
-    name: 'Alert 1',
-    description: 'Say Hello'
+    name: 'Say Hello',
+    description: 'Say Hello on console'
   },
   {
-    fn: testFn_2,
+    fn: sayGoobye,
     id: '2',
-    config: '*-*-1-*-7-utc',
-    name: 'Alert 2',
-    description: 'Say Goodbye'
+    config: '15-30-*-*-*-utc',
+    name: 'Say Goodbye',
+    description: 'Say Goodbye on console'
   },
   {
-    fn: testFn_3,
+    fn: RequestSomething,
     id: '3',
-    config: '6-11-18-10-*-utc',
-    name: 'Alert 3',
+    config: '15-*-*-*-*-utc',
+    name: 'Request Something',
     description: 'Send API'
   },
   {
-    fn: testFn_4,
+    fn: sendNotification,
     id: '4',
-    config: '6-*-18-10-*-utc',
-    name: 'Alert 4',
+    config: '10-11-18-3-*-utc',
+    name: 'Send Notification',
     description: 'Send Event Notification'
   },
   {
-    fn: testFn_5,
+    fn: logUserOut,
     id: '5',
-    config: '*-11-18-10-*-utc',
-    name: 'Alert 5'
-  },
-  {
-    fn: testFn_6,
-    id: '6',
-    config: '11-22-17-10-*-utc'
+    config: '*-16-18-10-*-utc',
+    name: 'Log user out'
   }
 ]
 
