@@ -12,7 +12,7 @@
 npm install --save reactjs-crontab
 ```
 
-make sure to add date-fns as dev dependencies as this package depending on [date-fns](https://date-fns.org/)
+make sure to add date-fns as dev dependencies since this package depending on [date-fns](https://github.com/date-fns/date-fns#readme)
 
 ```bash
 npm install date-fns@^2.0.0 --save-dev
@@ -34,6 +34,19 @@ This is very mamual and sometimes, very complecated to do so.
 Therefore, I've decided to create crontab node package, which is similar to Linux crontab.
 
 The good-looking dashboard that I've created with crontab will be very helpful for scheduling and managing your repetitive tasks. -->
+
+## Crontab Config Format
+
+```
+MIN-HOUR-DOM-MON-DOW-TIMEZONE
+```
+
+MIN represent minute(s), can be 0-59. '_' means every minute
+HOUR represent hour(s) of a day, can be 0-23. '_' means every hour
+DOM represent day of month, can be 1-31. '_' means everyday
+MON represent month, can be 1-12. '_' means every month
+DOW represent day of week, can be 1-7. 1 is Monday, 2 is Tusday and so on. '\*' means everyday
+TIMEZONE represent the timezone that crontab will refer when it triggers tasks. Unfortunately, We only support 'utc timezone'. But we're working hard to improve this.
 
 ## Basic Example
 
@@ -116,13 +129,6 @@ const App = () => {
   return <BasicCron tasks={tasks} />
 }
 
-// config 1-1-1-1-1-utc
-// the first number represent minute(s), can be 0-59. '*' means every minute
-// the second number represent hour(s) of a day, can be 0-23. '*' means every hour
-// the third number represent dom(day of month), can be 1-31. '*' means everyday
-// the forth number represent month, can be 1-12. '*' means every month
-// the forth number represent dow(day of week), can be 1-7. 1 is Monday, 2 is Tusday and so on. '*' means everyday
-// the 'utc' after fifth dash represent the timezone is set as utc. Unfortunately no other timezone is supported at the monent. but we're working hard to improve this.
 export default App
 ```
 
@@ -142,13 +148,6 @@ BasicCron Props {
 }
 
 
-config 1-1-1-1-1-utc
-the first number represent minute(s), can be 0-59. '*' means every minute
-the second 1 represent hour(s) of a day, can be 0-23. '*' means every hour
-the third 1 represent dom(day of month), can be 1-31. '*' means everyday
-the forth 1 represent month, can be 1-12. '*' means every month
-the forth 1 represent dow(day of week), can be 1-7. 1 is Monday, 2 is Tusday and so on. '*' means everyday
-the 'utc' after fifth dash represent the timezone is set as utc. Unfortunately no other timezone is supported at the monent. but we're working hard to improve this.
 
 
 
