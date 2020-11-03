@@ -152,7 +152,7 @@ BasicCron Props {
 
 ## note
 
-This will work well for simple crontab task but I am aiming to add a tons of features. Stay tuned!
+This will work well for simple crontab task but I have a tons of features that I'd like to add. So stay tuned!
 Thank you so much for your attention!
 
 ## License
