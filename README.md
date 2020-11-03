@@ -41,11 +41,11 @@ The good-looking dashboard that I've created with crontab will be very helpful f
 MIN-HOUR-DOM-MON-DOW-TIMEZONE
 ```
 
-- MIN represent minute(s), can be 0-59. `*` means every minute
-- HOUR represent hour(s) of a day, can be 0-23. `*` means every hour
-- DOM represent day of month, can be 1-31. `*` means everyday
-- MON represent month, can be 1-12. `*` means every month
-- DOW represent day of week, can be 1-7. 1 is Monday, 2 is Tusday and so on. `*` means everyday
+- MIN represent minute(s), can be 0 through 59. `*` means every minute
+- HOUR represent hour(s) of a day, can be 0 through 23. `*` means every hour
+- DOM represent day of month, can be 1 through 31. `*` means everyday
+- MON represent month, can be 1 through 12. `*` means every month
+- DOW represent day of week, can be 1 through 7. 1 is Monday, 2 is Tusday and so on. `*` means everyday
 - TIMEZONE represent the timezone that crontab will refer when it triggers tasks. Unfortunately, We only support 'utc timezone'. But we're working hard to improve this.
 
 ## Basic Example
@@ -148,10 +148,12 @@ BasicCron Props {
 }
 
 
-
-
-
 ```
+
+## note
+
+This will work well for simple crontab task but I am aiming to add a tons of features. Stay tuned!
+Thank you so much for your attention!
 
 ## License
 
