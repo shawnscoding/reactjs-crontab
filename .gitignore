@@ -12,6 +12,9 @@ dist
 # demo 
 example
 
+# vscode settings
+.vscode
+
 
 # misc
 .DS_Store
