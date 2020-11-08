@@ -1,10 +1,19 @@
 import React, { createContext, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { format } from 'date-fns'
-import { validateFields, validateConfig } from '../../common/utils/errHandler'
+import {
+  validateValueTypes,
+  validateConfig,
+  validateConfigLength,
+  validateMin,
+  validateHour
+} from '../../common/utils/errHandler'
 import defaultTasks from '../../common/data/BasicCronDefaultProps'
+import { converConfigValuesToObject } from '../../common/utils/utils'
 
-const timerDuration = 6000
+export { BasicCronProvider, BasicCronContext }
+
+const timerDuration = 60000
 
 const detectNecessaryTask = (configArr) => {
   const utcTime = new Date(new Date().toUTCString().slice(0, -3))
@@ -23,39 +32,45 @@ const detectNecessaryTask = (configArr) => {
   const dow = configArr[4]
 
   if (min !== '*' && min !== currentMin) {
-    return { error: true, col: 'min' }
+    return { isNecessary: false, col: 'min' }
   }
   if (hour !== '*' && hour !== currentHour) {
-    return { error: true, col: 'hour' }
+    return { isNecessary: false, col: 'hour' }
   }
 
   if (dom !== '*' && dom !== currentDom) {
-    return { error: true, col: 'dom' }
+    return { isNecessary: false, col: 'dom' }
   }
 
   if (mon !== '*' && mon !== currentMon) {
-    return { error: true, col: 'mon' }
+    return { isNecessary: false, col: 'mon' }
   }
   if (dow !== '*' && dow !== currentDow) {
-    return { error: true, col: 'dow' }
+    return { isNecessary: false, col: 'dow' }
   }
 
   if (dom !== '*' && dow !== '*') {
     if (dom !== currentDom || dow !== currentDow) {
-      return { error: true, col: 'dom and dow' }
+      return { isNecessary: false, col: 'dom and dow' }
     }
   }
 
-  return { error: false, col: null }
+  return { isNecessary: false, col: null }
 }
 
 const handleSetTimer = (task) => {
   const { config } = task
-  const splitted = config.split('-')
-  const notAsterisk = splitted
-    .slice(0, splitted.length - 1)
+  const splittedConfig = config.split('-')
+  const res = validateConfigLength(splittedConfig)
+  if (res.error) {
+    throw Error(res.msg)
+  }
+
+  const isNotAsterisk = splittedConfig
+    .slice(0, splittedConfig.length - 1)
     .find((item) => item !== '*')
-  if (!notAsterisk) {
+  if (isNotAsterisk === undefined) {
+    // means this is all *
     const { fn } = task
     setInterval(() => {
       fn()
@@ -64,31 +79,45 @@ const handleSetTimer = (task) => {
     // means there is something particular
     // validate value in config field
     const { fn } = task
-    const { error, msg } = validateConfig(splitted)
-    if (error) {
-      throw Error(msg)
-    }
 
-    setInterval(() => {
-      const res = detectNecessaryTask(splitted)
-      // console.log('validation res ::', res)
-      if (!res.error) {
-        // console.log('utc::', utcTime)
+    // const { error, msg } = validateConfig(splittedConfig)
+    // console.log('error: ', error)
+    // if (error) {
+    //   throw Error(msg)
+    // }
 
-        fn()
-      } else {
-        // console.log("not validated task ::", task);
-      }
-    }, timerDuration)
+    const convertedConfig = splittedConfig.map((item) => {
+      const obj = converConfigValuesToObject(item)
+      return obj
+    })
+
+    const minValidateRes = validateMin(convertedConfig[0])
+
+    const hourValidateRes = validateHour(convertedConfig[1])
+
+    console.log('minValidateRes', minValidateRes)
+    console.log('hourValidateRes', hourValidateRes)
+
+    //   setInterval(() => {
+    //     const { isNecessary } = detectNecessaryTask(splittedConfig)
+    //     // console.log('validation res ::', res)
+    //     if (isNecessary) {
+    //       // console.log('utc::', utcTime)
+
+    //       fn()
+    //     } else {
+    //       // console.log("not validated task ::", task);
+    //     }
+    //   }, timerDuration)
+    // }
   }
 }
-
 const BasicCronContext = createContext(null)
 
 const BasicCronProvider = ({ children, tasks }) => {
   useEffect(() => {
     if (tasks.length) {
-      const validatedTasks = validateFields(tasks)
+      const validatedTasks = validateValueTypes(tasks)
 
       for (const item of validatedTasks) {
         handleSetTimer(item)
@@ -113,5 +142,3 @@ BasicCronProvider.propTypes = {
 BasicCronProvider.defaultProps = {
   tasks: defaultTasks
 }
-
-export { BasicCronProvider, BasicCronContext }

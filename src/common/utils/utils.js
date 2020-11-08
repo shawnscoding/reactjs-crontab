@@ -1,3 +1,5 @@
+import { ONE_NUMBER, ASTERISK, SEVERAL_NUMBERS } from '../data/types'
+
 export const getHRtime = (hrTime, conditions, hourFormat) => {
   const { min, hour, dom, mon, dow } = conditions
   console.log('condition ::', conditions)
@@ -376,4 +378,30 @@ export const insertZero = (arr) => {
   // console.log('result', result)
 
   return result
+}
+
+export const converConfigValuesToObject = (str) => {
+  const arr = str.split(',')
+  if (arr[0] === '*') {
+    return {
+      type: ASTERISK,
+      length: arr.length,
+      value: arr
+    }
+  }
+  if (arr.length === 1) {
+    return {
+      type: ONE_NUMBER,
+      length: arr.length,
+      value: arr
+    }
+  } else if (arr.length > 1) {
+    return {
+      type: SEVERAL_NUMBERS,
+      length: arr.length,
+      value: arr
+    }
+  } else {
+    throw Error('Bad Settings')
+  }
 }
