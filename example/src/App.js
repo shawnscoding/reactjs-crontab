@@ -1,5 +1,5 @@
 import React from 'react'
-import BasicCron from 'reactjs-crontab'
+import { BasicCron, Guide } from 'reactjs-crontab'
 import 'reactjs-crontab/dist/index.css'
 
 // const testFn_1 = () => {
@@ -69,7 +69,12 @@ import 'reactjs-crontab/dist/index.css'
 // ]
 
 const App = () => {
-  return <BasicCron />
+  return (
+    <>
+      <BasicCron />
+      <Guide />
+    </>
+  )
 }
 
 export default App

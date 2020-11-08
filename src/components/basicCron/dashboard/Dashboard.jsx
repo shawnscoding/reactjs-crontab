@@ -1,21 +1,21 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
-import { BasicCronContext } from '../../contexts/basic/BasicCronContext'
-import styles from '../../styles.module.css'
+import { BasicCronContext } from '../../../contexts/basic/BasicCronContext'
+import styles from '../../../styles.module.css'
 import {
   formatDOW,
   insertZero,
   formatHour,
   getHRtime,
   formatMonth
-} from '../../common/utils/utils'
+} from '../../../common/utils/utils'
 
 const addHrTime = (tasks) => {
   // console.log("res", res);
   if (!tasks.length) return []
   const result = tasks.map((task) => {
     // let year = "2020";
-    let hrTime = ''
+    const hrTime = ''
     const { config } = task
     const splitted = config.split('-')
     const inserted = insertZero(splitted)
@@ -42,10 +42,10 @@ const Dashboard = (props) => {
   const crons = addHrTime(tasks)
   // console.log('crons :::')
   return (
-    <div className={styles['dashboard']}>
-      <table className={styles['dashboard__container']}>
-        <caption className={styles['dashboard__title__container']}>
-          <h1 className={styles['dashboard__title']}>Dashboard</h1>
+    <div className={styles.dashboard}>
+      <table className={styles.dashboard__container}>
+        <caption className={styles.dashboard__title__container}>
+          <h1 className={styles.dashboard__title}>Dashboard</h1>
         </caption>
         <thead>
           <tr>
@@ -63,7 +63,7 @@ const Dashboard = (props) => {
                 <td>{cron.id}</td>
                 <td>{cron.name}</td>
                 <td>{cron.config}</td>
-                <td>expected to run {cron.hrTime}</td>
+                <td>Execute At: {cron.hrTime}</td>
                 <td>{cron.description}</td>
               </tr>
             </tbody>

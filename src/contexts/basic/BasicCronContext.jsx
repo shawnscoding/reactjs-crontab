@@ -1,7 +1,7 @@
 import React, { createContext, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { format } from 'date-fns'
-import { validateFields } from '../../common/utils/utils'
+import { validateFields } from '../../common/utils/errHandler'
 
 const sayHello = () => {
   console.log('Hello')
