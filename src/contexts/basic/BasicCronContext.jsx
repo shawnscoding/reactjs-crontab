@@ -1,78 +1,12 @@
 import React, { createContext, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { format } from 'date-fns'
-import { validateFields } from '../../common/utils/errHandler'
-
-const sayHello = () => {
-  console.log('Hello')
-}
-
-const sayGoobye = () => {
-  console.log('Goodbye')
-}
-
-const RequestSomething = () => {
-  console.log('Api request has been sent')
-}
-
-const sendNotification = () => {
-  console.log('Send Event Notification')
-}
-
-const logUserOut = () => {
-  console.log('log user out')
-}
-
-// these are the functions which will run according to your settings
-
-const defaultTasks = [
-  // tasks props should be array
-  {
-    fn: sayHello,
-    id: '1',
-    config: '*-*-*-*-*-utc',
-    name: 'Say Hello',
-    description: 'Say Hello on console'
-  },
-  {
-    fn: sayGoobye,
-    id: '2',
-    config: '15-30-*-*-*-utc',
-    name: 'Say Goodbye',
-    description: 'Say Goodbye on console'
-  },
-  {
-    fn: RequestSomething,
-    id: '3',
-    config: '15-*-*-*-*-utc',
-    name: 'Request Something',
-    description: 'Send API'
-  },
-  {
-    fn: sendNotification,
-    id: '4',
-    config: '10-11-18-3-*-utc',
-    name: 'Send Notification',
-    description: 'Send Event Notification'
-  },
-  {
-    fn: logUserOut,
-    id: '5',
-    config: '*-16-18-10-*-utc',
-    name: 'Log user out'
-  }
-]
+import { validateFields, validateConfig } from '../../common/utils/errHandler'
+import defaultTasks from '../../common/data/BasicCronDefaultProps'
 
 const timerDuration = 6000
 
-const handleAllAsterisks = (task) => {
-  const { fn } = task
-  setInterval(() => {
-    fn()
-  }, timerDuration)
-}
-
-const detectNecessaryTask = (splitted) => {
+const detectNecessaryTask = (configArr) => {
   const utcTime = new Date(new Date().toUTCString().slice(0, -3))
   const currentMin = format(utcTime, 'm')
   const currentHour = format(utcTime, 'H')
@@ -82,11 +16,11 @@ const detectNecessaryTask = (splitted) => {
   // console.log('utc::', utcTime)
   // console.log("m::", currentMin, currentHour, currentDom, currentMon);
 
-  const min = splitted[0]
-  const hour = splitted[1]
-  const dom = splitted[2]
-  const mon = splitted[3]
-  const dow = splitted[4]
+  const min = configArr[0]
+  const hour = configArr[1]
+  const dom = configArr[2]
+  const mon = configArr[3]
+  const dow = configArr[4]
 
   if (min !== '*' && min !== currentMin) {
     return { error: true, col: 'min' }
@@ -122,11 +56,18 @@ const handleSetTimer = (task) => {
     .slice(0, splitted.length - 1)
     .find((item) => item !== '*')
   if (!notAsterisk) {
-    // console.log('all asterisk ::', task)
-    handleAllAsterisks(task)
+    const { fn } = task
+    setInterval(() => {
+      fn()
+    }, timerDuration)
   } else {
     // means there is something particular
+    // validate value in config field
     const { fn } = task
+    const { error, msg } = validateConfig(splitted)
+    if (error) {
+      throw Error(msg)
+    }
 
     setInterval(() => {
       const res = detectNecessaryTask(splitted)

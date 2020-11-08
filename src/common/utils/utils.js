@@ -300,12 +300,13 @@ export const formatHour = (hour) => {
   } else {
     hourFormat = 'A.M.'
   }
-
-  return { hour: intHour, hourFormat }
+  const res = intHour.toString()
+  return { hour: res, hourFormat }
 }
 
 export const formatMonth = (mon) => {
   if (mon === '*') return mon
+  const msg = `Bad config, month is required to be less than 13`
   switch (mon) {
     case '01':
       return 'January'
@@ -332,13 +333,14 @@ export const formatMonth = (mon) => {
     case '12':
       return 'December'
     default:
-      throw Error('in formatMonth fn')
+      throw Error(msg)
   }
 }
 
 export const formatDOW = (dow) => {
   // console.log('dow::', dow)
   if (dow === '*') return dow
+  const msg = 'Bad config, dow is required to be less than 8'
   switch (dow) {
     case '01':
       return 'Monday'
@@ -355,7 +357,7 @@ export const formatDOW = (dow) => {
     case '07':
       return 'Sunday'
     default:
-      throw Error('in formatMonth fn')
+      throw Error(msg)
   }
 }
 

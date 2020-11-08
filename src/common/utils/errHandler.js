@@ -62,3 +62,39 @@ export const validateFields = (arr) => {
     // handle  nonexistent field
   })
 }
+
+export const validateConfig = (configArr) => {
+  const min = configArr[0]
+  const hour = configArr[1]
+  const dom = configArr[2]
+  const mon = configArr[3]
+  const dow = configArr[4]
+  let msg = ''
+
+  if (min !== '*' && Number(min) > 59) {
+    msg = `Bad config, minute is required to be less than 60`
+    return { error: true, msg }
+  }
+
+  if (hour !== '*' && Number(hour) > 23) {
+    msg = `Bad config, hour is required to be less than 24`
+    return { error: true, msg }
+  }
+
+  if (dom !== '*' && Number(dom) > 31) {
+    msg = `Bad config, dom is required to be less than 32`
+    return { error: true, msg }
+  }
+
+  if (mon !== '*' && Number(mon) > 12) {
+    msg = `Bad config, month is required to be less than 13`
+    return { error: true, msg }
+  }
+
+  if (dow !== '*' && Number(dow) > 7) {
+    msg = `Bad config, dow is required to be less than 8`
+    return { error: true, msg }
+  }
+
+  return { error: false, msg }
+}

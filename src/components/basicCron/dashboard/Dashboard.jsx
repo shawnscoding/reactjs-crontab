@@ -11,16 +11,16 @@ import {
 } from '../../../common/utils/utils'
 
 const addHrTime = (tasks) => {
-  // console.log("res", res);
   if (!tasks.length) return []
   const result = tasks.map((task) => {
     // let year = "2020";
     const hrTime = ''
     const { config } = task
     const splitted = config.split('-')
+    const { hour, hourFormat } = formatHour(splitted[1])
     const inserted = insertZero(splitted)
+    // console.log('inserted ::', inserted)
     const min = inserted[0]
-    const { hour, hourFormat } = formatHour(inserted[1])
 
     const dom = inserted[2]
     const mon = formatMonth(inserted[3])
