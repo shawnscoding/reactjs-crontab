@@ -2,7 +2,6 @@ import { ONE_NUMBER, ASTERISK, SEVERAL_NUMBERS } from '../data/types'
 
 export const getHRtime = (hrTime, conditions, hourFormat) => {
   const { min, hour, dom, mon, dow } = conditions
-  console.log('condition ::', conditions)
   if (
     min === '*' &&
     hour === '*' &&

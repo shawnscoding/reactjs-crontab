@@ -3,11 +3,15 @@ import PropTypes from 'prop-types'
 import { format } from 'date-fns'
 import {
   validateValueTypes,
-  validateConfig,
-  validateConfigLength,
-  validateMin,
-  validateHour
+  validateConfigLength
 } from '../../common/utils/errHandler'
+import {
+  validateMin,
+  validateHour,
+  validateDom,
+  validateMon,
+  validateDow
+} from '../../common/utils/validateTime'
 import defaultTasks from '../../common/data/BasicCronDefaultProps'
 import { converConfigValuesToObject } from '../../common/utils/utils'
 
@@ -23,7 +27,7 @@ const detectNecessaryTask = (configArr) => {
   const currentMon = format(utcTime, 'M')
   const currentDow = format(utcTime, 'i')
   // console.log('utc::', utcTime)
-  // console.log("m::", currentMin, currentHour, currentDom, currentMon);
+  // console.log('m::', currentMin, currentHour, currentDom, currentMon)
 
   const min = configArr[0]
   const hour = configArr[1]
@@ -55,7 +59,7 @@ const detectNecessaryTask = (configArr) => {
     }
   }
 
-  return { isNecessary: false, col: null }
+  return { isNecessary: true, col: null }
 }
 
 const handleSetTimer = (task) => {
@@ -95,21 +99,18 @@ const handleSetTimer = (task) => {
 
     const hourValidateRes = validateHour(convertedConfig[1])
 
-    console.log('minValidateRes', minValidateRes)
-    console.log('hourValidateRes', hourValidateRes)
+    const domValidateRes = validateDom(convertedConfig[2])
 
-    //   setInterval(() => {
-    //     const { isNecessary } = detectNecessaryTask(splittedConfig)
-    //     // console.log('validation res ::', res)
-    //     if (isNecessary) {
-    //       // console.log('utc::', utcTime)
+    const monValidateRes = validateMon(convertedConfig[3])
 
-    //       fn()
-    //     } else {
-    //       // console.log("not validated task ::", task);
-    //     }
-    //   }, timerDuration)
-    // }
+    const dowValidateRes = validateDow(convertedConfig[4])
+
+    setInterval(() => {
+      const { isNecessary } = detectNecessaryTask(splittedConfig)
+      if (isNecessary) {
+        fn()
+      }
+    }, timerDuration)
   }
 }
 const BasicCronContext = createContext(null)
