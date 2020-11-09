@@ -10,56 +10,64 @@ import {
   validateHour,
   validateDom,
   validateMon,
-  validateDow
+  validateDow,
+  IsNeededToRunNow
 } from '../../common/utils/validateTime'
 import defaultTasks from '../../common/data/BasicCronDefaultProps'
 import { converConfigValuesToObject } from '../../common/utils/utils'
 
 export { BasicCronProvider, BasicCronContext }
 
-const timerDuration = 60000
+const timerDuration = 3000
 
-const detectNecessaryTask = (configArr) => {
+const detectTaskTime = (convertedConfigArr) => {
   const utcTime = new Date(new Date().toUTCString().slice(0, -3))
+
   const currentMin = format(utcTime, 'm')
   const currentHour = format(utcTime, 'H')
   const currentDom = format(utcTime, 'd')
   const currentMon = format(utcTime, 'M')
   const currentDow = format(utcTime, 'i')
-  // console.log('utc::', utcTime)
-  // console.log('m::', currentMin, currentHour, currentDom, currentMon)
+  console.log('m::', currentMin, currentHour, currentDom, currentMon)
 
-  const min = configArr[0]
-  const hour = configArr[1]
-  const dom = configArr[2]
-  const mon = configArr[3]
-  const dow = configArr[4]
+  const min = convertedConfigArr[0]
+  const hour = convertedConfigArr[1]
+  const dom = convertedConfigArr[2]
+  const mon = convertedConfigArr[3]
+  const dow = convertedConfigArr[4]
 
-  if (min !== '*' && min !== currentMin) {
-    return { isNecessary: false, col: 'min' }
-  }
-  if (hour !== '*' && hour !== currentHour) {
-    return { isNecessary: false, col: 'hour' }
-  }
+  const minValidateRes = IsNeededToRunNow(min, currentMin)
+  const hourValidateRes = IsNeededToRunNow(hour, currentHour)
+  const domValidateRes = IsNeededToRunNow(dom, currentDom)
+  const monValidateRes = IsNeededToRunNow(mon, currentMon)
+  const dowValidateRes = IsNeededToRunNow(dow, currentDow)
 
-  if (dom !== '*' && dom !== currentDom) {
-    return { isNecessary: false, col: 'dom' }
+  if (!minValidateRes.isNeededToRun) {
+    return minValidateRes.isNeededToRun
   }
-
-  if (mon !== '*' && mon !== currentMon) {
-    return { isNecessary: false, col: 'mon' }
+  if (!hourValidateRes.isNeededToRun) {
+    return hourValidateRes.isNeededToRun
   }
-  if (dow !== '*' && dow !== currentDow) {
-    return { isNecessary: false, col: 'dow' }
+  if (!domValidateRes.isNeededToRun) {
+    return domValidateRes.isNeededToRun
   }
-
-  if (dom !== '*' && dow !== '*') {
-    if (dom !== currentDom || dow !== currentDow) {
-      return { isNecessary: false, col: 'dom and dow' }
-    }
+  if (!monValidateRes.isNeededToRun) {
+    return monValidateRes.isNeededToRun
+  }
+  if (!dowValidateRes.isNeededToRun) {
+    return dowValidateRes.isNeededToRun
   }
 
-  return { isNecessary: true, col: null }
+  // console.log('minValidateRes ::', minValidateRes.isNeededToRun)
+
+  // console.log('hourValidateRes ::', hourValidateRes.isNeededToRun)
+  // console.log('domValidateRes ::', domValidateRes.isNeededToRun)
+
+  // console.log('monValidateRes ::', monValidateRes.isNeededToRun)
+
+  // console.log('dowValidateRes ::', dowValidateRes.isNeededToRun)
+
+  return true
 }
 
 const handleSetTimer = (task) => {
@@ -69,6 +77,10 @@ const handleSetTimer = (task) => {
   if (res.error) {
     throw Error(res.msg)
   }
+
+  console.log('config :::', config)
+  const utcTime = new Date(new Date().toUTCString().slice(0, -3))
+  console.log('utc::', utcTime)
 
   const isNotAsterisk = splittedConfig
     .slice(0, splittedConfig.length - 1)
@@ -82,14 +94,6 @@ const handleSetTimer = (task) => {
   } else {
     // means there is something particular
     // validate value in config field
-    const { fn } = task
-
-    // const { error, msg } = validateConfig(splittedConfig)
-    // console.log('error: ', error)
-    // if (error) {
-    //   throw Error(msg)
-    // }
-
     const convertedConfig = splittedConfig.map((item) => {
       const obj = converConfigValuesToObject(item)
       return obj
@@ -105,9 +109,28 @@ const handleSetTimer = (task) => {
 
     const dowValidateRes = validateDow(convertedConfig[4])
 
+    if (minValidateRes.error) {
+      const { msg } = minValidateRes
+      throw Error(msg)
+    } else if (hourValidateRes.error) {
+      const { msg } = hourValidateRes
+      throw Error(msg)
+    } else if (domValidateRes.error) {
+      const { msg } = domValidateRes
+      throw Error(msg)
+    } else if (monValidateRes.error) {
+      const { msg } = monValidateRes
+      throw Error(msg)
+    } else if (dowValidateRes.error) {
+      const { msg } = dowValidateRes
+      throw Error(msg)
+    }
+
+    const { fn } = task
+
     setInterval(() => {
-      const { isNecessary } = detectNecessaryTask(splittedConfig)
-      if (isNecessary) {
+      const isNeededToRun = detectTaskTime(convertedConfig)
+      if (isNeededToRun) {
         fn()
       }
     }, timerDuration)
