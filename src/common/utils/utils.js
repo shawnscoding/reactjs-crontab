@@ -295,21 +295,20 @@ export const formatHour = (hour) => {
   if (hour.type === ASTERISK) return { hour }
   console.log('hour ::', hour)
   const values = hour.value
+  let hourFormat = ''
+
   const convertedArr = values.map((item) => {
     let intHour = Number(item)
-    let hourFormat
     if (intHour > 12) {
       intHour -= 12
       hourFormat = 'P.M.'
     } else {
       hourFormat = 'A.M.'
     }
-    const res = intHour.toString() + hourFormat
+    const res = intHour.toString()
 
     return res
   })
-
-  console.log('convertedArr ::', convertedArr)
 }
 
 export const formatMonth = (mon) => {
