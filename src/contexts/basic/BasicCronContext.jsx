@@ -16,8 +16,6 @@ import {
 import defaultTasks from '../../common/data/BasicCronDefaultProps'
 import { converConfigValuesToObject } from '../../common/utils/utils'
 
-export { BasicCronProvider, BasicCronContext }
-
 const timerDuration = 3000
 
 const detectTaskTime = (convertedConfigArr) => {
@@ -28,7 +26,7 @@ const detectTaskTime = (convertedConfigArr) => {
   const currentDom = format(utcTime, 'd')
   const currentMon = format(utcTime, 'M')
   const currentDow = format(utcTime, 'i')
-  console.log('m::', currentMin, currentHour, currentDom, currentMon)
+  // console.log('m::', currentMin, currentHour, currentDom, currentMon)
 
   const min = convertedConfigArr[0]
   const hour = convertedConfigArr[1]
@@ -166,3 +164,5 @@ BasicCronProvider.propTypes = {
 BasicCronProvider.defaultProps = {
   tasks: defaultTasks
 }
+
+export { BasicCronProvider, BasicCronContext }
