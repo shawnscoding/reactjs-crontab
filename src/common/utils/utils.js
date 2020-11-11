@@ -9,7 +9,7 @@ export const getHRtime = (hrTime, conditions, hourFormat) => {
     mon === '*' &&
     dow === '*'
   ) {
-    // 1
+    // 1s
 
     hrTime += `every minutes`
   } else if (
@@ -312,60 +312,69 @@ export const formatHour = (hour) => {
 }
 
 export const formatMonth = (mon) => {
-  if (mon === '*') return mon
+  if (typeof mon !== typeof {}) throw Error('Bad argument')
+  const { value } = mon
   const msg = `Bad config, month is required to be less than 13`
-  switch (mon) {
-    case '01':
-      return 'January'
-    case '02':
-      return 'Faburary'
-    case '03':
-      return 'March'
-    case '04':
-      return 'April'
-    case '05':
-      return 'May'
-    case '06':
-      return 'June'
-    case '07':
-      return 'July'
-    case '08':
-      return 'Augest'
-    case '09':
-      return 'September'
-    case '10':
-      return 'October'
-    case '11':
-      return 'November'
-    case '12':
-      return 'December'
-    default:
-      throw Error(msg)
-  }
+  const formatted = value.map((val) => {
+    switch (val) {
+      case '1':
+        return 'January'
+      case '2':
+        return 'Faburary'
+      case '3':
+        return 'March'
+      case '4':
+        return 'April'
+      case '5':
+        return 'May'
+      case '6':
+        return 'June'
+      case '7':
+        return 'July'
+      case '8':
+        return 'Augest'
+      case '9':
+        return 'September'
+      case '10':
+        return 'October'
+      case '11':
+        return 'November'
+      case '12':
+        return 'December'
+      default:
+        throw Error(msg)
+    }
+  })
+  const result = { ...mon, value: formatted }
+  return result
 }
 
 export const formatDOW = (dow) => {
-  // console.log('dow::', dow)
-  if (dow === '*') return dow
+  if (typeof dow !== typeof {}) throw Error('Bad args')
   const msg = 'Bad config, dow is required to be less than 8'
-  switch (dow) {
-    case '01':
-      return 'Monday'
-    case '02':
-      return 'Tuesday'
-    case '03':
-      return 'Wednesday'
-    case '04':
-      return 'Thirsday'
-    case '05':
-      return 'Friday'
-    case '06':
-      return 'Saturday'
-    case '07':
-      return 'Sunday'
-    default:
-      throw Error(msg)
-  }
+  const { value } = dow
+  const formatted = value.map((val) => {
+    switch (val) {
+      case '1':
+        return 'Monday'
+      case '2':
+        return 'Tuesday'
+      case '3':
+        return 'Wednesday'
+      case '4':
+        return 'Thirsday'
+      case '5':
+        return 'Friday'
+      case '6':
+        return 'Saturday'
+      case '7':
+        return 'Sunday'
+      default:
+        throw Error(msg)
+    }
+  })
+  const result = { ...dow, value: formatted }
+  return result
 }
 
 export const insertZero = (arr) => {
