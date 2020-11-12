@@ -104,9 +104,9 @@ const addHrTime = (tasks) => {
       }
       for (let i = 0; i < arr.length; i++) {
         if (i === 0) {
-          hrTime += ` ${arr[i]}minute(s)`
+          hrTime += ` ${arr[i]} minute(s)`
         } else {
-          hrTime += `, ${arr[i]}minute(s)`
+          hrTime += `, ${arr[i]} minute(s)`
         }
       }
     }
