@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
-import Indicator from './Indicator'
-import MinForm from './MinForm'
-import HourForm from './HourForm'
-import DomForm from './DomForm'
-import MonForm from './MonForm'
-import DowForm from './DowForm'
 import styles from '../../../styles.module.css'
+import Form from './form/Form'
+
+// todo
+// 1. helper HR text
 
 const Guide = () => {
   const [format, setFormat] = useState('*-*-*-*-*-utc')
@@ -24,9 +22,12 @@ const Guide = () => {
               type='text'
               onChange={handleInputChange}
               value={format}
-              className={styles.guide_input}
+              className={styles.guide__input}
             />
-            <div className={styles.divider} />
+            <div className={styles.guide__divider}>
+              <span>OR</span>
+            </div>
+            <Form />
           </div>
         </div>
       </div>
