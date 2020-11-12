@@ -291,32 +291,33 @@ export const getHRtime = (hrTime, conditions, hourFormat) => {
   return hrTime
 }
 
-export const formatHour = (hour) => {
-  if (hour.type === ASTERISK) return { hour }
-  console.log('hour ::', hour)
-  const values = hour.value
+export const formatHour = (hourStr) => {
+  if (typeof hourStr !== typeof '') throw Error('Bad arg')
+
   let hourFormat = ''
 
-  const convertedArr = values.map((item) => {
-    let intHour = Number(item)
-    if (intHour > 12) {
-      intHour -= 12
-      hourFormat = 'P.M.'
-    } else {
-      hourFormat = 'A.M.'
-    }
-    const res = intHour.toString()
+  let intHour = Number(hourStr)
+  if (intHour > 12) {
+    intHour -= 12
+    hourFormat = 'P.M.'
+  } else {
+    hourFormat = 'A.M.'
+  }
 
-    return res
-  })
+  const res = `${intHour.toString()}${hourFormat}`
+
+  return res
 }
 
 export const formatMonth = (mon) => {
   if (typeof mon !== typeof {}) throw Error('Bad argument')
   const { value } = mon
+
   const msg = `Bad config, month is required to be less than 13`
   const formatted = value.map((val) => {
     switch (val) {
+      case '*':
+        return '*'
       case '1':
         return 'January'
       case '2':
@@ -355,6 +356,8 @@ export const formatDOW = (dow) => {
   const { value } = dow
   const formatted = value.map((val) => {
     switch (val) {
+      case '*':
+        return '*'
       case '1':
         return 'Monday'
       case '2':

@@ -16,7 +16,7 @@ import {
 import defaultTasks from '../../common/data/BasicCronDefaultProps'
 import { converConfigValuesToObject } from '../../common/utils/utils'
 
-const timerDuration = 3000
+const timerDuration = 60000
 
 const detectTaskTime = (convertedConfigArr) => {
   const utcTime = new Date(new Date().toUTCString().slice(0, -3))
@@ -76,9 +76,9 @@ const handleSetTimer = (task) => {
     throw Error(res.msg)
   }
 
-  console.log('config :::', config)
-  const utcTime = new Date(new Date().toUTCString().slice(0, -3))
-  console.log('utc::', utcTime)
+  // console.log('config :::', config)
+  // const utcTime = new Date(new Date().toUTCString().slice(0, -3))
+  // console.log('utc::', utcTime)
 
   const isNotAsterisk = splittedConfig
     .slice(0, splittedConfig.length - 1)

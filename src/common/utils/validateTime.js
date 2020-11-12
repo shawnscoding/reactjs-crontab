@@ -131,8 +131,8 @@ export const validateMon = (mon) => {
         return item
       }
     })
-    console.log('badConfig ::', badConfig)
-    console.log('values ::', values)
+    // console.log('badConfig ::', badConfig)
+    // console.log('values ::', values)
     if (badConfig) {
       msg = `Bad Config: Month is required to be less than 13`
       return { error: true, msg }

@@ -4,9 +4,7 @@ import { BasicCronContext } from '../../../contexts/basic/BasicCronContext'
 import styles from '../../../styles.module.css'
 import {
   formatDOW,
-  insertZero,
   formatHour,
-  getHRtime,
   formatMonth,
   converConfigValuesToObject
 } from '../../../common/utils/utils'
@@ -23,8 +21,6 @@ const addHrTime = (tasks) => {
       return obj
     })
     let hrTime = ''
-
-    console.log('convertedConfig ::', convertedConfig)
 
     // const { hour, hourFormat } = formatHour(convertedConfig[1])
     // const inserted = insertZero(splitted)
@@ -53,7 +49,6 @@ const addHrTime = (tasks) => {
     if (dom.type === ASTERISK) {
       hrTime += ''
     } else {
-      console.log('called !!!')
       const arr = dom.value
       hrTime += ` on`
       for (let i = 0; i < arr.length; i++) {
@@ -89,10 +84,11 @@ const addHrTime = (tasks) => {
       const arr = hour.value
       hrTime += ` At`
       for (let i = 0; i < arr.length; i++) {
+        const res = formatHour(arr[i])
         if (i === 0) {
-          hrTime += ` ${arr[i]}`
+          hrTime += ` ${res}`
         } else {
-          hrTime += `, ${arr[i]}`
+          hrTime += `, ${res}`
         }
       }
     }
@@ -101,23 +97,25 @@ const addHrTime = (tasks) => {
       hrTime += ' every minute'
     } else {
       const arr = min.value
-      hrTime += ``
+      if (hour.type !== ASTERISK) {
+        hrTime += ` and At`
+      } else {
+        hrTime += ` At`
+      }
       for (let i = 0; i < arr.length; i++) {
         if (i === 0) {
-          hrTime += ` ${arr[i]}`
+          hrTime += ` ${arr[i]}minute(s)`
         } else {
-          hrTime += `, ${arr[i]}`
+          hrTime += `, ${arr[i]}minute(s)`
         }
       }
     }
-
-    console.log('hrTime :: ', hrTime)
 
     // // since we have 32 possibilities, we are gonna have 32 if statements
     // const conditions = { min, hour, dom, mon, dow }
     // const res = getHRtime(hrTime, conditions)
 
-    // return { ...task, hrTime: res }
+    return { ...task, hrTime }
   })
 
   return result
@@ -131,7 +129,7 @@ const Dashboard = (props) => {
   // console.log('crons :::')
   return (
     <div className={styles.dashboard}>
-      {/* <table className={styles.dashboard__container}>
+      <table className={styles.dashboard__container}>
         <caption className={styles.dashboard__title__container}>
           <h1 className={styles.dashboard__title}>Dashboard</h1>
         </caption>
@@ -156,7 +154,7 @@ const Dashboard = (props) => {
               </tr>
             </tbody>
           ))}
-      </table> */}
+      </table>
     </div>
   )
 }
