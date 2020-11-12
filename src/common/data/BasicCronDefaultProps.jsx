@@ -39,7 +39,7 @@ const defaultTasks = [
   {
     fn: RequestSomething,
     id: '3',
-    config: '*-*-*-11,12-*-4',
+    config: '*-15,19-*-11,12-*-4',
     name: 'Request Something',
     description: 'Send API'
   },

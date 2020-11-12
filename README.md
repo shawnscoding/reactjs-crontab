@@ -87,39 +87,39 @@ const tasks = [
     fn: sayHello,
     id: '1',
     config: '*-*-*-*-*-utc',
-    // expected to run every minutes
+    // Execute every minutes
     name: 'Say Hello',
     description: 'Say Hello on console'
   },
   {
     fn: sayGoobye,
     id: '2',
-    config: '15-30-*-*-*-utc',
-    // expected to run at 18:15P.M  every day (utc)
+    config: '*-7,8-12-11-*-utc',
+    // Execute In November on 12th At 7AM, 8AM every minute
     name: 'Say Goodbye',
     description: 'Say Goodbye on console'
   },
   {
     fn: RequestSomething,
     id: '3',
-    config: '15-*-*-*-*-utc',
-    // expected to run every day, every hour as long as it's 15 minute (utc)
+    config: '*-15,19-*-11,12-*-4',
+    // Execute In November, December At 3PM, 7PM every minute
     name: 'Request Something',
     description: 'Send API'
   },
   {
     fn: sendNotification,
     id: '4',
-    config: '10-11-18-3-*-utc',
-    // expected to run at 11:10A.M. as long as it's 18th March (utc)
+    config: '10-11-18-7-*-utc',
+    // Execute In July on 18th At 11AM and At 10minute(s)
     name: 'Send Notification',
     description: 'Send Event Notification'
   },
   {
     fn: logUserOut,
     id: '5',
-    config: '*-16-18-10-*-utc',
-    // expected to run every minute at 4P.M. as long as it's 18th October (utc)
+    config: '*-16-*-10-1-utc',
+    // Execute In October on Monday At 4PM every minute
     name: 'Log user out'
   }
 ]

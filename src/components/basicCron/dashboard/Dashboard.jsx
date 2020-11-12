@@ -149,7 +149,7 @@ const Dashboard = (props) => {
                 <td>{cron.id}</td>
                 <td>{cron.name}</td>
                 <td>{cron.config}</td>
-                <td>Execute At: {cron.hrTime}</td>
+                <td>{cron.hrTime}</td>
                 <td>{cron.description}</td>
               </tr>
             </tbody>

@@ -299,9 +299,9 @@ export const formatHour = (hourStr) => {
   let intHour = Number(hourStr)
   if (intHour > 12) {
     intHour -= 12
-    hourFormat = 'P.M.'
+    hourFormat = 'PM'
   } else {
-    hourFormat = 'A.M.'
+    hourFormat = 'AM'
   }
 
   const res = `${intHour.toString()}${hourFormat}`
