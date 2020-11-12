@@ -34,7 +34,7 @@ MIN-HOUR-DOM-MON-DOW-TIMEZONE
 
 OR
 
-Multiple like this
+Can be multiple values like this
 
 ```
 MIN,MIN-HOUR,HOUR-DOM,DOM-MON,MON-DOW,DOW-TIMEZONE
@@ -153,7 +153,7 @@ BasicCron Props {
 
 ```
 
-## note
+## Note
 
 - This will work well for simple crontab task but I have tons of features that I'd like to add. So stay tuned!
   Thank you so much for your attention!
