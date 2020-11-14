@@ -104,9 +104,9 @@ const addHrTime = (tasks) => {
       }
       for (let i = 0; i < arr.length; i++) {
         if (i === 0) {
-          hrTime += ` ${arr[i]}minute(s)`
+          hrTime += ` ${arr[i]} minute(s)`
         } else {
-          hrTime += `, ${arr[i]}minute(s)`
+          hrTime += `, ${arr[i]} minute(s)`
         }
       }
     }
@@ -149,7 +149,7 @@ const Dashboard = (props) => {
                 <td>{cron.id}</td>
                 <td>{cron.name}</td>
                 <td>{cron.config}</td>
-                <td>Execute At: {cron.hrTime}</td>
+                <td>{cron.hrTime}</td>
                 <td>{cron.description}</td>
               </tr>
             </tbody>

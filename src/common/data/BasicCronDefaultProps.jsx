@@ -32,14 +32,14 @@ const defaultTasks = [
   {
     fn: sayGoobye,
     id: '2',
-    config: '*-7,8-12-11-*-utc',
+    config: '5-7-12-11-*-utc',
     name: 'Say Goodbye',
     description: 'Say Goodbye on console'
   },
   {
     fn: RequestSomething,
     id: '3',
-    config: '*-*-*-11,12-*-4',
+    config: '*-15,19-*-11,12-*-4',
     name: 'Request Something',
     description: 'Send API'
   },
