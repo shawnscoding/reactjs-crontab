@@ -190,6 +190,18 @@ video {
   -moz-box-sizing: border-box;
 }
 
+button {
+  font-style: normal;
+  font-feature-settings: normal;
+  font-variant-ligatures: normal;
+  font-variant-caps: normal;
+  font-variant-numeric: normal;
+  font-variant-east-asian: normal;
+  font-weight: normal;
+  font-stretch: normal;
+  font-size: 10px;
+}
+
 .daily-form {
   margin: 0 50px;
 }
@@ -345,7 +357,7 @@ th {
 }
 
 .guide__container {
-  width: 110em;
+  width: 100em;
   box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
     0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
   transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
@@ -415,4 +427,14 @@ th {
   -webkit-transform: translateY(50%);
   transform: translateY(50%);
   content: '';
+}
+
+.guide__selectform {
+}
+
+.guide__clearbutton {
+  background: rgb(220, 0, 78);
+  color: #fff;
+  width: 6em;
+  height: 3em;
 }

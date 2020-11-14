@@ -1,14 +1,37 @@
 import React, { useState } from 'react'
 import styles from '../../../styles.module.css'
-import Form from './form/Form'
-
-// todo
-// 1. helper HR text
+import SelectForm from './selectForm/SelectForm'
+import TextFieldForm from './textFieldForm/TextFieldForm'
 
 const Guide = () => {
   const [format, setFormat] = useState('*-*-*-*-*-utc')
 
-  const handleInputChange = () => {}
+  const handleInputChange = (e) => {
+    const value = e.target.value
+    setFormat(value)
+  }
+
+  const [select, setSelect] = useState({
+    min: '',
+    hour: '',
+    dom: '',
+    mon: '',
+    dow: ''
+  })
+
+  const handleSelectChange = (e) => {
+    const id = e.target.id
+    const value = e.target.value
+
+    setSelect((prevState) => ({
+      ...prevState,
+      [id]: value
+    }))
+  }
+
+  const handleClear = () => {
+    setFormat('*-*-*-*-*-utc')
+  }
 
   return (
     <React.Fragment>
@@ -18,16 +41,18 @@ const Guide = () => {
             <h1 className={styles.guide__title}>Guide</h1>
           </div>
           <div className={styles.guide__content}>
-            <input
-              type='text'
-              onChange={handleInputChange}
-              value={format}
-              className={styles.guide__input}
+            <TextFieldForm
+              format={format}
+              handleInputChange={handleInputChange}
             />
             <div className={styles.guide__divider}>
               <span>OR</span>
             </div>
-            <Form />
+            <SelectForm
+              handleClear={handleClear}
+              handleChange={handleSelectChange}
+              select={select}
+            />
           </div>
         </div>
       </div>
