@@ -338,15 +338,14 @@ th {
 }
 
 .dashboard__title__container {
-  background: #1976d2;
   padding: 1.5em;
   text-align: left;
 }
 
 .dashboard__title {
   margin: 0;
-  background: #1976d2;
-  color: #fff;
+  text-align: left;
+  color: #1976d2;
   font-size: 15px;
 }
 
@@ -365,14 +364,14 @@ th {
 }
 
 .guide__title__container {
-  background: #1976d2;
   padding: 1.5em;
   text-align: left;
+  border-bottom: 1px solid rgba(224, 224, 224, 1);
 }
 
 .guide__title {
   margin: 0;
-  color: #fff;
+  color: #1976d2;
   font-size: 15px;
 }
 

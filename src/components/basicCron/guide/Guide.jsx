@@ -12,11 +12,11 @@ const Guide = () => {
   }
 
   const [select, setSelect] = useState({
-    min: '',
-    hour: '',
-    dom: '',
-    mon: '',
-    dow: ''
+    min: '*',
+    hour: '*',
+    dom: '*',
+    mon: '*',
+    dow: '*'
   })
 
   const handleSelectChange = (e) => {

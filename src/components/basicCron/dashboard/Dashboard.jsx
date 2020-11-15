@@ -130,9 +130,13 @@ const Dashboard = (props) => {
   return (
     <div className={styles.dashboard}>
       <table className={styles.dashboard__container}>
-        <caption className={styles.dashboard__title__container}>
-          <h1 className={styles.dashboard__title}>Dashboard</h1>
-        </caption>
+        <thead className={styles.dashboard__title__container}>
+          <tr>
+            <th colSpan='5' className={styles.dashboard__title}>
+              Dashboard
+            </th>
+          </tr>
+        </thead>
         <thead>
           <tr>
             <th>ID</th>

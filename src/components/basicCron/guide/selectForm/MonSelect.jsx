@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styles from '../../../../styles.module.css'
 
 const createArrWithNum = (num) => {
   const arr = []
@@ -21,13 +22,15 @@ const MonSelect = ({ select, handleChange }) => {
   const { mon } = select
   const res = createArrWithNum(12)
   return (
-    <select defaultValue={mon} onChange={handleChange} id='mon'>
-      {res.map((item) => (
-        <option key={item.id} value={item.value}>
-          {item.label}
-        </option>
-      ))}
-    </select>
+    <div className={styles.select__container}>
+      <select defaultValue={mon} onChange={handleChange} id='mon'>
+        {res.map((item) => (
+          <option key={item.id} value={item.value}>
+            {item.label}
+          </option>
+        ))}
+      </select>
+    </div>
   )
 }
 
