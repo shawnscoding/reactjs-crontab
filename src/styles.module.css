@@ -438,3 +438,14 @@ th {
   width: 6em;
   height: 3em;
 }
+
+.select__container {
+  margin: 8px;
+  min-width: 120px;
+  border: 0;
+  display: inline-flex;
+  padding: 0;
+  position: relative;
+  flex-direction: column;
+  vertical-align: top;
+}
