@@ -99,13 +99,6 @@
   box-sizing: border-box;
 }
 
-.global div,
-input,
-button,
-p {
-  box-sizing: border-box;
-}
-
 .global iframe,
 h1,
 h2,
@@ -185,6 +178,14 @@ video {
   border: 0;
   outline: 0;
   background: transparent;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+.global,
+*::before,
+*::after {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -448,4 +449,139 @@ th {
   position: relative;
   flex-direction: column;
   vertical-align: top;
+}
+
+.checkboxes__combobox {
+  width: 500px;
+  box-sizing: inherit;
+}
+
+.checkboxes__wrapper {
+  width: 100%;
+  display: inline-flex;
+  position: relative;
+  flex-direction: column;
+  vertical-align: top;
+  font-size: 8px;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-weight: 400;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.checkboxes__label {
+  z-index: 1;
+  transform: translate(14px, 20px) scale(1);
+  pointer-events: none;
+  transition: color 200ms cubic-bezier(0, 0, 0.2, 1) 0ms,
+    transform 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+  top: 0;
+  left: 0;
+  position: absolute;
+  display: block;
+  transform-origin: top left;
+  color: rgba(0, 0, 0, 0.54);
+  padding: 0;
+  font-size: 10px;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.00938em;
+}
+
+.checkboxes__container {
+  padding-right: 65px;
+  padding: 9px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.checkboxes__container :hover {
+  border-color: #15141494;
+}
+
+.MuiInputBase-root {
+  color: rgba(0, 0, 0, 0.87);
+  cursor: text;
+  display: inline-flex;
+  position: relative;
+  font-size: 1rem;
+  box-sizing: border-box;
+  align-items: center;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-weight: 400;
+  line-height: 1.1876em;
+  letter-spacing: 0.00938em;
+}
+
+.MuiOutlinedInput-root {
+  position: relative;
+  border-radius: 4px;
+}
+
+/* input */
+.checkboxes__input {
+  padding-left: 6px;
+  padding: 9.5px 4px;
+  width: 0;
+  min-width: 30px;
+  opacity: 1;
+  flex-grow: 1;
+  text-overflow: ellipsis;
+}
+
+.MuiInputBase-input {
+  font: inherit;
+  color: currentColor;
+  border: 0;
+  height: 1.1876em;
+  margin: 0;
+  display: block;
+  background: none;
+  box-sizing: content-box;
+  animation-name: mui-auto-fill-cancel;
+  letter-spacing: inherit;
+  animation-duration: 10ms;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.checkboxes__combobox fieldset {
+  top: -5px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 0 8px;
+  overflow: hidden;
+  position: absolute;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: inherit;
+  pointer-events: none;
+  border-color: rgba(0, 0, 0, 0.23);
+}
+
+.checkboxes__combobox legend {
+  width: auto;
+  height: 11px;
+  display: block;
+  padding: 0;
+  font-size: 0.75em;
+  max-width: 0.01px;
+  text-align: left;
+  transition: max-width 50ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+  visibility: hidden;
+}
+
+.checkboxes__label--focus {
+  display: inline-block;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-weight: 400;
+  line-height: 1.1876em;
+  letter-spacing: 0.00938em;
+  color: rgba(0, 0, 0, 0.87);
+  cursor: text;
 }

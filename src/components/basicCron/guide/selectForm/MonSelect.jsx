@@ -57,19 +57,26 @@ const MonSelect = ({ select, handleChange }) => {
   const res = createArrWithNum(12)
   return (
     <React.Fragment>
-      <div role='combobox'>
-        <div className='MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth'>
-          <label />
+      <div className={styles.checkboxes__combobox}>
+        <div className={styles.checkboxes__wrapper}>
+          <label className={styles.checkboxes__label}>Checkboxes</label>
 
-          <div>
-            <input type='text' />
+          <div
+            className={`${styles.checkboxes__container} ${styles['MuiInputBase-root']} ${styles['MuiOutlinedInput-root']}`}
+          >
+            <input
+              className={`${styles.checkboxes__input} ${styles['MuiInputBase-input']}`}
+              type='text'
+            />
             <Test />
             <fieldset
+              className={`${styles['MuiInputBase-root']}`}
               aria-hidden='true'
-              className='PrivateNotchedOutline-root-1 MuiOutlinedInput-notchedOutline'
             >
-              <legend className='PrivateNotchedOutline-legendLabelled-3'>
-                <span>Checkboxes</span>
+              <legend className={`${styles['MuiInputBase-root']}`}>
+                <span className={styles['checkboxes__label--focus']}>
+                  Checkboxes
+                </span>
               </legend>
             </fieldset>
           </div>

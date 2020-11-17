@@ -16,7 +16,7 @@ const SelectFieldsForm = ({ handleClear, handleChange, select }) => {
     <form>
       <span>In</span>
       <MonSelect select={select} handleChange={handleChange} />
-      <span>On</span>
+      {/* <span>On</span>
 
       <DOMSelect select={select} handleChange={handleChange} />
       <span>And</span>
@@ -27,14 +27,14 @@ const SelectFieldsForm = ({ handleClear, handleChange, select }) => {
       <HourSelect select={select} handleChange={handleChange} />
       <span>:</span>
 
-      <MinSelect select={select} handleChange={handleChange} />
-      <button
+      <MinSelect select={select} handleChange={handleChange} /> */}
+      {/* <button
         className={styles.guide__clearbutton}
         type='button'
         onClick={handleClear}
       >
         <span>Clear</span>
-      </button>
+      </button> */}
     </form>
   )
 }
