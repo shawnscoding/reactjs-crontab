@@ -2,16 +2,50 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styles from '../../../../styles.module.css'
 
+const renderSelectedDates = (date, msg) => {
+  if (date === '*') {
+    return (
+      <div>
+        <span className={styles['select-box__input-text']}>{msg}</span>
+      </div>
+    )
+  }
+  const splitted = date.split(',')
+
+  console.log('date', date, splitted)
+  const res = splitted.map((item, index) => {
+    return (
+      <span key={index} className={styles['select-box__input-text']}>
+        {item}
+      </span>
+    )
+  })
+  return (
+    <div
+      style={{
+        display: 'flex',
+        position: 'absolute',
+        top: '-18px',
+        left: '1px'
+      }}
+    >
+      {res}
+    </div>
+  )
+}
+
+const msg = 'asterisk'
+
 const createArrWithNum = (num) => {
   const arr = []
   for (let i = 0; i < num; i++) {
     const iPlusOne = i + 1
     const val = {
       id: iPlusOne.toString(),
-      value: iPlusOne.toString(), 
+      value: iPlusOne.toString(),
       label: iPlusOne.toString()
     }
-    arr.push(val) 
+    arr.push(val)
   }
 
   return arr
@@ -23,37 +57,45 @@ const MonSelect = ({ select, handleChange }) => {
   const res = createArrWithNum(12)
   return (
     <React.Fragment>
-   {/* <select defaultValue={mon} onChange={handleChange} id='mon'>
-      {res.map((item) => (
-        <option key={item.id} value={item.value}>
-          {item.label}
-        </option>
-      ))}
-    </select> */}
+      <div className={styles['select-box']}>
+        <div className={styles['select-box__current']} tabIndex='1'>
+          {/* {res.map((item) => ( */}
+          <div className={styles['select-box__value']}>
+            <input
+              onChange={(e) => handleChange(e, 'mon')}
+              type='text'
+              // id={item.id}
+              value=''
+              name='Ben'
+              // checked={mon === item.value}
+              className={styles['select-box__input']}
+            />
+            {renderSelectedDates(mon, msg)}
+            {/* <p className={styles['select-box__input-text']}>{msg}</p> */}
+          </div>
+          {/* ))} */}
 
-<div className={styles["select-box"]}>
-  <div className={styles["select-box__current"]} tabIndex="1">
-    
-    {res.map((item, index) => (
-    <div key={item.id} className={styles["select-box__value"]}>
-      <input type="radio" id={item.id} value={item.value} name="Ben" checked={index === 0 ? true : false} className={styles["select-box__input"]} />
-    <p className={styles["select-box__input-text"]}>{item.label}</p>
-    </div>
-
-    ))}
-    
-    <img className={styles["select-box__icon"]} src="http://cdn.onlinewebfonts.com/svg/img_295694.svg" alt="Arrow Icon" aria-hidden="true"/>
-  </div>
-  <ul className={styles["select-box__list"]}>
-  {res.map((item, index) => (
-    <li key={item.id}>
-      <label className={styles["select-box__option"]} htmlFor={item.id} aria-hidden="aria-hidden">{item.label}</label>
-    </li>
-
-    ))}
-    
-  </ul>
-</div>
+          <img
+            className={styles['select-box__icon']}
+            src='http://cdn.onlinewebfonts.com/svg/img_295694.svg'
+            alt='Arrow Icon'
+            aria-hidden='true'
+          />
+        </div>
+        <ul className={styles['select-box__list']}>
+          {res.map((item) => (
+            <li key={item.id}>
+              <label
+                className={styles['select-box__option']}
+                htmlFor={item.id}
+                aria-hidden='aria-hidden'
+              >
+                {item.label}
+              </label>
+            </li>
+          ))}
+        </ul>
+      </div>
     </React.Fragment>
   )
 }
@@ -61,7 +103,6 @@ const MonSelect = ({ select, handleChange }) => {
 MonSelect.propTypes = {}
 
 export default MonSelect
-
 
 // import React from 'react'
 // import PropTypes from 'prop-types'
@@ -154,8 +195,6 @@ export default MonSelect
 // MonSelect.propTypes = {}
 
 // export default MonSelect
-
-
 
 // <div class="select-box">
 //   <div class="select-box__current" tabindex="1">

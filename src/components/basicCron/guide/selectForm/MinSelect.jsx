@@ -9,6 +9,7 @@ const createArrWithNum = (num) => {
   }
 
   return arr
+
   // 0 - 59
 }
 

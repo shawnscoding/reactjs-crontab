@@ -15,17 +15,16 @@ const Guide = () => {
     min: '*',
     hour: '*',
     dom: '*',
-    mon: '*',
+    mon: '1,2,3,4',
     dow: '*'
   })
 
-  const handleSelectChange = (e) => {
-    const id = e.target.id
+  const handleSelectChange = (e, key) => {
     const value = e.target.value
 
     setSelect((prevState) => ({
       ...prevState,
-      [id]: value
+      [key]: value
     }))
   }
 
