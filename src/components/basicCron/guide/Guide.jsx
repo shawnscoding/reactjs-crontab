@@ -15,17 +15,46 @@ const Guide = () => {
     min: '*',
     hour: '*',
     dom: '*',
-    mon: '1,2,3,4',
+    mon: '*',
     dow: '*'
   })
 
-  const handleSelectChange = (e, key) => {
-    const value = e.target.value
+  const handleSelectChange = ({ name, item }) => {
+    console.log('name', name)
+    console.log('item', item)
+    const { value } = item
 
-    setSelect((prevState) => ({
-      ...prevState,
-      [key]: value
-    }))
+    setSelect((prevState) => {
+      const selectedDate = prevState[name]
+      if (selectedDate === '*') {
+        return {
+          ...prevState,
+          [name]: value
+        }
+      } else {
+        const dateList = selectedDate.split(',')
+        const found = dateList.find((date) => date === value)
+        if (found) {
+          const res = dateList.filter((date) => date !== found)
+          if (!res.length) {
+            return {
+              ...prevState,
+              [name]: '*'
+            }
+          }
+          return {
+            ...prevState,
+            [name]: res.join()
+          }
+        } else {
+          const res = `${selectedDate},${value}`
+          return {
+            ...prevState,
+            [name]: res
+          }
+        }
+      }
+    })
   }
 
   const handleClear = () => {

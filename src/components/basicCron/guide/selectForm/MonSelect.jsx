@@ -1,23 +1,35 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styles from '../../../../styles.module.css'
+import { formatMonth } from '../../../../common/utils/utils'
+import { format } from 'date-fns'
 
-const renderSelectedDates = (date, msg) => {
-  if (date === '*') {
+const SelectedDates = ({ mon }) => {
+  const msg = 'Every Month'
+
+  if (mon === '*') {
     return (
-      <div>
+      <div
+        style={{
+          display: 'flex',
+          position: 'absolute',
+          top: '-18px',
+          left: '1px'
+        }}
+      >
         <span className={styles['select-box__input-text']}>{msg}</span>
       </div>
     )
   }
-  const splitted = date.split(',')
+  const splitted = mon.split(',')
 
-  console.log('date', date, splitted)
-  const res = splitted.map((item, index) => {
+  const { value } = formatMonth({ value: splitted })
+
+  const res = value.map((item, index) => {
     return (
-      <span key={index} className={styles['select-box__input-text']}>
-        {item}
-      </span>
+      <div key={index} className={styles['select-box__input-wrapper']}>
+        <span className={styles['select-box__input-text']}>{item}</span>
+      </div>
     )
   })
   return (
@@ -34,46 +46,48 @@ const renderSelectedDates = (date, msg) => {
   )
 }
 
-const msg = 'asterisk'
-
 const createArrWithNum = (num) => {
   const arr = []
   for (let i = 0; i < num; i++) {
     const iPlusOne = i + 1
-    const val = {
+    // const val = {
+    //   id: iPlusOne.toString(),
+    //   value: iPlusOne.toString(),
+    //   label: iPlusOne.toString()
+    // }
+    arr.push(iPlusOne.toString())
+  }
+  const { value } = formatMonth({ value: arr })
+  const res = value.map((item, index) => {
+    const iPlusOne = index + 1
+    return {
       id: iPlusOne.toString(),
       value: iPlusOne.toString(),
-      label: iPlusOne.toString()
+      label: item
     }
-    arr.push(val)
-  }
-
-  return arr
+  })
+  return res
   // 1 - 12
 }
 
 const MonSelect = ({ select, handleChange }) => {
   const { mon } = select
   const res = createArrWithNum(12)
+  console.log('res ;', res)
   return (
     <React.Fragment>
       <div className={styles['select-box']}>
         <div className={styles['select-box__current']} tabIndex='1'>
-          {/* {res.map((item) => ( */}
           <div className={styles['select-box__value']}>
             <input
               onChange={(e) => handleChange(e, 'mon')}
               type='text'
-              // id={item.id}
               value=''
               name='Ben'
-              // checked={mon === item.value}
               className={styles['select-box__input']}
             />
-            {renderSelectedDates(mon, msg)}
-            {/* <p className={styles['select-box__input-text']}>{msg}</p> */}
+            <SelectedDates mon={mon} />
           </div>
-          {/* ))} */}
 
           <img
             className={styles['select-box__icon']}
@@ -84,7 +98,10 @@ const MonSelect = ({ select, handleChange }) => {
         </div>
         <ul className={styles['select-box__list']}>
           {res.map((item) => (
-            <li key={item.id}>
+            <li
+              onClick={() => handleChange({ name: 'mon', item })}
+              key={item.id}
+            >
               <label
                 className={styles['select-box__option']}
                 htmlFor={item.id}
