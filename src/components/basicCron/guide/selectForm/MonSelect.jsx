@@ -2,7 +2,15 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styles from '../../../../styles.module.css'
 import { formatMonth } from '../../../../common/utils/utils'
-import { format } from 'date-fns'
+
+
+const classes = {
+  
+}
+
+const handleStates = () => {
+
+}
 
 const SelectedDates = ({ mon }) => {
   const msg = 'Every Month'
@@ -96,7 +104,7 @@ const MonSelect = ({ select, handleChange }) => {
             aria-hidden='true'
           />
         </div>
-        <ul className={styles['select-box__list']}>
+        <ul style={handleStates} className={styles['select-box__list']}>
           {res.map((item) => (
             <li
               onClick={() => handleChange({ name: 'mon', item })}

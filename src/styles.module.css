@@ -491,6 +491,13 @@ th {
   -webkit-animation-name: none;
   animation-name: none;
 }
+
+.select-box__list:focus {
+  opacity: 1;
+  -webkit-animation-name: none;
+  animation-name: none;
+}
+
 .select-box__current:focus + .select-box__list .select-box__option {
   cursor: pointer;
 }
