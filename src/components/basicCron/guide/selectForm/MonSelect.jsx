@@ -1,16 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styles from '../../../../styles.module.css'
 import { formatMonth } from '../../../../common/utils/utils'
 
-
 const classes = {
-  
+  listOnClicked: {}
 }
 
-const handleStates = () => {
-
-}
+const handleStates = () => {}
 
 const SelectedDates = ({ mon }) => {
   const msg = 'Every Month'
@@ -81,7 +78,12 @@ const createArrWithNum = (num) => {
 const MonSelect = ({ select, handleChange }) => {
   const { mon } = select
   const res = createArrWithNum(12)
+  const [theswitch, setSwitch] = useState(false)
   console.log('res ;', res)
+  const handleCheckBoxChange = () => {
+    setSwitch(!theswitch)
+    console.log('called', theswitch)
+  }
   return (
     <React.Fragment>
       <div className={styles['select-box']}>
@@ -104,7 +106,7 @@ const MonSelect = ({ select, handleChange }) => {
             aria-hidden='true'
           />
         </div>
-        <ul style={handleStates} className={styles['select-box__list']}>
+        <ul className={styles['select-box__list']}>
           {res.map((item) => (
             <li
               onClick={() => handleChange({ name: 'mon', item })}
@@ -120,6 +122,40 @@ const MonSelect = ({ select, handleChange }) => {
             </li>
           ))}
         </ul>
+
+        <span className={styles.checkbox__wrapper} aria-disabled='false'>
+          <span
+            className={`${
+              theswitch ? styles.checkbox__checked : styles.checkbox
+            }`}
+          >
+            <input
+              className={`${styles.checkbox__input}`}
+              type='checkbox'
+              value=''
+              onChange={handleCheckBoxChange}
+            />
+            <svg
+              className={`${
+                theswitch
+                  ? styles.checkbox__icon__checked
+                  : styles.checkbox__icon
+              }`}
+              focusable='false'
+              viewBox='0 0 24 24'
+              aria-hidden='true'
+            >
+              <path d='M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z' />
+            </svg>
+          </span>
+          <span
+            className={`${
+              theswitch
+                ? styles.checkbox__animator__checked
+                : styles.checkbox__animator
+            }`}
+          />
+        </span>
       </div>
     </React.Fragment>
   )
