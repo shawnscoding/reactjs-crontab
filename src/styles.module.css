@@ -477,6 +477,15 @@ th {
   -webkit-animation-name: none;
   animation-name: none;
 }
+
+.select-box__list-item {
+  display: flex;
+}
+
+.select-box__option {
+  flex-grow: 1;
+}
+
 .select-box__list .select-box__option {
   cursor: pointer;
 }

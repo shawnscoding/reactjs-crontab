@@ -20,9 +20,8 @@ const Guide = () => {
   })
 
   const handleSelectChange = ({ name, item }) => {
-    console.log('name', name)
-    console.log('item', item)
     const { value } = item
+    console.log('handleSelectChange called')
 
     setSelect((prevState) => {
       const selectedDate = prevState[name]
@@ -57,6 +56,54 @@ const Guide = () => {
     })
   }
 
+  const handleCheckboxChange = ({ name, item }) => {
+    const { value } = item
+    console.log('handleCheckboxChange called')
+
+    const selectedDate = select[name]
+
+    if (selectedDate === '*') {
+      setSelect({
+        ...select,
+        [name]: value
+      })
+    }
+    // setSelect((prevState) => {
+    //   const selectedDate = prevState[name]
+    //   if (selectedDate === '*') {
+    //     console.log('name', name)
+    //     console.log('value', value)
+    //     console.log('selectedDate', selectedDate)
+    //     return {
+    //       ...prevState,
+    //       [name]: value
+    //     }
+    //   } else {
+    //     const dateList = selectedDate.split(',')
+    //     const found = dateList.find((date) => date === value)
+    //     if (found) {
+    //       const res = dateList.filter((date) => date !== found)
+    //       if (!res.length) {
+    //         return {
+    //           ...prevState,
+    //           [name]: '*'
+    //         }
+    //       }
+    //       return {
+    //         ...prevState,
+    //         [name]: res.join()
+    //       }
+    //     } else {
+    //       const res = `${selectedDate},${value}`
+    //       return {
+    //         ...prevState,
+    //         [name]: res
+    //       }
+    //     }
+    //   }
+    // })
+  }
+
   const handleClear = () => {
     setFormat('*-*-*-*-*-utc')
   }
@@ -77,6 +124,7 @@ const Guide = () => {
               <span>OR</span>
             </div>
             <SelectForm
+              handleCheckboxChange={handleCheckboxChange}
               handleClear={handleClear}
               handleChange={handleSelectChange}
               select={select}

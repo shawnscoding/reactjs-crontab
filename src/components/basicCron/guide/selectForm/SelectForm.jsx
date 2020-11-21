@@ -7,7 +7,12 @@ import DOMSelect from './DOMSelect'
 import DOWSelect from './DOWSelect'
 import HourSelect from './HourSelect'
 
-const SelectFieldsForm = ({ handleClear, handleChange, select }) => {
+const SelectFieldsForm = ({
+  handleCheckboxChange,
+  handleClear,
+  handleChange,
+  select
+}) => {
   // need 5 select boxes
   // btn is for clear rather than submit
   // helper test with icon
@@ -15,7 +20,11 @@ const SelectFieldsForm = ({ handleClear, handleChange, select }) => {
   return (
     <form>
       <span>In</span>
-      <MonSelect select={select} handleChange={handleChange} />
+      <MonSelect
+        handleCheckboxChange={handleCheckboxChange}
+        select={select}
+        handleChange={handleChange}
+      />
       <span>On</span>
 
       <DOMSelect select={select} handleChange={handleChange} />

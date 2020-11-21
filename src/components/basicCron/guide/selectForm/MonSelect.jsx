@@ -7,7 +7,58 @@ const classes = {
   listOnClicked: {}
 }
 
-const handleStates = () => {}
+const isShouldBeOn = (value, mon) => {
+  const splitted = mon.split(',')
+  console.log('splitted ,', splitted)
+  console.log(splitted.length === 1)
+  if (mon === '*') {
+    return false
+  } else if (splitted.length === 1) {
+    if (mon === value) {
+      return true
+    } else {
+      return false
+    }
+  } else if (splitted.length > 1) {
+    const found = splitted.find((val) => val === value)
+    console.log('found ::', found)
+    if (found) {
+      return true
+    } else {
+      return false
+    }
+  }
+}
+
+const Checkbox = ({ isOn, item }) => {
+  return (
+    <span className={styles.checkbox__wrapper} aria-disabled='false'>
+      <span className={`${isOn ? styles.checkbox__checked : styles.checkbox}`}>
+        <input
+          className={`${styles.checkbox__input}`}
+          type='checkbox'
+          value=''
+          readOnly
+        />
+        <svg
+          className={`${
+            isOn ? styles.checkbox__icon__checked : styles.checkbox__icon
+          }`}
+          focusable='false'
+          viewBox='0 0 24 24'
+          aria-hidden='true'
+        >
+          <path d='M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z' />
+        </svg>
+      </span>
+      <span
+        className={`${
+          isOn ? styles.checkbox__animator__checked : styles.checkbox__animator
+        }`}
+      />
+    </span>
+  )
+}
 
 const SelectedDates = ({ mon }) => {
   const msg = 'Every Month'
@@ -75,24 +126,19 @@ const createArrWithNum = (num) => {
   // 1 - 12
 }
 
-const MonSelect = ({ select, handleChange }) => {
+const MonSelect = ({ select, handleChange, handleCheckboxChange }) => {
   const { mon } = select
   const res = createArrWithNum(12)
-  const [theswitch, setSwitch] = useState(false)
-  console.log('res ;', res)
-  const handleCheckBoxChange = () => {
-    setSwitch(!theswitch)
-    console.log('called', theswitch)
-  }
+
   return (
     <React.Fragment>
       <div className={styles['select-box']}>
         <div className={styles['select-box__current']} tabIndex='1'>
           <div className={styles['select-box__value']}>
             <input
-              onChange={(e) => handleChange(e, 'mon')}
               type='text'
               value=''
+              readOnly
               name='Ben'
               className={styles['select-box__input']}
             />
@@ -107,55 +153,27 @@ const MonSelect = ({ select, handleChange }) => {
           />
         </div>
         <ul className={styles['select-box__list']}>
-          {res.map((item) => (
-            <li
-              onClick={() => handleChange({ name: 'mon', item })}
-              key={item.id}
-            >
-              <label
-                className={styles['select-box__option']}
-                htmlFor={item.id}
-                aria-hidden='aria-hidden'
-              >
-                {item.label}
-              </label>
-            </li>
-          ))}
-        </ul>
+          {res.map((item) => {
+            const isOn = isShouldBeOn(item.value, mon)
 
-        <span className={styles.checkbox__wrapper} aria-disabled='false'>
-          <span
-            className={`${
-              theswitch ? styles.checkbox__checked : styles.checkbox
-            }`}
-          >
-            <input
-              className={`${styles.checkbox__input}`}
-              type='checkbox'
-              value=''
-              onChange={handleCheckBoxChange}
-            />
-            <svg
-              className={`${
-                theswitch
-                  ? styles.checkbox__icon__checked
-                  : styles.checkbox__icon
-              }`}
-              focusable='false'
-              viewBox='0 0 24 24'
-              aria-hidden='true'
-            >
-              <path d='M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z' />
-            </svg>
-          </span>
-          <span
-            className={`${
-              theswitch
-                ? styles.checkbox__animator__checked
-                : styles.checkbox__animator
-            }`}
-          />
-        </span>
+            return (
+              <li
+                onClick={() => handleChange({ name: 'mon', item })}
+                key={item.id}
+                className={styles['select-box__list-item']}
+              >
+                <label
+                  className={styles['select-box__option']}
+                  htmlFor={item.id}
+                  aria-hidden='aria-hidden'
+                >
+                  {item.label}
+                </label>
+                <Checkbox item={item} handleChange={handleChange} isOn={isOn} />
+              </li>
+            )
+          })}
+        </ul>
       </div>
     </React.Fragment>
   )
