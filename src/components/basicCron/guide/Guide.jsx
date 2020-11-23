@@ -19,16 +19,16 @@ const Guide = () => {
     dow: '*'
   })
 
-  const handleSelectChange = ({ name, item }) => {
+  const handleSelectChange = ({ fieldName, item }) => {
     const { value } = item
     console.log('handleSelectChange called')
 
     setSelect((prevState) => {
-      const selectedDate = prevState[name]
+      const selectedDate = prevState[fieldName]
       if (selectedDate === '*') {
         return {
           ...prevState,
-          [name]: value
+          [fieldName]: value
         }
       } else {
         const dateList = selectedDate.split(',')
@@ -38,18 +38,18 @@ const Guide = () => {
           if (!res.length) {
             return {
               ...prevState,
-              [name]: '*'
+              [fieldName]: '*'
             }
           }
           return {
             ...prevState,
-            [name]: res.join()
+            [fieldName]: res.join()
           }
         } else {
           const res = `${selectedDate},${value}`
           return {
             ...prevState,
-            [name]: res
+            [fieldName]: res
           }
         }
       }
@@ -104,6 +104,32 @@ const Guide = () => {
     // })
   }
 
+  const handleClickClose = ({ fieldName, item }) => {
+    const { value } = item
+    console.log('val ::', value)
+    console.log('fieldName ::', fieldName)
+
+    setSelect((prevState) => {
+      const selectedDate = prevState[fieldName]
+      // can be one or several date
+      const dateList = selectedDate.split(',')
+      const found = dateList.find((date) => date === value)
+      if (found) {
+        const res = dateList.filter((date) => date !== found)
+        if (!res.length) {
+          return {
+            ...prevState,
+            [fieldName]: '*'
+          }
+        }
+        return {
+          ...prevState,
+          [fieldName]: res.join()
+        }
+      }
+    })
+  }
+
   const handleClear = () => {
     setFormat('*-*-*-*-*-utc')
   }
@@ -124,7 +150,7 @@ const Guide = () => {
               <span>OR</span>
             </div>
             <SelectForm
-              handleCheckboxChange={handleCheckboxChange}
+              handleClickClose={handleClickClose}
               handleClear={handleClear}
               handleChange={handleSelectChange}
               select={select}

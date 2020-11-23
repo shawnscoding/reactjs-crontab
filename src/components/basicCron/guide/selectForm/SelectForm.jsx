@@ -8,8 +8,8 @@ import DOWSelect from './DOWSelect'
 import HourSelect from './HourSelect'
 
 const SelectFieldsForm = ({
-  handleCheckboxChange,
   handleClear,
+  handleClickClose,
   handleChange,
   select
 }) => {
@@ -21,9 +21,9 @@ const SelectFieldsForm = ({
     <form>
       <span>In</span>
       <MonSelect
-        handleCheckboxChange={handleCheckboxChange}
         select={select}
         handleChange={handleChange}
+        handleClickClose={handleClickClose}
       />
       <span>On</span>
 

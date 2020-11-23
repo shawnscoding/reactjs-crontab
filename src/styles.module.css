@@ -482,13 +482,37 @@ th {
   display: flex;
 }
 
-.select-box__option {
-  flex-grow: 1;
-}
 
 .select-box__list .select-box__option {
   cursor: pointer;
 }
+
+.select-box__option {
+  display: block;
+  padding: 12px 15px;
+  flex-grow: 1;
+  background-color: #fff;
+}
+.select-box__option:hover,
+.select-box__option:focus {
+  color: #546c84;
+    background-color: #f7f7f7;
+}
+
+.select-box__option--selected {
+background-color: #efefef;
+flex-grow: 1;
+display: block;
+padding: 12px 15px;
+cursor: pointer;
+}
+
+.select-box__option--selected:hover,
+.select-box__option--selected:focus {
+    background-color: #f7f7f7;
+  color: #546c84;
+  }
+
 
 .select-box__icon {
   -webkit-transform: translateY(-50%) rotate(180deg);
@@ -537,15 +561,10 @@ th {
   display: -webkit-box;
   display: flex;
 }
-/* .select-box__input {
-  display: none;
-} */
-/* .select-box__input:checked + .select-box__input-text { */
-/* display: block; */
-/* } */
 
 .select-box__input-wrapper {
   color: rgba(0, 0, 0, 0.87);
+
   border: none;
   height: 32px;
   display: inline-flex;
@@ -562,14 +581,7 @@ th {
   margin: 3px;
 }
 
-.select-box__input-text {
-  display: inline-block;
-  overflow: hidden;
-  white-space: nowrap;
-  padding-left: 12px;
-  padding-right: 12px;
-  text-overflow: ellipsis;
-}
+
 .select-box__list {
   position: absolute;
   width: 100%;
@@ -577,7 +589,7 @@ th {
   list-style: none;
   max-height: 245px;
   overflow: auto;
-  /* -webkit-animation-name: HideList;
+  -webkit-animation-name: HideList;
   animation-name: HideList;
   -webkit-animation-duration: 0.5s;
   animation-duration: 0.5s;
@@ -586,19 +598,10 @@ th {
   -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
   -webkit-animation-timing-function: step-start;
-  animation-timing-function: step-start; */
+  animation-timing-function: step-start;
   box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
 }
-.select-box__option {
-  display: block;
-  padding: 12px 15px;
-  background-color: #fff;
-}
-.select-box__option:hover,
-.select-box__option:focus {
-  color: #546c84;
-  background-color: #fbfbfb;
-}
+
 
 @-webkit-keyframes HideList {
   from {
@@ -626,6 +629,8 @@ th {
 
 .checkbox__wrapper {
   padding: 9px;
+  position: absolute;
+  right: 0;
   overflow: visible;
     font-size: 1.5rem;
     text-align: center;
@@ -637,7 +642,6 @@ th {
     text-decoration: none;
     background-color: transparent;
     vertical-align: middle;
-    position: relative;
     align-items: center;
     user-select: none;
     border: 0;
@@ -753,4 +757,86 @@ th {
   position: absolute;
   border-radius: inherit;
   pointer-events: none;
+}
+
+
+.select-box__close-icon {
+  color: rgba(0, 0, 0, 0.26);
+  width: 22px;
+  cursor: pointer;
+  height: 22px;
+  margin: 0 5px 0 -6px;
+  -webkit-tap-highlight-color: transparent;
+  display: inline-block;
+  font-size: 1.5rem;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  flex-shrink: 0;
+  user-select: none;
+  fill: currentColor;
+    white-space: nowrap;
+}
+
+.select-box__close-icon:hover {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+
+.select-box__selected-date__text {
+  display: inline-block;
+  overflow: hidden;
+  margin: 0 3px;
+  white-space: nowrap;
+  padding-left: 12px;
+  padding-right: 12px;
+  text-overflow: ellipsis;
+}
+
+.MuiAutocomplete-inputRoot {
+  right: 9px;
+  top: calc(50% - 14px);
+    position: absolute;
+}
+
+.MuiAutocomplete-clearIndicator {
+  padding: 4px;
+  visibility: hidden;
+  margin-right: -2px;
+  flex: 0 0 auto;
+  color: rgba(0, 0, 0, 0.54);
+  overflow: visible;
+  font-size: 1.5rem;
+  text-align: center;
+  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 50%;
+  justify-content: center;
+  text-decoration: none;
+  background-color: transparent;
+  -webkit-tap-highlight-color: transparent;
+  vertical-align: middle;
+  position: relative;
+  align-items: center;
+  user-select: none;
+  border: 0;
+  cursor: pointer;
+  margin: 0;
+  display: inline-flex;
+  outline: 0;
+}
+
+.MuiIconButton-label {
+  width: 100%;
+  display: flex;
+  align-items: inherit;
+  justify-content: inherit;
+}
+
+.MuiSvgIcon-fontSizeSmall {
+  font-size: 1.25rem;
+  fill: currentColor;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  flex-shrink: 0;
+  user-select: none;
 }

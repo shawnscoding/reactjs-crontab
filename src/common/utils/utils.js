@@ -350,6 +350,41 @@ export const formatMonth = (mon) => {
   return result
 }
 
+export const formatMonthInGudie = (mons) => {
+  const msg = `Bad config, month is required to be less than 13`
+  const formatted = mons.map((value) => {
+    switch (value) {
+      case '1':
+        return { hrText: 'January', value }
+      case '2':
+        return { hrText: 'Faburary', value }
+      case '3':
+        return { hrText: 'March', value }
+      case '4':
+        return { hrText: 'April', value }
+      case '5':
+        return { hrText: 'May', value }
+      case '6':
+        return { hrText: 'June', value }
+      case '7':
+        return { hrText: 'July', value }
+      case '8':
+        return { hrText: 'Augest', value }
+      case '9':
+        return { hrText: 'September', value }
+      case '10':
+        return { hrText: 'October', value }
+      case '11':
+        return { hrText: 'November', value }
+      case '12':
+        return { hrText: 'December', value }
+      default:
+        throw Error(msg)
+    }
+  })
+  return formatted
+}
+
 export const formatDOW = (dow) => {
   if (typeof dow !== typeof {}) throw Error('Bad args')
   const msg = 'Bad config, dow is required to be less than 8'
