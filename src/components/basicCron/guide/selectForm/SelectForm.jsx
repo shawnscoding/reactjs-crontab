@@ -13,6 +13,10 @@ const SelectFieldsForm = ({
   handleChange,
   select
 }) => {
+  const handleAllClear = () => {
+    const fieldName = ['mon', 'dow', 'dom', 'hour', 'min']
+    handleClear({ fieldName })
+  }
   // need 5 select boxes
   // btn is for clear rather than submit
   // helper test with icon
@@ -21,6 +25,7 @@ const SelectFieldsForm = ({
     <form>
       <span>In</span>
       <MonSelect
+        handleClear={handleClear}
         select={select}
         handleChange={handleChange}
         handleClickClose={handleClickClose}
@@ -40,7 +45,7 @@ const SelectFieldsForm = ({
       <button
         className={styles.guide__clearbutton}
         type='button'
-        onClick={handleClear}
+        onClick={handleAllClear}
       >
         <span>Clear</span>
       </button>

@@ -794,7 +794,15 @@ cursor: pointer;
 .MuiAutocomplete-inputRoot {
   right: 9px;
   top: calc(50% - 14px);
-    position: absolute;
+  position: absolute;
+}
+
+/* .MuiAutocomplete-inputRoot:focus .select-box__arrow-icon {
+  transform: rotate(180deg);
+} */
+
+.select-box:focus .select-box__arrow-icon {
+  transform: rotate(180deg);
 }
 
 .MuiAutocomplete-clearIndicator {
@@ -823,11 +831,40 @@ cursor: pointer;
   outline: 0;
 }
 
+.MuiAutocomplete-clearIndicator--active {
+  visibility: visible;
+  padding: 4px;
+  margin-right: -2px;
+  flex: 0 0 auto;
+  color: rgba(0, 0, 0, 0.54);
+  overflow: visible;
+  font-size: 1.5rem;
+  text-align: center;
+  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 50%;
+  justify-content: center;
+  text-decoration: none;
+  background-color: transparent;
+  -webkit-tap-highlight-color: transparent;
+  vertical-align: middle;
+  position: relative;
+  align-items: center;
+  user-select: none;
+  border: 0;
+  cursor: pointer;
+  margin: 0;
+  display: inline-flex;
+  outline: 0;
+}
+
 .MuiIconButton-label {
   width: 100%;
   display: flex;
   align-items: inherit;
   justify-content: inherit;
+  font-size: 1.5rem;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.54);
 }
 
 .MuiSvgIcon-fontSizeSmall {
@@ -839,4 +876,67 @@ cursor: pointer;
   transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   flex-shrink: 0;
   user-select: none;
+}
+
+
+.select-box__arrow-icon {
+  padding: 2px;
+  margin-right: -2px;
+  flex: 0 0 auto;
+  color: rgba(0, 0, 0, 0.54);
+  overflow: visible;
+  font-size: 1.5rem;
+  text-align: center;
+  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 50%;
+  order: 0;
+    cursor: pointer;
+    margin: 0;
+    display: inline-flex;
+    outline: 0;
+    position: relative;
+    align-items: center;
+    user-select: none;
+    vertical-align: middle;
+    -moz-appearance: none;
+    justify-content: center;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.select-box__arrow-icon:hover {
+  background-color: rgba(0, 0, 0, 0.04)
+}
+
+.select-box__current:focus .select-box__arrow-icon {
+  transform: rotate(180deg);
+}
+
+
+.MuiSvgIcon-root {
+  fill: currentColor;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  font-size: 1.5rem;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  flex-shrink: 0;
+  user-select: none;
+}
+.MuiTouchRipple-root {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  overflow: hidden;
+  position: absolute;
+  border-radius: inherit;
+  pointer-events: none;
+  font-size: 1.5rem;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.54);
+    -webkit-tap-highlight-color: transparent;
 }

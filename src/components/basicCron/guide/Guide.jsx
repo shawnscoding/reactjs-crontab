@@ -130,8 +130,15 @@ const Guide = () => {
     })
   }
 
-  const handleClear = () => {
-    setFormat('*-*-*-*-*-utc')
+  const handleClear = ({ fieldName }) => {
+    for (const name of fieldName) {
+      setSelect((prevState) => {
+        return {
+          ...prevState,
+          [name]: '*'
+        }
+      })
+    }
   }
 
   return (

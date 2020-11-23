@@ -7,11 +7,16 @@ const classes = {
   listOnClicked: {}
 }
 
-const BtnGroup = () => {
+const BtnGroup = ({ isDateSelected, handleClear }) => {
   return (
     <div className={styles['MuiAutocomplete-inputRoot']}>
       <button
-        className={styles['MuiAutocomplete-clearIndicator']}
+        onClick={() => handleClear({ fieldName: ['mon'] })}
+        className={
+          isDateSelected
+            ? styles['MuiAutocomplete-clearIndicator--active']
+            : styles['MuiAutocomplete-clearIndicator']
+        }
         tabIndex='-1'
         type='button'
         aria-label='Clear'
@@ -27,18 +32,19 @@ const BtnGroup = () => {
             <path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z' />
           </svg>
         </span>
-        <span className='MuiTouchRipple-root' />
+        <span className={styles['MuiTouchRipple-root']} />
       </button>
       <button
-        className='MuiButtonBase-root MuiIconButton-root MuiAutocomplete-popupIndicator'
+        className={styles['select-box__arrow-icon']}
         tabIndex='-1'
         type='button'
         aria-label='Open'
         title='Open'
+        id={styles['select-box__arrow-icon--open']}
       >
-        <span className='MuiIconButton-label'>
+        <span className={styles['MuiIconButton-label']}>
           <svg
-            className='MuiSvgIcon-root'
+            className={styles['MuiSvgIcon-root']}
             focusable='false'
             viewBox='0 0 24 24'
             aria-hidden='true'
@@ -46,7 +52,7 @@ const BtnGroup = () => {
             <path d='M7 10l5 5 5-5z' />
           </svg>
         </span>
-        <span className='MuiTouchRipple-root' />
+        <span className={styles['MuiTouchRipple-root']} />
       </button>
     </div>
   )
@@ -188,14 +194,13 @@ const createArrWithNum = (num) => {
   // 1 - 12
 }
 
-const MonSelect = ({ select, handleChange, handleClickClose }) => {
+const MonSelect = ({ handleClear, select, handleChange, handleClickClose }) => {
   const { mon } = select
   const res = createArrWithNum(12)
+  const isDateSelected = mon !== '*'
 
   return (
     <React.Fragment>
-      <BtnGroup />
-
       <div className={styles['select-box']}>
         <div className={styles['select-box__current']} tabIndex='1'>
           <div className={styles['select-box__value']}>
@@ -208,15 +213,15 @@ const MonSelect = ({ select, handleChange, handleClickClose }) => {
             />
 
             <SelectedDates handleClickClose={handleClickClose} mon={mon} />
-            <BtnGroup />
           </div>
+          <BtnGroup handleClear={handleClear} isDateSelected={isDateSelected} />
 
-          <img
+          {/* <img
             className={styles['select-box__icon']}
             src='http://cdn.onlinewebfonts.com/svg/img_295694.svg'
             alt='Arrow Icon'
             aria-hidden='true'
-          />
+          /> */}
         </div>
         <ul className={styles['select-box__list']}>
           {res.map((item) => {
