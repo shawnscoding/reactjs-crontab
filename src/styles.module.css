@@ -514,10 +514,7 @@ cursor: pointer;
   }
 
 
-.select-box__icon {
-  -webkit-transform: translateY(-50%) rotate(180deg);
-  transform: translateY(-50%) rotate(180deg);
-}
+
 
 .select-box__current:focus + .select-box__list {
   display: block;
@@ -542,21 +539,7 @@ cursor: pointer;
 .select-box__current:focus + .select-box__list .select-box__option {
   cursor: pointer;
 }
-.select-box__current:focus .select-box__icon {
-  -webkit-transform: translateY(-50%) rotate(180deg);
-  transform: translateY(-50%) rotate(180deg);
-}
-.select-box__icon {
-  position: absolute;
-  top: 50%;
-  right: 15px;
-  -webkit-transform: translateY(-50%);
-  transform: translateY(-50%);
-  width: 20px;
-  opacity: 0.3;
-  -webkit-transition: 0.2s ease;
-  transition: 0.2s ease;
-}
+
 .select-box__value {
   display: -webkit-box;
   display: flex;

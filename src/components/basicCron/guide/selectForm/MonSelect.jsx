@@ -215,13 +215,6 @@ const MonSelect = ({ handleClear, select, handleChange, handleClickClose }) => {
             <SelectedDates handleClickClose={handleClickClose} mon={mon} />
           </div>
           <BtnGroup handleClear={handleClear} isDateSelected={isDateSelected} />
-
-          {/* <img
-            className={styles['select-box__icon']}
-            src='http://cdn.onlinewebfonts.com/svg/img_295694.svg'
-            alt='Arrow Icon'
-            aria-hidden='true'
-          /> */}
         </div>
         <ul className={styles['select-box__list']}>
           {res.map((item) => {

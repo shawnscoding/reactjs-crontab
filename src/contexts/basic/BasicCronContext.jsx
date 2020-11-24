@@ -85,7 +85,9 @@ const handleSetTimer = (task) => {
     .find((item) => item !== '*')
   if (isNotAsterisk === undefined) {
     // means this is all *
+    // console.log('isNotAsterisk ::', isNotAsterisk)
     const { fn } = task
+    fn()
     setInterval(() => {
       fn()
     }, timerDuration)
@@ -125,6 +127,12 @@ const handleSetTimer = (task) => {
     }
 
     const { fn } = task
+
+    const isNeededToRun = detectTaskTime(convertedConfig)
+    if (isNeededToRun) {
+      // console.log('isNeededToRun ::', isNeededToRun)
+      fn()
+    }
 
     setInterval(() => {
       const isNeededToRun = detectTaskTime(convertedConfig)

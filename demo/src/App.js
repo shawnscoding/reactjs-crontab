@@ -71,8 +71,8 @@ import 'reactjs-crontab/dist/index.css'
 const App = () => {
   return (
     <>
-      {/* <BasicCron /> */}
-      <Guide />
+      <BasicCron />
+      {/* <Guide /> */}
     </>
   )
 }
