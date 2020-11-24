@@ -457,3 +457,25 @@ export const converConfigValuesToObject = (str) => {
     throw Error('Bad Settings')
   }
 }
+
+export const isShouldBeOn = (value, fieldValue) => {
+  const splitted = fieldValue.split(',')
+
+  if (fieldValue === '*') {
+    return false
+  } else if (splitted.length === 1) {
+    if (fieldValue === value) {
+      return true
+    } else {
+      return false
+    }
+  } else if (splitted.length > 1) {
+    const found = splitted.find((val) => val === value)
+
+    if (found) {
+      return true
+    } else {
+      return false
+    }
+  }
+}

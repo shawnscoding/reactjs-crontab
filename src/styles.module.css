@@ -441,24 +441,26 @@ th {
 }
 
 .select-box {
-  position: relative;
+  position: absolute;
+  top: -10px;
+  left: 0;
   display: inline-block;
-  margin: 0 auto;
   font-family: 'Open Sans', 'Helvetica Neue', 'Segoe UI', 'Calibri', 'Arial',
     sans-serif;
-  color: #60666d;
-  margin: 0 2em;
 }
 
-
+.select-box__wrapper {
+  width: 38.5em;
+    display: inline-block;
+    margin: 0 2em;
+    position: relative;
+}
 .select-box__current {
   position: relative;
-  box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+  width: 38.5em;
   outline: none;
-  padding: 15px;
-  width: 23em;
-  height: 30px;
+  border: 1px solid #00000054;
 }
 .select-box__list {
   display: none;
@@ -471,13 +473,11 @@ th {
 }
 
 
-.select-box__list .select-box__option {
-  cursor: pointer;
-}
+
 
 .select-box__option {
-  display: block;
   padding: 12px 15px;
+  font-size: 1.4em;
   flex-grow: 1;
   background-color: #fff;
 }
@@ -490,7 +490,7 @@ th {
 .select-box__option--selected {
 background-color: #efefef;
 flex-grow: 1;
-display: block;
+font-size: 1.4em;
 padding: 12px 15px;
 cursor: pointer;
 }
@@ -498,9 +498,12 @@ cursor: pointer;
 .select-box__option--selected:hover,
 .select-box__option--selected:focus {
     background-color: #f7f7f7;
-  color: #546c84;
+    color: #546c84;
   }
 
+.select-box__option {
+    cursor: pointer;
+  }
 
 
 
@@ -528,10 +531,10 @@ cursor: pointer;
   cursor: pointer;
 }
 
-.select-box__value {
+/* .select-box__value {
   display: -webkit-box;
   display: flex;
-}
+} */
 
 .select-box__input-wrapper {
   color: rgba(0, 0, 0, 0.87);
@@ -552,6 +555,11 @@ cursor: pointer;
   margin: 3px;
 }
 
+.select-box__input {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 
 .select-box__list {
   position: absolute;
@@ -751,15 +759,20 @@ cursor: pointer;
   color: rgba(0, 0, 0, 0.4);
 }
 
+.select-box__selected-date {
+  display: flex;
+  flex-wrap: wrap;
+  width: 33em;
+  min-height: 40px;
+}
 
 .select-box__selected-date__text {
   display: inline-block;
-  overflow: hidden;
-  margin: 0 3px;
-  white-space: nowrap;
+  margin: 8px 3px;
   padding-left: 12px;
   padding-right: 12px;
-  text-overflow: ellipsis;
+  font-size: 1.5em;
+  color: #60666d;
 }
 
 .MuiAutocomplete-inputRoot {
@@ -776,9 +789,13 @@ cursor: pointer;
   transform: rotate(180deg);
 }
 
-.MuiAutocomplete-clearIndicator {
-  padding: 4px;
+.btn-group__clear {
   visibility: hidden;
+}
+
+.btn-group__clear--active {
+  visibility: visible;
+  padding: 4px;
   margin-right: -2px;
   flex: 0 0 auto;
   color: rgba(0, 0, 0, 0.54);
@@ -788,8 +805,6 @@ cursor: pointer;
   transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   border-radius: 50%;
   justify-content: center;
-  text-decoration: none;
-  background-color: transparent;
   -webkit-tap-highlight-color: transparent;
   vertical-align: middle;
   position: relative;
@@ -802,31 +817,11 @@ cursor: pointer;
   outline: 0;
 }
 
-.MuiAutocomplete-clearIndicator--active {
-  visibility: visible;
-  padding: 4px;
-  margin-right: -2px;
-  flex: 0 0 auto;
-  color: rgba(0, 0, 0, 0.54);
-  overflow: visible;
-  font-size: 1.5rem;
-  text-align: center;
-  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  border-radius: 50%;
-  justify-content: center;
-  text-decoration: none;
-  background-color: transparent;
-  -webkit-tap-highlight-color: transparent;
-  vertical-align: middle;
-  position: relative;
-  align-items: center;
-  user-select: none;
-  border: 0;
-  cursor: pointer;
-  margin: 0;
-  display: inline-flex;
-  outline: 0;
+.btn-group__clear--active:hover {
+  background-color: rgba(0, 0, 0, 0.04);
 }
+
+
 
 .MuiIconButton-label {
   width: 100%;

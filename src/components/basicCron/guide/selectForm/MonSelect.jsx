@@ -1,129 +1,20 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styles from '../../../../styles.module.css'
-import { formatMonth, formatMonthInGudie } from '../../../../common/utils/utils'
-
-const classes = {
-  listOnClicked: {}
-}
-
-const BtnGroup = ({ isDateSelected, handleClear }) => {
-  return (
-    <div className={styles['MuiAutocomplete-inputRoot']}>
-      <button
-        onClick={() => handleClear({ fieldName: ['mon'] })}
-        className={
-          isDateSelected
-            ? styles['MuiAutocomplete-clearIndicator--active']
-            : styles['MuiAutocomplete-clearIndicator']
-        }
-        tabIndex='-1'
-        type='button'
-        aria-label='Clear'
-        title='Clear'
-      >
-        <span className={styles['MuiIconButton-label']}>
-          <svg
-            className={styles['MuiSvgIcon-fontSizeSmall']}
-            focusable='false'
-            viewBox='0 0 24 24'
-            aria-hidden='true'
-          >
-            <path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z' />
-          </svg>
-        </span>
-        <span className={styles['MuiTouchRipple-root']} />
-      </button>
-      <button
-        className={styles['select-box__arrow-icon']}
-        tabIndex='-1'
-        type='button'
-        aria-label='Open'
-        title='Open'
-        id={styles['select-box__arrow-icon--open']}
-      >
-        <span className={styles['MuiIconButton-label']}>
-          <svg
-            className={styles['MuiSvgIcon-root']}
-            focusable='false'
-            viewBox='0 0 24 24'
-            aria-hidden='true'
-          >
-            <path d='M7 10l5 5 5-5z' />
-          </svg>
-        </span>
-        <span className={styles['MuiTouchRipple-root']} />
-      </button>
-    </div>
-  )
-}
-
-const isShouldBeOn = (value, mon) => {
-  const splitted = mon.split(',')
-  console.log('splitted ,', splitted)
-  console.log(splitted.length === 1)
-  if (mon === '*') {
-    return false
-  } else if (splitted.length === 1) {
-    if (mon === value) {
-      return true
-    } else {
-      return false
-    }
-  } else if (splitted.length > 1) {
-    const found = splitted.find((val) => val === value)
-    console.log('found ::', found)
-    if (found) {
-      return true
-    } else {
-      return false
-    }
-  }
-}
-
-const Checkbox = ({ isOn }) => {
-  return (
-    <span className={styles.checkbox__wrapper} aria-disabled='false'>
-      <span className={`${isOn ? styles.checkbox__checked : styles.checkbox}`}>
-        <input
-          className={`${styles.checkbox__input}`}
-          type='checkbox'
-          value=''
-          readOnly
-        />
-        <svg
-          className={`${
-            isOn ? styles.checkbox__icon__checked : styles.checkbox__icon
-          }`}
-          focusable='false'
-          viewBox='0 0 24 24'
-          aria-hidden='true'
-        >
-          <path d='M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z' />
-        </svg>
-      </span>
-      <span
-        className={`${
-          isOn ? styles.checkbox__animator__checked : styles.checkbox__animator
-        }`}
-      />
-    </span>
-  )
-}
+import {
+  formatMonth,
+  formatMonthInGudie,
+  isShouldBeOn
+} from '../../../../common/utils/utils'
+import BtnGroup from './BtnGroup'
+import Checkbox from './Checkbox'
 
 const SelectedDates = ({ mon, handleClickClose }) => {
   const msg = 'Every Month'
 
   if (mon === '*') {
     return (
-      <div
-        style={{
-          display: 'flex',
-          position: 'absolute',
-          top: '2px',
-          left: '5px'
-        }}
-      >
+      <div className={styles['select-box__selected-date']}>
         <span className={styles['select-box__selected-date__text']}>{msg}</span>
       </div>
     )
@@ -131,8 +22,6 @@ const SelectedDates = ({ mon, handleClickClose }) => {
   const splitted = mon.split(',')
 
   const formatted = formatMonthInGudie(splitted)
-
-  console.log('formatted ::', formatted)
 
   const res = formatted.map((item, index) => {
     return (
@@ -156,18 +45,7 @@ const SelectedDates = ({ mon, handleClickClose }) => {
       </div>
     )
   })
-  return (
-    <div
-      style={{
-        display: 'flex',
-        position: 'absolute',
-        top: '2px',
-        left: '5px'
-      }}
-    >
-      {res}
-    </div>
-  )
+  return <div className={styles['select-box__selected-date']}>{res}</div>
 }
 
 const createArrWithNum = (num) => {
@@ -201,9 +79,10 @@ const MonSelect = ({ handleClear, select, handleChange, handleClickClose }) => {
 
   return (
     <React.Fragment>
-      <div className={styles['select-box']}>
-        <div className={styles['select-box__current']} tabIndex='1'>
-          <div className={styles['select-box__value']}>
+      <div className={styles['select-box__wrapper']}>
+        <div className={styles['select-box']}>
+          <div className={styles['select-box__current']} tabIndex='1'>
+            {/* <div className={styles['select-box__value']}> */}
             <input
               type='text'
               value=''
@@ -213,35 +92,40 @@ const MonSelect = ({ handleClear, select, handleChange, handleClickClose }) => {
             />
 
             <SelectedDates handleClickClose={handleClickClose} mon={mon} />
+            {/* </div> */}
+            <BtnGroup
+              fieldName={['mon']}
+              handleClear={handleClear}
+              isDateSelected={isDateSelected}
+            />
           </div>
-          <BtnGroup handleClear={handleClear} isDateSelected={isDateSelected} />
-        </div>
-        <ul className={styles['select-box__list']}>
-          {res.map((item) => {
-            const isOn = isShouldBeOn(item.value, mon)
+          <ul className={styles['select-box__list']}>
+            {res.map((item) => {
+              const isOn = isShouldBeOn(item.value, mon)
 
-            return (
-              <li
-                onClick={() => handleChange({ fieldName: 'mon', item })}
-                key={item.id}
-                className={styles['select-box__list-item']}
-              >
-                <label
-                  className={
-                    isOn
-                      ? styles['select-box__option--selected']
-                      : styles['select-box__option']
-                  }
-                  htmlFor={item.id}
-                  aria-hidden='aria-hidden'
+              return (
+                <li
+                  onClick={() => handleChange({ fieldName: 'mon', item })}
+                  key={item.id}
+                  className={styles['select-box__list-item']}
                 >
-                  {item.label}
-                </label>
-                <Checkbox item={item} handleChange={handleChange} isOn={isOn} />
-              </li>
-            )
-          })}
-        </ul>
+                  <label
+                    className={
+                      isOn
+                        ? styles['select-box__option--selected']
+                        : styles['select-box__option']
+                    }
+                    htmlFor={item.id}
+                    aria-hidden='aria-hidden'
+                  >
+                    {item.label}
+                  </label>
+                  <Checkbox isOn={isOn} />
+                </li>
+              )
+            })}
+          </ul>
+        </div>
       </div>
     </React.Fragment>
   )
