@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styles from '../../../../styles.module.css'
-import MinSelect from './MinSelect'
-import MonSelect from './MonSelect'
-import DOMSelect from './DOMSelect'
-import DOWSelect from './DOWSelect'
-import HourSelect from './HourSelect'
+import MinDropdown from './MinDropdown'
+import MonDropdown from './MonDropdown'
+import DOMDropdown from './DOMDropdown'
+import DOWDropdown from './DOWDropdown'
+import HourDropdown from './HourDropdown'
 
-const SelectFieldsForm = ({
+const DropdownForm = ({
   handleClear,
   handleClickClose,
   handleChange,
@@ -17,14 +17,10 @@ const SelectFieldsForm = ({
     const fieldName = ['mon', 'dow', 'dom', 'hour', 'min']
     handleClear({ fieldName })
   }
-  // need 5 select boxes
-  // btn is for clear rather than submit
-  // helper test with icon
-  // Double click on a dropdown option to automatically select / unselect a periodicity
   return (
     <form>
       <span>In</span>
-      <MonSelect
+      <MonDropdown
         handleClear={handleClear}
         select={select}
         handleChange={handleChange}
@@ -32,16 +28,16 @@ const SelectFieldsForm = ({
       />
       <span>On</span>
 
-      <DOMSelect select={select} handleChange={handleChange} />
+      <DOMDropdown select={select} handleChange={handleChange} />
       <span>And</span>
 
-      <DOWSelect select={select} handleChange={handleChange} />
+      <DOWDropdown select={select} handleChange={handleChange} />
       <span>At</span>
 
-      <HourSelect select={select} handleChange={handleChange} />
+      <HourDropdown select={select} handleChange={handleChange} />
       <span>:</span>
 
-      <MinSelect select={select} handleChange={handleChange} />
+      <MinDropdown select={select} handleChange={handleChange} />
       <button
         className={styles.guide__clearbutton}
         type='button'
@@ -53,8 +49,8 @@ const SelectFieldsForm = ({
   )
 }
 
-SelectFieldsForm.propTypes = {
+DropdownForm.propTypes = {
   handleClear: PropTypes.func.isRequired
 }
 
-export default SelectFieldsForm
+export default DropdownForm

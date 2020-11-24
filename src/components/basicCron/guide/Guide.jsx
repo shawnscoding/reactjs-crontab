@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styles from '../../../styles.module.css'
-import SelectForm from './selectForm/SelectForm'
+import DropdownForm from './selectForm/DropdownForm'
 import TextFieldForm from './textFieldForm/TextFieldForm'
 
 const Guide = () => {
@@ -156,7 +156,7 @@ const Guide = () => {
             <div className={styles.guide__divider}>
               <span>OR</span>
             </div>
-            <SelectForm
+            <DropdownForm
               handleClickClose={handleClickClose}
               handleClear={handleClear}
               handleChange={handleSelectChange}

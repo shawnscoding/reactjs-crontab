@@ -29,12 +29,12 @@ const BtnGroup = ({ isDateSelected, handleClear, fieldName }) => {
         <span className={styles['MuiTouchRipple-root']} />
       </button>
       <button
-        className={styles['select-box__arrow-icon']}
+        className={styles['dropdown__arrow-icon']}
         tabIndex='-1'
         type='button'
         aria-label='Open'
         title='Open'
-        id={styles['select-box__arrow-icon--open']}
+        id={styles['dropdown__arrow-icon--open']}
       >
         <span className={styles['MuiIconButton-label']}>
           <svg

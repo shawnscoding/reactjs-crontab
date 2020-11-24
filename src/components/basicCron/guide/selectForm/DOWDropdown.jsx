@@ -9,17 +9,17 @@ import {
 import BtnGroup from './BtnGroup'
 import Checkbox from './Checkbox'
 
-const SelectedDates = ({ mon, handleClickClose }) => {
-  const msg = 'Every Month'
+const SelectedDates = ({ dow, handleClickClose }) => {
+  const msg = 'Every day'
 
-  if (mon === '*') {
+  if (dow === '*') {
     return (
-      <div className={styles['select-box__selected-date']}>
-        <span className={styles['select-box__selected-date__text']}>{msg}</span>
+      <div className={styles['dropdown__selected-date']}>
+        <span className={styles['dropdown__selected-date__text']}>{msg}</span>
       </div>
     )
   }
-  const splitted = mon.split(',')
+  const splitted = dow.split(',')
 
   const formatted = formatMonthInGudie(splitted)
 
@@ -28,14 +28,14 @@ const SelectedDates = ({ mon, handleClickClose }) => {
       <div
         role='button'
         key={index}
-        className={styles['select-box__input-wrapper']}
+        className={styles['dropdown__input-wrapper']}
       >
-        <span className={styles['select-box__selected-date__text']}>
+        <span className={styles['dropdown__selected-date__text']}>
           {item.hrText}
         </span>
         <svg
-          onClick={() => handleClickClose({ item, fieldName: 'mon' })}
-          className={styles['select-box__close-icon']}
+          onClick={() => handleClickClose({ item, fieldName: 'dow' })}
+          className={styles['dropdown__close-icon']}
           focusable={false}
           viewBox='0 0 24 24'
           aria-hidden='true'
@@ -45,7 +45,7 @@ const SelectedDates = ({ mon, handleClickClose }) => {
       </div>
     )
   })
-  return <div className={styles['select-box__selected-date']}>{res}</div>
+  return <div className={styles['dropdown__selected-date']}>{res}</div>
 }
 
 const createArrWithNum = (num) => {
@@ -72,48 +72,53 @@ const createArrWithNum = (num) => {
   // 1 - 12
 }
 
-const MonSelect = ({ handleClear, select, handleChange, handleClickClose }) => {
-  const { mon } = select
-  const res = createArrWithNum(12)
-  const isDateSelected = mon !== '*'
+const DOWDropdown = ({
+  handleClear,
+  select,
+  handleChange,
+  handleClickClose
+}) => {
+  const { dow } = select
+  const res = createArrWithNum(7)
+  const isDateSelected = dow !== '*'
 
   return (
     <React.Fragment>
-      <div className={styles['select-box__wrapper']}>
-        <div className={styles['select-box']}>
-          <div className={styles['select-box__current']} tabIndex='1'>
-            {/* <div className={styles['select-box__value']}> */}
+      <div className={styles.dropdown__wrapper}>
+        <div className={styles.dropdown}>
+          <div className={styles.dropdown__current} tabIndex='1'>
+            {/* <div className={styles['dropdown__value']}> */}
             <input
               type='text'
               value=''
               readOnly
               name='Ben'
-              className={styles['select-box__input']}
+              className={styles.dropdown__input}
             />
 
-            <SelectedDates handleClickClose={handleClickClose} mon={mon} />
+            <SelectedDates handleClickClose={handleClickClose} dow={dow} />
             {/* </div> */}
             <BtnGroup
-              fieldName={['mon']}
+              fieldName={['dow']}
               handleClear={handleClear}
               isDateSelected={isDateSelected}
             />
           </div>
-          <ul className={styles['select-box__list']}>
+          <ul className={styles.dropdown__list}>
             {res.map((item) => {
-              const isOn = isShouldBeOn(item.value, mon)
+              const isOn = isShouldBeOn(item.value, dow)
 
               return (
                 <li
-                  onClick={() => handleChange({ fieldName: 'mon', item })}
+                  onClick={() => handleChange({ fieldName: 'dow', item })}
                   key={item.id}
-                  className={styles['select-box__list-item']}
+                  className={styles['dropdown__list-item']}
                 >
                   <label
                     className={
                       isOn
-                        ? styles['select-box__option--selected']
-                        : styles['select-box__option']
+                        ? styles['dropdown__option--selected']
+                        : styles.dropdown__option
                     }
                     htmlFor={item.id}
                     aria-hidden='aria-hidden'
@@ -131,6 +136,6 @@ const MonSelect = ({ handleClear, select, handleChange, handleClickClose }) => {
   )
 }
 
-MonSelect.propTypes = {}
+DOWDropdown.propTypes = {}
 
-export default MonSelect
+export default DOWDropdown
