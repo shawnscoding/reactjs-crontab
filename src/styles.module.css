@@ -442,35 +442,23 @@ th {
 
 .select-box {
   position: relative;
-  display: block;
-  width: 13em;
+  display: inline-block;
   margin: 0 auto;
   font-family: 'Open Sans', 'Helvetica Neue', 'Segoe UI', 'Calibri', 'Arial',
     sans-serif;
-  font-size: 18px;
   color: #60666d;
+  margin: 0 2em;
 }
-@media (min-width: 768px) {
-  .select-box {
-    width: 13em;
-  }
-}
-@media (min-width: 992px) {
-  .select-box {
-    width: 50%;
-  }
-}
-@media (min-width: 1200px) {
-  .select-box {
-    width: 13em;
-  }
-}
+
+
 .select-box__current {
   position: relative;
   box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   outline: none;
   padding: 15px;
+  width: 23em;
+  height: 30px;
 }
 .select-box__list {
   display: none;

@@ -120,8 +120,8 @@ const SelectedDates = ({ mon, handleClickClose }) => {
         style={{
           display: 'flex',
           position: 'absolute',
-          top: '-18px',
-          left: '1px'
+          top: '2px',
+          left: '5px'
         }}
       >
         <span className={styles['select-box__selected-date__text']}>{msg}</span>
@@ -161,8 +161,8 @@ const SelectedDates = ({ mon, handleClickClose }) => {
       style={{
         display: 'flex',
         position: 'absolute',
-        top: '-18px',
-        left: '1px'
+        top: '2px',
+        left: '5px'
       }}
     >
       {res}
