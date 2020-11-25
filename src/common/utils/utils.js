@@ -415,6 +415,31 @@ export const formatDOW = (dow) => {
   return result
 }
 
+export const formatDOWGudie = (dows) => {
+  const msg = `Bad config, month is required to be less than 13`
+  const formatted = dows.map((value) => {
+    switch (value) {
+      case '1':
+        return { hrText: 'Monday', value }
+      case '2':
+        return { hrText: 'Tuesday', value }
+      case '3':
+        return { hrText: 'Wednesday', value }
+      case '4':
+        return { hrText: 'Thirsday', value }
+      case '5':
+        return { hrText: 'Friday', value }
+      case '6':
+        return { hrText: 'Saturday', value }
+      case '7':
+        return { hrText: 'Sunday', value }
+      default:
+        throw Error(msg)
+    }
+  })
+  return formatted
+}
+
 export const insertZero = (arr) => {
   // console.log('arr ', arr)
   const result = arr.map((item) => {

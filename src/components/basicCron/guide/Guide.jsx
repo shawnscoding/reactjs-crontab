@@ -1,16 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from '../../../styles.module.css'
 import DropdownForm from './selectForm/DropdownForm'
 import TextFieldForm from './textFieldForm/TextFieldForm'
 
 const Guide = () => {
-  const [format, setFormat] = useState('*-*-*-*-*-utc')
-
-  const handleInputChange = (e) => {
-    const value = e.target.value
-    setFormat(value)
-  }
-
   const [select, setSelect] = useState({
     min: '*',
     hour: '*',
@@ -56,54 +49,6 @@ const Guide = () => {
     })
   }
 
-  const handleCheckboxChange = ({ name, item }) => {
-    const { value } = item
-    console.log('handleCheckboxChange called')
-
-    const selectedDate = select[name]
-
-    if (selectedDate === '*') {
-      setSelect({
-        ...select,
-        [name]: value
-      })
-    }
-    // setSelect((prevState) => {
-    //   const selectedDate = prevState[name]
-    //   if (selectedDate === '*') {
-    //     console.log('name', name)
-    //     console.log('value', value)
-    //     console.log('selectedDate', selectedDate)
-    //     return {
-    //       ...prevState,
-    //       [name]: value
-    //     }
-    //   } else {
-    //     const dateList = selectedDate.split(',')
-    //     const found = dateList.find((date) => date === value)
-    //     if (found) {
-    //       const res = dateList.filter((date) => date !== found)
-    //       if (!res.length) {
-    //         return {
-    //           ...prevState,
-    //           [name]: '*'
-    //         }
-    //       }
-    //       return {
-    //         ...prevState,
-    //         [name]: res.join()
-    //       }
-    //     } else {
-    //       const res = `${selectedDate},${value}`
-    //       return {
-    //         ...prevState,
-    //         [name]: res
-    //       }
-    //     }
-    //   }
-    // })
-  }
-
   const handleClickClose = ({ fieldName, item }) => {
     const { value } = item
     console.log('val ::', value)
@@ -141,6 +86,18 @@ const Guide = () => {
     }
   }
 
+  const handleTFchange = (e) => {
+    // const value = e.target.value
+    // const splitted = value.split('-')
+    // setSelect({
+    //   min: splitted[0],
+    //   hour: splitted[1],
+    //   dom: splitted[2],
+    //   mon: splitted[3],
+    //   dow: splitted[4]
+    // })
+  }
+
   return (
     <React.Fragment>
       <div className={styles.guide}>
@@ -149,10 +106,7 @@ const Guide = () => {
             <h1 className={styles.guide__title}>Guide</h1>
           </div>
           <div className={styles.guide__content}>
-            <TextFieldForm
-              format={format}
-              handleInputChange={handleInputChange}
-            />
+            <TextFieldForm handleChange={handleTFchange} select={select} />
             <div className={styles.guide__divider}>
               <span>OR</span>
             </div>

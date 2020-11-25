@@ -2,15 +2,15 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styles from '../../../../styles.module.css'
 import {
-  formatMonth,
-  formatMonthInGudie,
+  formatDOW,
+  formatDOWGudie,
   isShouldBeOn
 } from '../../../../common/utils/utils'
 import BtnGroup from './BtnGroup'
 import Checkbox from './Checkbox'
 
 const SelectedDates = ({ dow, handleClickClose }) => {
-  const msg = 'Every day'
+  const msg = 'Every Day of Week'
 
   if (dow === '*') {
     return (
@@ -21,7 +21,7 @@ const SelectedDates = ({ dow, handleClickClose }) => {
   }
   const splitted = dow.split(',')
 
-  const formatted = formatMonthInGudie(splitted)
+  const formatted = formatDOWGudie(splitted)
 
   const res = formatted.map((item, index) => {
     return (
@@ -52,14 +52,9 @@ const createArrWithNum = (num) => {
   const arr = []
   for (let i = 0; i < num; i++) {
     const iPlusOne = i + 1
-    // const val = {
-    //   id: iPlusOne.toString(),
-    //   value: iPlusOne.toString(),
-    //   label: iPlusOne.toString()
-    // }
     arr.push(iPlusOne.toString())
   }
-  const { value } = formatMonth({ value: arr })
+  const { value } = formatDOW({ value: arr })
   const res = value.map((item, index) => {
     const iPlusOne = index + 1
     return {

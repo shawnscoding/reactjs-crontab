@@ -19,7 +19,7 @@ const DropdownForm = ({
   }
   return (
     <form>
-      <span>In</span>
+      {/* <span>In</span>
       <MonDropdown
         handleClear={handleClear}
         select={select}
@@ -28,16 +28,36 @@ const DropdownForm = ({
       />
       <span>On</span>
 
-      <DOMDropdown select={select} handleChange={handleChange} />
-      <span>And</span>
+      <DOMDropdown
+        handleClear={handleClear}
+        handleClickClose={handleClickClose}
+        select={select}
+        handleChange={handleChange}
+      />
+      <span>And</span> */}
 
-      <DOWDropdown select={select} handleChange={handleChange} />
+      <DOWDropdown
+        handleClear={handleClear}
+        handleClickClose={handleClickClose}
+        select={select}
+        handleChange={handleChange}
+      />
       <span>At</span>
 
-      <HourDropdown select={select} handleChange={handleChange} />
+      <HourDropdown
+        handleClear={handleClear}
+        handleClickClose={handleClickClose}
+        select={select}
+        handleChange={handleChange}
+      />
       <span>:</span>
 
-      <MinDropdown select={select} handleChange={handleChange} />
+      <MinDropdown
+        handleClear={handleClear}
+        handleClickClose={handleClickClose}
+        select={select}
+        handleChange={handleChange}
+      />
       <button
         className={styles.guide__clearbutton}
         type='button'
