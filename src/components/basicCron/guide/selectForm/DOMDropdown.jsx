@@ -10,7 +10,9 @@ const SelectedDates = ({ dom, handleClickClose }) => {
   if (dom === '*') {
     return (
       <div className={styles['dropdown__selected-date']}>
-        <span className={styles['dropdown__selected-date__text']}>{msg}</span>
+        <span className={styles['dropdown__selected-date__placeholder']}>
+          {msg}
+        </span>
       </div>
     )
   }

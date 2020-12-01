@@ -15,7 +15,9 @@ const SelectedDates = ({ mon, handleClickClose }) => {
   if (mon === '*') {
     return (
       <div className={styles['dropdown__selected-date']}>
-        <span className={styles['dropdown__selected-date__text']}>{msg}</span>
+        <span className={styles['dropdown__selected-date__placeholder']}>
+          {msg}
+        </span>
       </div>
     )
   }
@@ -87,7 +89,6 @@ const MonDropdown = ({
       <div className={styles.dropdown__wrapper}>
         <div className={styles.dropdown}>
           <div className={styles.dropdown__current} tabIndex='1'>
-            {/* <div className={styles['dropdown__value']}> */}
             <input
               type='text'
               value=''
@@ -97,7 +98,6 @@ const MonDropdown = ({
             />
 
             <SelectedDates handleClickClose={handleClickClose} mon={mon} />
-            {/* </div> */}
             <BtnGroup
               fieldName={['mon']}
               handleClear={handleClear}
@@ -114,18 +114,25 @@ const MonDropdown = ({
                   key={item.id}
                   className={styles['dropdown__list-item']}
                 >
-                  <label
+                  <div
                     className={
-                      isOn
-                        ? styles['dropdown__option--selected']
-                        : styles.dropdown__option
+                      // ? styles['dropdown__option--selected']
+                      styles.dropdown__option
                     }
                     htmlFor={item.id}
-                    aria-hidden='aria-hidden'
                   >
                     {item.label}
-                  </label>
-                  <Checkbox isOn={isOn} />
+                  </div>
+                  <input
+                    value={item.label}
+                    readOnly
+                    className={
+                      isOn
+                        ? styles['dropdown__option__input--selected']
+                        : styles.dropdown__option__input
+                    }
+                  />
+                  <Checkbox id={item.id} isOn={isOn} />
                 </li>
               )
             })}
