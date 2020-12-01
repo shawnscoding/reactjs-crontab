@@ -12,11 +12,16 @@
   --text-grey: #60666dab;
   --dropdown-list-z-index: 10;
   --border--hover: rgba(0, 0, 0, 0.87);
+  --secondary-hover: rgb(228 0 81);
 }
 
 .global {
   font-family: Arial, Helvetica, sans-serif;
   box-sizing: border-box;
+}
+
+.global input {
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .global iframe,
@@ -167,6 +172,13 @@ th {
   text-align: left;
 }
 
+.hr-text {
+  font-size: 2em;
+  color: var(--primary);
+  text-align: center;
+  margin: 2em 0;
+}
+
 .dashboard__title {
   margin: 0;
   text-align: left;
@@ -178,7 +190,8 @@ th {
   display: flex;
   justify-content: center;
   font-size: 10px;
-  margin-bottom: 20em;
+  margin-bottom: 15em;
+  margin-top: 5em;
 }
 
 .guide__container {
@@ -205,10 +218,15 @@ th {
   padding: 2em;
 }
 
+.guide__input__container {
+  display: flex;
+  justify-content: center;
+}
+
 .guide__input {
-  width: 100%;
-  font-size: 15px;
-  padding: 7px 10px;
+  width: 70%;
+  font-size: 17px;
+  padding: 10px 11px;
   border: 1px solid rgb(0 0 0 / 23%);
 }
 
@@ -262,9 +280,28 @@ th {
 .guide__clear-button {
   background: var(--secondary);
   color: #fff;
-  width: 6em;
-  padding: 1em 1.5em;
-  font-size: 1.6em;
+  width: 7em;
+  padding: 0.5em 1.5em;
+  font-size: 1.7em;
+  cursor: pointer;
+  border-radius: 3px;
+  text-transform: uppercase;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.guide__clear-button:hover {
+  background: var(--secondary-hover);
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+}
+
+.guide__clear-button:active {
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
 .dropdown__wrapper {
@@ -385,7 +422,7 @@ th {
   transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
     box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   align-items: center;
-  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+
   white-space: nowrap;
   border-radius: 16px;
   vertical-align: middle;
@@ -752,22 +789,27 @@ th {
   position: absolute;
   width: 100%;
   padding: 0;
-  list-style: none;
   max-height: 245px;
   height: 245px;
   border: 1px solid lightgrey;
   overflow: hidden;
   padding: 1.2em;
   background: white;
+  z-index: 10;
+}
+
+.dropdown__wrapper:focus-within .dom-picker__wrapper {
+  display: block;
+}
+
+.dropdown:focus-within .dom-picker__wrapper {
+  display: block;
 }
 
 .dom-picker {
+  list-style: none;
   display: flex;
   flex-wrap: wrap;
-}
-
-.dropdown__current:focus + .dom-picker__wrapper {
-  display: block;
 }
 
 .dom-picker__wrapper:focus {

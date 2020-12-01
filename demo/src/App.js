@@ -71,10 +71,14 @@ import 'reactjs-crontab/dist/index.css'
 const App = () => {
   return (
     <>
-      <BasicCron />
+      {/* <BasicCron /> */}
       <Guide />
     </>
   )
 }
 
 export default App
+// #1976d2
+// fff
+// f7f7f7
+// efefef
