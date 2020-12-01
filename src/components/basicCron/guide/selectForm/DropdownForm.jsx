@@ -49,7 +49,7 @@ const DropdownForm = ({
             handleClickClose={handleClickClose}
           />
         </div>
-        <div className={styles.dropbox__container}>
+        <div className={styles.dropdown__container}>
           <div className={styles['guide__helper-text-box']}>
             <span
               className={
@@ -69,8 +69,8 @@ const DropdownForm = ({
             handleChange={handleChange}
           />
         </div>
-        {/* 
-        <div>
+
+        <div className={styles.dropdown__container}>
           <div className={styles['guide__helper-text-box']}>
             <span
               className={
@@ -90,7 +90,7 @@ const DropdownForm = ({
             handleChange={handleChange}
           />
         </div>
-        <div>
+        <div className={styles.dropdown__container}>
           <div className={styles['guide__helper-text-box']}>
             <span
               className={
@@ -110,7 +110,7 @@ const DropdownForm = ({
             handleChange={handleChange}
           />
         </div>
-        <div>
+        <div className={styles.dropdown__container}>
           <div className={styles['guide__helper-text-box']}>
             <span
               className={
@@ -129,7 +129,7 @@ const DropdownForm = ({
             select={select}
             handleChange={handleChange}
           />
-        </div> */}
+        </div>
       </div>
       <div className={styles['guide__clear-button__wrapper']}>
         <button

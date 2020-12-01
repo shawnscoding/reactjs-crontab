@@ -109,17 +109,16 @@ const DOWDropdown = ({
                   key={item.id}
                   className={styles['dropdown__list-item']}
                 >
-                  <label
+                  <div className={styles.dropdown__option}>{item.label}</div>
+                  <input
+                    value={item.label}
+                    readOnly
                     className={
                       isOn
-                        ? styles['dropdown__option--selected']
-                        : styles.dropdown__option
+                        ? styles['dropdown__option__input--selected']
+                        : styles.dropdown__option__input
                     }
-                    htmlFor={item.id}
-                    aria-hidden='aria-hidden'
-                  >
-                    {item.label}
-                  </label>
+                  />
                   <Checkbox isOn={isOn} />
                 </li>
               )
