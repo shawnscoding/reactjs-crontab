@@ -335,10 +335,13 @@ th {
   border: 2px solid var(--primary);
 }
 
+.dropdown__list-item {
+  display: flex;
+  position: relative;
+}
+
 .dropdown__list {
   display: none;
-  -webkit-animation-name: none;
-  animation-name: none;
   position: absolute;
   width: 100%;
   padding: 0;
@@ -346,33 +349,16 @@ th {
   max-height: 245px;
   overflow: auto;
   z-index: var(--dropdown-list-z-index);
-  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
-    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
-  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }
 
-.dropdown__list-item {
-  display: flex;
-  position: relative;
-}
-
-.dropdown__current:focus-within + .dropdown__list {
+.dropdown__wrapper:focus-within .dropdown__list {
   display: block;
-  -webkit-animation-name: none;
-  animation-name: none;
   cursor: pointer;
 }
 
-.dropdown__list:focus {
+.dropdown:focus-within .dropdown__list {
   display: block;
-  -webkit-animation-name: none;
-  animation-name: none;
-}
-
-.dropdown__list:hover {
-  display: block;
-  -webkit-animation-name: none;
-  animation-name: none;
+  cursor: pointer;
 }
 
 .dropdown__option {
@@ -636,7 +622,7 @@ th {
   color: var(--text-grey);
 }
 
-.MuiAutocomplete-inputRoot {
+.btn-group {
   right: 9px;
   top: calc(50% - 14px);
   position: absolute;
@@ -706,21 +692,15 @@ th {
   color: rgba(0, 0, 0, 0.54);
   overflow: visible;
   font-size: 1.5rem;
-  text-align: center;
   transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   border-radius: 50%;
-  order: 0;
   cursor: pointer;
-  margin: 0;
   display: inline-flex;
-  outline: 0;
   position: relative;
   align-items: center;
-  user-select: none;
   vertical-align: middle;
   -moz-appearance: none;
   justify-content: center;
-  text-decoration: none;
   background-color: transparent;
   -webkit-appearance: none;
   -webkit-tap-highlight-color: transparent;
@@ -730,7 +710,11 @@ th {
   background-color: rgba(0, 0, 0, 0.04);
 }
 
-.dropdown__current:focus .dropdown__arrow-icon {
+.dropdown__current:focus-within .dropdown__arrow-icon {
+  transform: rotate(180deg);
+}
+
+.dropdown__wrapper:focus-within .dropdown__arrow-icon {
   transform: rotate(180deg);
 }
 

@@ -114,15 +114,7 @@ const MonDropdown = ({
                   key={item.id}
                   className={styles['dropdown__list-item']}
                 >
-                  <div
-                    className={
-                      // ? styles['dropdown__option--selected']
-                      styles.dropdown__option
-                    }
-                    htmlFor={item.id}
-                  >
-                    {item.label}
-                  </div>
+                  <div className={styles.dropdown__option}>{item.label}</div>
                   <input
                     value={item.label}
                     readOnly

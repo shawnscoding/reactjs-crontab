@@ -91,7 +91,7 @@ const DOWDropdown = ({
             />
           </div>
           <div className={styles['dom-picker__wrapper']}>
-            <ui className={styles['dom-picker']}>
+            <ul className={styles['dom-picker']}>
               {res.map((item) => {
                 const isOn = isShouldBeOn(item.value, dom)
 
@@ -115,7 +115,7 @@ const DOWDropdown = ({
                   </li>
                 )
               })}
-            </ui>
+            </ul>
           </div>
         </div>
       </div>

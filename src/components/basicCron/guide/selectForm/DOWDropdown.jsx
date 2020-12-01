@@ -84,7 +84,6 @@ const DOWDropdown = ({
       <div className={styles.dropdown__wrapper}>
         <div className={styles.dropdown}>
           <div className={styles.dropdown__current} tabIndex='1'>
-            {/* <div className={styles['dropdown__value']}> */}
             <input
               type='text'
               value=''
@@ -94,7 +93,6 @@ const DOWDropdown = ({
             />
 
             <SelectedDates handleClickClose={handleClickClose} dow={dow} />
-            {/* </div> */}
             <BtnGroup
               fieldName={['dow']}
               handleClear={handleClear}
