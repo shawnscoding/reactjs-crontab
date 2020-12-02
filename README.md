@@ -50,9 +50,7 @@ MIN,MIN-HOUR,HOUR-DOM,DOM-MON,MON-DOW,DOW-TIMEZONE
 
 ## Basic Example
 
-Reactjs-crontab has very similar pattern to [Linux Crontab](https://www.geeksforgeeks.org/crontab-in-linux-with-examples).
-To learn linux crontab [Linux Crontab](https://www.geeksforgeeks.org/crontab-in-linux-with-examples)
-The difference is that this uses dash between arguments like this `*-*-*-*-*-*`. Whereas Linux crontab uses white space like this `* * * * * *`
+Reactjs-crontab has very similar pattern to [Linux Crontab](https://www.geeksforgeeks.org/crontab-in-linux-with-examples)Except that this uses hyphen between arguments like this *-*-*-*-*-*.
 
 
 ```jsx
@@ -133,6 +131,12 @@ const App = () => {
 
 export default App
 ```
+
+Copying and pasting this will result something like this below
+
+![Dashboard Demo](assets/dashboard.png)
+
+And do what it says.
 
 
 ## Helper (Guide) Component
