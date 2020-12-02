@@ -102,7 +102,7 @@ const tasks = [
   {
     fn: RequestSomething,
     id: '3',
-    config: '*-15,19-*-11,12-*-4',
+    config: '*-15,19-*-11,12-*-utc',
     // Execute In November, December At 3PM, 7PM every minute
     name: 'Request Something',
     description: 'Send API'
