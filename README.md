@@ -4,8 +4,8 @@
 
 [![NPM](https://img.shields.io/npm/v/reactjs-crontab.svg)](https://www.npmjs.com/package/reactjs-crontab) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-![Dashboard Demo](./assets/dashboard.png)
-![Crontab Guide Demo](./assets/cronGuide.png)
+![Dashboard Demo](assets/dashboard__.png)
+![Crontab Guide Demo](https://raw.githubusercontent.com/shawnscoding/reactjs-crontab/HEAD/assets/cronGuide.png)
 
 ## Installation
 
@@ -125,7 +125,7 @@ const tasks = [
 ]
 
 const App = () => {
-  // this will display dashboard with scheduled tasks
+  // this will display dashboard__ with scheduled tasks
   return <BasicCron tasks={tasks} />
 }
 
@@ -134,7 +134,7 @@ export default App
 
 Copying and pasting above code will result something like this below
 
-![Dashboard Demo](./assets/dashboard.png)
+![Dashboard Demo](assets/dashboard__.png)
 
 And That's it. This will do what it says.
 
@@ -154,7 +154,7 @@ And That's it. This will do what it says.
 
 ## Helper (Guide) Component
 
-![Crontab Guide Demo](./assets/cronGuide.png)
+![Crontab Guide Demo](https://raw.githubusercontent.com/shawnscoding/reactjs-crontab/HEAD/assets/cronGuide.png)
 
 Simply import CronGuide and css and that's all.
 ```jsx
