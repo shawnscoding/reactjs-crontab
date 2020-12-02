@@ -161,14 +161,14 @@ const TextFieldForm = ({ select, handleChange }) => {
               : styles['guide__hr-text__label']
           }
         >
-          Current State(HR):
+          Current State:
         </p>
         <p
           className={
             isSelected ? styles['hr-text--selected'] : styles['hr-text']
           }
         >
-          {res.hrTime}
+          Execute: {res.hrTime}
         </p>
       </div>
     </React.Fragment>

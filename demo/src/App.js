@@ -1,5 +1,5 @@
 import React from 'react'
-import { BasicCron, Guide } from 'reactjs-crontab'
+import { BasicCron, CronGuide } from 'reactjs-crontab'
 import 'reactjs-crontab/dist/index.css'
 
 // const testFn_1 = () => {
@@ -71,8 +71,8 @@ import 'reactjs-crontab/dist/index.css'
 const App = () => {
   return (
     <>
-      <BasicCron />
-      <Guide />
+      {/* <BasicCron /> */}
+      <CronGuide />
     </>
   )
 }
