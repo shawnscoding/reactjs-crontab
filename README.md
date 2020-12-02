@@ -4,7 +4,7 @@
 
 [![NPM](https://img.shields.io/npm/v/reactjs-crontab.svg)](https://www.npmjs.com/package/reactjs-crontab) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-![Dashboard Demo](assets/dashboard__.png)
+![Dashboard Demo](https://raw.githubusercontent.com/shawnscoding/reactjs-crontab/HEAD/assets/dashboard.png)
 ![Crontab Guide Demo](https://raw.githubusercontent.com/shawnscoding/reactjs-crontab/HEAD/assets/cronGuide.png)
 
 ## Installation
@@ -125,7 +125,7 @@ const tasks = [
 ]
 
 const App = () => {
-  // this will display dashboard__ with scheduled tasks
+  // this will scheduled tasks
   return <BasicCron tasks={tasks} />
 }
 
@@ -134,7 +134,7 @@ export default App
 
 Copying and pasting above code will result something like this below
 
-![Dashboard Demo](assets/dashboard__.png)
+![Dashboard Demo](https://raw.githubusercontent.com/shawnscoding/reactjs-crontab/HEAD/assets/dashboard.png)
 
 And That's it. This will do what it says.
 
