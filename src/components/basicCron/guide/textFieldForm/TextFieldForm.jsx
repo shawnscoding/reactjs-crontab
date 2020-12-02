@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 import styles from '../../../../styles.module.css'
 import {
@@ -110,23 +110,66 @@ const getHRtime = (config) => {
   return { hrTime }
 }
 
-// todo
-// 1. helper HR text
 const TextFieldForm = ({ select, handleChange }) => {
+  const inputEl = useRef(null)
   const value = convertToCronSyntax(select)
   const res = getHRtime(value)
+  const isSelected = value !== '*-*-*-*-*'
+
+  const handleCopyText = (e) => {
+    const copyText = inputEl.current
+
+    copyText.select()
+    copyText.setSelectionRange(0, 99999)
+    document.execCommand('copy')
+  }
+
   return (
     <React.Fragment>
       <div className={styles.guide__input__container}>
+        <p
+          className={
+            isSelected
+              ? styles['guide__text-field__label--selected']
+              : styles['guide__text-field__label']
+          }
+        >
+          Indicator:
+        </p>
         <input
+          ref={inputEl}
           onChange={handleChange}
           type='text'
           value={value}
-          className={styles.guide__input}
+          className={
+            isSelected ? styles['guide__input--selected'] : styles.guide__input
+          }
         />
+        <button
+          className={styles['guide__copy-button']}
+          type='button'
+          onClick={handleCopyText}
+        >
+          <span>COPY</span>
+        </button>
       </div>
-      <div className={styles.guide__input__container}>
-        <p className={styles['hr-text']}>{res.hrTime}</p>
+      <div className={styles['guide__hr-text__container']}>
+        <p
+          className={
+            isSelected
+              ? styles['guide__hr-text__label--selected']
+              : styles['guide__hr-text__label']
+          }
+        >
+          Current State(HR):
+        </p>
+        <p
+          className={
+            isSelected ? styles['hr-text--selected'] : styles['hr-text']
+          }
+        >
+          {res.hrTime}
+        </p>
       </div>
     </React.Fragment>
   )

@@ -133,6 +133,7 @@ const DropdownForm = ({
       </div>
       <div className={styles['guide__clear-button__wrapper']}>
         <button
+          title='Clear'
           className={styles['guide__clear-button']}
           type='button'
           onClick={handleAllClear}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styles from '../../../styles.module.css'
 import DropdownForm from './selectForm/DropdownForm'
 import TextFieldForm from './textFieldForm/TextFieldForm'
@@ -107,9 +107,7 @@ const Guide = () => {
           </div>
           <div className={styles.guide__content}>
             <TextFieldForm handleChange={handleTFchange} select={select} />
-            <div className={styles.guide__divider}>
-              <span>OR</span>
-            </div>
+            <div className={styles.guide__divider} />
             <DropdownForm
               handleClickClose={handleClickClose}
               handleClear={handleClear}
