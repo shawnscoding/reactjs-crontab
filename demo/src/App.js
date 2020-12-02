@@ -78,7 +78,3 @@ const App = () => {
 }
 
 export default App
-// #1976d2
-// fff
-// f7f7f7
-// efefef

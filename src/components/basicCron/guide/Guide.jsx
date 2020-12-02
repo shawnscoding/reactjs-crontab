@@ -103,7 +103,7 @@ const Guide = () => {
       <div className={styles.guide}>
         <div className={styles.guide__container}>
           <div className={styles.guide__title__container}>
-            <h1 className={styles.guide__title}>Guide</h1>
+            <h1 className={styles.guide__title}>Cron Guide</h1>
           </div>
           <div className={styles.guide__content}>
             <TextFieldForm handleChange={handleTFchange} select={select} />
