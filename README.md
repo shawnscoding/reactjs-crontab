@@ -136,17 +136,18 @@ Copying and pasting this will result something like this below
 
 ![Dashboard Demo](assets/dashboard.png)
 
-And do what it says.
+And this will do what it says.
 
 
 ## Helper (Guide) Component
+
 ![Crontab Guide Demo](assets/cronGuide.png)
 
+Simply import CronGuide and css and that's all.
 ```jsx
 import React from 'react'
 import { CronGuide } from 'reactjs-crontab'
 import 'reactjs-crontab/dist/index.css'
-// simply import CronGuide and css and that's all.
 
 const App = () => {
   return <CronGuide />
@@ -154,6 +155,10 @@ const App = () => {
 
 export default App
 ```
+
+This component is created to help you understand how to configure your crontab. 
+Even if you are aware of such function, This would make it easier to set your crontab up and running.
+
 
 ## API
 
@@ -172,16 +177,6 @@ BasicCron Props {
 
 
 ```
-
-
-
-## Just updated to 1.6.0
-
-Now it supports Cron Guideline Component.
-This component is created to help you understand how to configure your crontab. 
-Even if you are aware of such function, This would make it easier to set your crontab up and running.
-![Crontab Guide Demo](assets/cronGuide.png)
-
 
 ## Note
 
