@@ -5,7 +5,7 @@
 [![NPM](https://img.shields.io/npm/v/reactjs-crontab.svg)](https://www.npmjs.com/package/reactjs-crontab) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ![Dashboard Demo](assets/dashboard.png)
-![Crontab Guide Demo](assets/CronGuide.png)
+![Crontab Guide Demo](assets/cronGuide.png)
 
 ## Installation
 
@@ -23,12 +23,6 @@ npm install date-fns@^2.0.0 --save-dev
 
 - [Linux Crontab](https://www.geeksforgeeks.org/crontab-in-linux-with-examples)
 
-## Just updated to 1.6.0
-
-Now it supports Cron Guideline Component.
-This component is created to help you understand how to configure your crontab. 
-Even if you are aware of such function, This would make it easier to set your crontab up and running.
-![Crontab Guide Demo](assets/CronGuide.png)
 
 ## Crontab Config Format
 
@@ -59,6 +53,7 @@ MIN,MIN-HOUR,HOUR-DOM,DOM-MON,MON-DOW,DOW-TIMEZONE
 Reactjs-crontab has very similar pattern to [Linux Crontab](https://www.geeksforgeeks.org/crontab-in-linux-with-examples).
 To learn linux crontab [Linux Crontab](https://www.geeksforgeeks.org/crontab-in-linux-with-examples)
 The difference is that this uses dash between arguments like this `*-*-*-*-*-*`. Whereas Linux crontab uses white space like this `* * * * * *`
+
 
 ```jsx
 import React from 'react'
@@ -139,6 +134,23 @@ const App = () => {
 export default App
 ```
 
+
+## Helper (Guide) Component
+![Crontab Guide Demo](assets/cronGuide.png)
+
+```jsx
+import React from 'react'
+import { CronGuide } from 'reactjs-crontab'
+import 'reactjs-crontab/dist/index.css'
+// simply import CronGuide and css and that's all.
+
+const App = () => {
+  return <CronGuide />
+}
+
+export default App
+```
+
 ## API
 
 ```
@@ -157,10 +169,19 @@ BasicCron Props {
 
 ```
 
+
+
+## Just updated to 1.6.0
+
+Now it supports Cron Guideline Component.
+This component is created to help you understand how to configure your crontab. 
+Even if you are aware of such function, This would make it easier to set your crontab up and running.
+![Crontab Guide Demo](assets/cronGuide.png)
+
+
 ## Note
 
-- This will work well for simple crontab task but I have tons of features that I'd like to add. So stay tuned!
-  Thank you so much for your attention!
+    Thank you so much for your attention!
 - feel free to open issue. [Reactjs-crontab Github repo](https://github.com/shawnscoding/reactjs-crontab).
   Any idea that could improve this package or bug report will be highly appreciated.
 
