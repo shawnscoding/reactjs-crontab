@@ -48,6 +48,7 @@ MIN,MIN-HOUR,HOUR-DOM,DOM-MON,MON-DOW,DOW-TIMEZONE
 - Each sort of time value(s) must be separated by a hyphen '-'
 - Multiple values must be separated by comma ','
 
+
 ## Basic Example
 
 Reactjs-crontab has very similar pattern to [Linux Crontab](https://www.geeksforgeeks.org/crontab-in-linux-with-examples)Except that this uses hyphen between arguments like this `*-*-*-*-*-utc`.
@@ -190,6 +191,9 @@ BasicCron Props {
 
 
 ```
+
+## Important Note
+Unfortunately, We only support 'utc timezone' at the moment. But we're working hard to improve this.
 
 ## Note
 
