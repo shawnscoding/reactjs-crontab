@@ -197,9 +197,7 @@ Unfortunately, We only support 'utc timezone' at the moment. But we're working h
 
 ## Note
 
-    Thank you so much for your attention!
-- feel free to open issue. [Reactjs-crontab Github repo](https://github.com/shawnscoding/reactjs-crontab).
-  Any idea that could improve this package or bug report will be highly appreciated.
+- feel free to open issue. [Reactjs-crontab Github repo](https://github.com/shawnscoding/reactjs-crontab). Any idea that could improve this package or bug report will be highly appreciated.
 
 ## License
 
