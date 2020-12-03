@@ -110,11 +110,11 @@ const getHRtime = (config) => {
   return { hrTime }
 }
 
-const TextFieldForm = ({ select, handleChange }) => {
+const TextFieldForm = ({ select }) => {
   const inputEl = useRef(null)
   const value = convertToCronSyntax(select)
   const res = getHRtime(value)
-  const isSelected = value !== '*-*-*-*-*'
+  const isSelected = value.slice(0, value.length - 4) !== '*-*-*-*-*'
 
   const handleCopyText = (e) => {
     const copyText = inputEl.current
@@ -138,7 +138,7 @@ const TextFieldForm = ({ select, handleChange }) => {
         </p>
         <input
           ref={inputEl}
-          onChange={handleChange}
+          readOnly
           type='text'
           value={value}
           className={
@@ -168,7 +168,7 @@ const TextFieldForm = ({ select, handleChange }) => {
             isSelected ? styles['hr-text--selected'] : styles['hr-text']
           }
         >
-          Execute: {res.hrTime}
+          Execute: {res.hrTime} (UTC)
         </p>
       </div>
     </React.Fragment>
@@ -176,7 +176,6 @@ const TextFieldForm = ({ select, handleChange }) => {
 }
 
 TextFieldForm.propTypes = {
-  handleChange: PropTypes.func.isRequired,
   select: PropTypes.object.isRequired
 }
 

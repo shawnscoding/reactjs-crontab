@@ -193,6 +193,10 @@ th {
   font-size: 17px;
 }
 
+.dashboard__tz-text {
+  font-size: 14px;
+}
+
 .guide {
   display: flex;
   justify-content: center;
@@ -919,3 +923,5 @@ th {
 .dom-picker__item-label--selected:focus {
   background-color: #f7f7f7;
 }
+
+

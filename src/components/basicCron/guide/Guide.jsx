@@ -9,12 +9,12 @@ const Guide = () => {
     hour: '*',
     dom: '*',
     mon: '*',
-    dow: '*'
+    dow: '*',
+    tz: 'utc'
   })
 
   const handleSelectChange = ({ fieldName, item }) => {
     const { value } = item
-    console.log('handleSelectChange called')
 
     setSelect((prevState) => {
       const selectedDate = prevState[fieldName]
@@ -51,8 +51,6 @@ const Guide = () => {
 
   const handleClickClose = ({ fieldName, item }) => {
     const { value } = item
-    console.log('val ::', value)
-    console.log('fieldName ::', fieldName)
 
     setSelect((prevState) => {
       const selectedDate = prevState[fieldName]
@@ -86,18 +84,6 @@ const Guide = () => {
     }
   }
 
-  const handleTFchange = (e) => {
-    // const value = e.target.value
-    // const splitted = value.split('-')
-    // setSelect({
-    //   min: splitted[0],
-    //   hour: splitted[1],
-    //   dom: splitted[2],
-    //   mon: splitted[3],
-    //   dow: splitted[4]
-    // })
-  }
-
   return (
     <React.Fragment>
       <div className={styles.guide}>
@@ -106,7 +92,7 @@ const Guide = () => {
             <h1 className={styles.guide__title}>Cron Guide</h1>
           </div>
           <div className={styles.guide__content}>
-            <TextFieldForm handleChange={handleTFchange} select={select} />
+            <TextFieldForm select={select} />
             <div className={styles.guide__divider} />
             <DropdownForm
               handleClickClose={handleClickClose}
