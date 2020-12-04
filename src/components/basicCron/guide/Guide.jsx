@@ -67,10 +67,10 @@ const Guide = () => {
     })
   }
 
-  const codeBoxTemplate = `//copy and paste this into your code !
-import React from 'react'
+  const codeBoxTemplate = `import React from 'react'
 import { BasicCron } from 'reactjs-crontab'
 import 'reactjs-crontab/dist/index.css'
+//copy and paste this code and run!
 
 ${getDefaultFnsWithSavedSelects(savedSelects)}
 

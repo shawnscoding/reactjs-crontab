@@ -4,7 +4,8 @@
 
 [![NPM](https://img.shields.io/npm/v/reactjs-crontab.svg)](https://www.npmjs.com/package/reactjs-crontab) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-![Dashboard Demo](https://raw.githubusercontent.com/shawnscoding/reactjs-crontab/HEAD/assets/dashboard.png)
+**demo** and **crontab guide** at [https://d180vcwahe2y6s.cloudfront.net/build/index.html](https://d180vcwahe2y6s.cloudfront.net/build/index.html)
+ 
 ![Crontab Guide Demo](https://raw.githubusercontent.com/shawnscoding/reactjs-crontab/HEAD/assets/cronGuide.png)
 
 ## Installation
@@ -155,8 +156,6 @@ And That's it. This will do what it says.
 
 ## Helper (Guide) Component
 
-![Crontab Guide Demo](https://raw.githubusercontent.com/shawnscoding/reactjs-crontab/HEAD/assets/cronGuide.png)
-
 Simply import CronGuide and css and that's all.
 ```jsx
 import React from 'react'
@@ -169,6 +168,8 @@ const App = () => {
 
 export default App
 ```
+
+![Crontab Guide Demo](https://raw.githubusercontent.com/shawnscoding/reactjs-crontab/HEAD/assets/cronGuide.png)
 
 This component is created to help you understand how to configure your crontab. 
 Even if you are aware of such function, This would make it easier to set your crontab up and running.
