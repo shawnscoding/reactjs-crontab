@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styles from '../../../../styles.module.css'
 import {
@@ -110,19 +110,10 @@ const getHRtime = (config) => {
   return { hrTime }
 }
 
-const TextFieldForm = ({ select }) => {
-  const inputEl = useRef(null)
+const TextFieldForm = ({ select, handleSave }) => {
   const value = convertToCronSyntax(select)
   const res = getHRtime(value)
   const isSelected = value.slice(0, value.length - 4) !== '*-*-*-*-*'
-
-  const handleCopyText = (e) => {
-    const copyText = inputEl.current
-
-    copyText.select()
-    copyText.setSelectionRange(0, 99999)
-    document.execCommand('copy')
-  }
 
   return (
     <React.Fragment>
@@ -137,7 +128,6 @@ const TextFieldForm = ({ select }) => {
           Indicator:
         </p>
         <input
-          ref={inputEl}
           readOnly
           type='text'
           value={value}
@@ -145,12 +135,14 @@ const TextFieldForm = ({ select }) => {
             isSelected ? styles['guide__input--selected'] : styles.guide__input
           }
         />
+
         <button
-          className={styles['guide__copy-button']}
+          title='Store'
+          className={styles['guide__button--store']}
           type='button'
-          onClick={handleCopyText}
+          onClick={handleSave}
         >
-          <span>COPY</span>
+          <i className={styles['right-arrow']} />
         </button>
       </div>
       <div className={styles['guide__hr-text__container']}>

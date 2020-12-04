@@ -1,6 +1,7 @@
 :root {
   --dropdown-bg-color: grey;
   --text-primary: #1976d2;
+  --text-warning: rgb(255 0 0 / 78%);
   --primary: #1976d2;
   --secondary: rgb(220, 0, 78);
   --option-default: #fff;
@@ -13,7 +14,11 @@
   --dropdown-list-z-index: 10;
   --border--hover: rgba(0, 0, 0, 0.87);
   --secondary-hover: rgb(228 0 81);
+  --primary-hover: #1469bd;
   --font-family-default: Arial, Helvetica, sans-serif;
+  --codebox-width: 28%;
+  --guide-cotent-width: 72%;
+  --border-grey: rgb(224 224 224 / 70%);
 }
 
 .global {
@@ -175,13 +180,15 @@ th {
 }
 
 .hr-text {
-  font-size: 2em;
+  font-size: 1.7em;
   flex-grow: 1;
   color: var(--text-grey);
+  width: 80%;
 }
 
 .hr-text--selected {
-  font-size: 2em;
+  width: 80%;
+  font-size: 1.7em;
   flex-grow: 1;
   color: #000;
 }
@@ -201,7 +208,7 @@ th {
   display: flex;
   justify-content: center;
   font-size: 10px;
-  margin-bottom: 15em;
+  margin-bottom: 5em;
   margin-top: 5em;
 }
 
@@ -226,7 +233,14 @@ th {
 }
 
 .guide__content {
-  padding: 2em;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.guide__left-content {
+  padding: 2em 2em 1em 2em;
+  width: var(--guide-cotent-width);
+  border-right: 1px solid var(--border-grey);
 }
 
 .guide__input__container {
@@ -242,7 +256,8 @@ th {
 
 .guide__text-field__label {
   width: 20%;
-  font-size: 20px;
+  font-weight: 550;
+  font-size: 1.7em;
   color: #60666dab;
   color: var(--text-grey);
   line-height: 37px;
@@ -250,7 +265,8 @@ th {
 
 .guide__text-field__label--selected {
   width: 20%;
-  font-size: 20px;
+  font-size: 1.7em;
+  font-weight: 550;
   color: #60666dab;
   color: var(--text-primary);
   line-height: 37px;
@@ -258,20 +274,22 @@ th {
 
 .guide__hr-text__label {
   width: 20%;
-  font-size: 18px;
+  font-weight: 550;
+  font-size: 1.7em;
   color: #60666dab;
   color: var(--text-grey);
 }
 
 .guide__hr-text__label--selected {
   width: 20%;
-  font-size: 18px;
+  font-weight: 550;
+  font-size: 1.7em;
   color: #60666dab;
   color: var(--text-primary);
 }
 
 .guide__input {
-  font-size: 17px;
+  font-size: 1.7em;
   flex-grow: 1;
   padding: 10px 11px;
   border: 1px solid rgb(0 0 0 / 23%);
@@ -279,7 +297,7 @@ th {
 
 .guide__input--selected {
   border: 1px solid var(--primary);
-  font-size: 17px;
+  font-size: 1.7em;
   flex-grow: 1;
   padding: 10px 11px;
 }
@@ -324,8 +342,8 @@ th {
   background: var(--secondary);
   color: #fff;
   width: 7em;
-  padding: 0.5em 1.5em;
-  font-size: 1.7em;
+  padding: 0.5em 1.7em;
+  font-size: 1.5em;
   cursor: pointer;
   border-radius: 3px;
   text-transform: uppercase;
@@ -347,13 +365,50 @@ th {
     0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
-.guide__copy-button {
-  margin: 10px 0 0 18px;
+.guide__button--store {
+  transform: scale(0.8) translate(0px, 7px);
+  background: var(--primary);
+  color: #fff;
+  margin: 0px 0 0 18px;
+  height: 39px;
+  padding: 0.5em 2.3em;
+  font-size: 1.4em;
+  cursor: pointer;
+  border-radius: 9px;
+  text-transform: uppercase;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.guide__button--store:hover {
+  background: var(--primary-hover);
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+}
+
+.guide__button--store:active {
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.right-arrow {
+  border: solid #fff;
+  border-width: 0 6px 6px 0;
+  display: inline-block;
+  padding: 6px;
+  transform: rotate(-45deg) translate(-2px, 0px);
+  border-radius: 0px;
+}
+
+.guide__btn-copy {
   background-color: #fff;
-    color: #000;
+  color: #000;
+margin: 4px 10px;
     width: 5em;
     height: 30px;
-    padding: 0.5em 1em;
     font-size: 1.4em;
     cursor: pointer;
     border-radius: 3px;
@@ -361,12 +416,34 @@ th {
     transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }
 
-.guide__copy-button:hover {
+.guide__btn-reset {
+  background-color: #fff;
+  color:  var(--text-warning);
+margin: 4px 10px;
+    width: 5em;
+    height: 30px;
+    font-size: 1.2em;
+    cursor: pointer;
+    border-radius: 3px;
+    text-transform: uppercase;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.guide__btn-copy:hover {
   background-color: rgba(0, 0, 0, 0.04);
 }
 
+.guide__btn-reset:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
 
-
+.codebox__btngroup {
+  display: flex;
+  justify-content: space-between;
+  height: 7%;
+  max-height: 50px;
+  align-items: flex-end;
+}
 
 .dropdown__wrapper {
   width: var(--dropdown--width);
@@ -405,6 +482,10 @@ th {
 
 .dropdown__container {
   margin-bottom: 7em;
+}
+
+.dropdown__container:last-child {
+  margin-bottom: 3em;
 }
 
 .guide__helper-text-box {
@@ -923,5 +1004,27 @@ th {
 .dom-picker__item-label--selected:focus {
   background-color: #f7f7f7;
 }
+
+.codebox__container {
+  width: var(--codebox-width);
+  height: 574px;
+}
+
+.codebox {
+  width: 100%;
+  height: 93%;
+    overflow-y: auto;
+    background-color: #eff0f1;
+    padding: 10px;
+    font-size: 1.1em;
+    display: inline-block;
+    border-bottom: 1px solid var(--border-grey)
+}
+
+
+
+
+
+
 
 

@@ -530,3 +530,16 @@ export const convertToCronSyntax = (select) => {
 
   return res
 }
+
+//  const preEl = useRef(null)
+// const handleCopyText = (e) => {
+//   const copyText = preEl.current
+//   const contents = copyText.innerHTML
+//   console.log('contents', contents)
+//   var tempInput = document.createElement('input')
+//   tempInput.value = contents
+//   document.body.appendChild(tempInput)
+//   tempInput.select()
+//   tempInput.setSelectionRange(0, 99999)
+//   document.execCommand('copy')
+// }

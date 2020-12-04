@@ -7,6 +7,8 @@ const App = () => {
   return (
     <div>
       <CronGuide />
+      <CronGuide />
+      <CronGuide />
 
     </div>
   )
