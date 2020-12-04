@@ -21,6 +21,8 @@
   --border-grey: rgb(224 224 224 / 70%);
 }
 
+
+
 .global {
   font-family: var(--font-family-default);
   box-sizing: border-box;
@@ -450,7 +452,7 @@ margin: 4px 10px;
   height: var(--dropdown--height);
   display: inline-block;
   position: relative;
-  margin: 0 1.5em;
+  margin: 0 1.5em 0 0;
 }
 
 .dropdown {
@@ -493,6 +495,7 @@ margin: 4px 10px;
   height: var(--dropdown--height);
   transform: translateY(-16px);
   align-items: center;
+  width: 39px;
 }
 
 .guide__helper-text {

@@ -79,7 +79,7 @@ const DropdownForm = ({
                   : styles['guide__helper-text']
               }
             >
-              AND
+              ON
             </span>
           </div>
 
