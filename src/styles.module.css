@@ -335,54 +335,46 @@ th {
   content: '';
 } */
 
-.guide__clear-button__wrapper {
+.guide__btn--clear__wrapper {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
-.guide__clear-button {
-  background: var(--secondary);
-  color: #fff;
-  width: 7em;
-  padding: 0.5em 1.7em;
+.guide__btn--clear {
+  background-color: #fff;
+  color: rgb(255 0 0 / 78%);
+  color: var(--text-warning);
+  width: 5em;
+  height: 30px;
+  display: inline-block;
   font-size: 1.5em;
+  padding: 0.5em;
   cursor: pointer;
   border-radius: 3px;
   text-transform: uppercase;
-  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
-    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
-    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
-    border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }
 
-.guide__clear-button:hover {
-  background: var(--secondary-hover);
-  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
-    0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+.guide__btn--clear:hover {
+  background-color: rgba(0, 0, 0, 0.04);
 }
 
-.guide__clear-button:active {
-  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
-    0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
-}
+
 
 .guide__button--store {
   transform: scale(0.8) translate(0px, 7px);
+  background: #1976d2;
   background: var(--primary);
   color: #fff;
-  margin: 0px 0 0 18px;
+  margin: 0px 0 0 3px;
   height: 39px;
-  padding: 0.5em 2.3em;
-  font-size: 1.4em;
+  padding: 0.5em 1.6em;
+  font-size: 1.9em;
   cursor: pointer;
   border-radius: 9px;
   text-transform: uppercase;
-  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
-    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
-    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
-    border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }
 
 .guide__button--store:hover {
@@ -398,7 +390,7 @@ th {
 
 .right-arrow {
   border: solid #fff;
-  border-width: 0 6px 6px 0;
+  border-width: 0 4px 4px 0;
   display: inline-block;
   padding: 6px;
   transform: rotate(-45deg) translate(-2px, 0px);

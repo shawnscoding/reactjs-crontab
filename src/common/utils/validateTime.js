@@ -3,7 +3,6 @@ import { SEVERAL_NUMBERS, ONE_NUMBER, ASTERISK } from '../data/types'
 export const IsNeededToRunNow = (time, currentTime) => {
   if (typeof time !== typeof {}) throw Error('Bad Arg')
   const { type, value } = time
-
   if (type === ASTERISK) {
     return { isNeededToRun: true }
   } else if (type === ONE_NUMBER) {

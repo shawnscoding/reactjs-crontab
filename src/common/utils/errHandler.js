@@ -67,5 +67,19 @@ export const validateConfigLength = (configArr) => {
     msg = `Bad Config: Six parameters are required in config field`
     return { error: true, msg }
   }
+
+  return { error: false, msg }
+}
+
+export const isEmpty = (configArr) => {
+  let msg = ''
+
+  for (let i = 0; i < configArr.length; i++) {
+    if (configArr[i] === '') {
+      msg = `Bad Config: White space is not allowed in config field`
+      return { error: true, msg }
+    }
+  }
+
   return { error: false, msg }
 }

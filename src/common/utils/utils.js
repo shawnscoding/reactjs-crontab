@@ -1,3 +1,4 @@
+import { clearConfigCache } from 'prettier'
 import { ONE_NUMBER, ASTERISK, SEVERAL_NUMBERS } from '../data/types'
 
 export const getHRtime = (hrTime, conditions, hourFormat) => {
@@ -466,17 +467,42 @@ export const converConfigValuesToObject = (str) => {
       value: arr
     }
   }
-  if (arr.length === 1) {
+  if (isNaN(arr[0])) {
+    // means this value is timezone
     return {
-      type: ONE_NUMBER,
+      type: ASTERISK,
       length: arr.length,
       value: arr
     }
+  }
+  if (arr.length === 1) {
+    const value = arr.map((item) => {
+      if (item.length === 2 && item[0] === '0') {
+        // means user formatted time differenctly like this 01 , 02
+        const newItem = item[1]
+        return newItem
+      }
+      return item
+    })
+    return {
+      type: ONE_NUMBER,
+      length: arr.length,
+      value
+    }
   } else if (arr.length > 1) {
+    const value = arr.map((item) => {
+      if (item.length === 2 && item[0] === '0') {
+        // means user formatted time differenctly like this 01 , 02
+        const newItem = item[1]
+        return newItem
+      }
+      return item
+    })
+
     return {
       type: SEVERAL_NUMBERS,
       length: arr.length,
-      value: arr
+      value
     }
   } else {
     throw Error('Bad Settings')

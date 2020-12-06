@@ -142,7 +142,7 @@ const TextFieldForm = ({ select, handleSave }) => {
           type='button'
           onClick={handleSave}
         >
-          <i className={styles['right-arrow']} />
+          SET <i className={styles['right-arrow']} />
         </button>
       </div>
       <div className={styles['guide__hr-text__container']}>

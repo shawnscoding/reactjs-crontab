@@ -1,9 +1,9 @@
 import React, { createContext, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { format } from 'date-fns'
 import {
   validateValueTypes,
-  validateConfigLength
+  validateConfigLength,
+  isEmpty
 } from '../../common/utils/errHandler'
 import {
   validateMin,
@@ -16,17 +16,32 @@ import {
 import defaultTasks from '../../common/data/BasicCronDefaultProps'
 import { converConfigValuesToObject } from '../../common/utils/utils'
 
+const foramtDow = (dow) => {
+  if (dow === 0) {
+    return 7
+  } else {
+    return dow
+  }
+}
+
 const timerDuration = 60000
 
 const detectTaskTime = (convertedConfigArr) => {
   const utcTime = new Date(new Date().toUTCString().slice(0, -3))
 
-  const currentMin = format(utcTime, 'm')
-  const currentHour = format(utcTime, 'H')
-  const currentDom = format(utcTime, 'd')
-  const currentMon = format(utcTime, 'M')
-  const currentDow = format(utcTime, 'i')
-  // console.log('m::', currentMin, currentHour, currentDom, currentMon)
+  const currentMin = utcTime.getMinutes()
+  const currentHour = utcTime.getHours()
+  const currentDom = utcTime.getDate()
+  const Mon = utcTime.getMonth() // beware: January = 0; February = 1, etc.
+  const Dow = utcTime.getDay()
+  const currentMon = Mon + 1
+  const currentDow = foramtDow(Dow) // Sunday = 0, Monday = 1, etc.
+  // console.log('utcTime::', utcTime)
+  // console.log('utcTime currentMin::', currentMin)
+  // console.log('utcTime currentHour::', currentHour)
+  // console.log('utcTime currentDom::', currentDom)
+  // console.log('utcTime currentMon::', currentMon)
+  // console.log('utcTime currentDow::', currentDow)
 
   const min = convertedConfigArr[0]
   const hour = convertedConfigArr[1]
@@ -34,11 +49,11 @@ const detectTaskTime = (convertedConfigArr) => {
   const mon = convertedConfigArr[3]
   const dow = convertedConfigArr[4]
 
-  const minValidateRes = IsNeededToRunNow(min, currentMin)
-  const hourValidateRes = IsNeededToRunNow(hour, currentHour)
-  const domValidateRes = IsNeededToRunNow(dom, currentDom)
-  const monValidateRes = IsNeededToRunNow(mon, currentMon)
-  const dowValidateRes = IsNeededToRunNow(dow, currentDow)
+  const minValidateRes = IsNeededToRunNow(min, currentMin.toString())
+  const hourValidateRes = IsNeededToRunNow(hour, currentHour.toString())
+  const domValidateRes = IsNeededToRunNow(dom, currentDom.toString())
+  const monValidateRes = IsNeededToRunNow(mon, currentMon.toString())
+  const dowValidateRes = IsNeededToRunNow(dow, currentDow.toString())
 
   if (!minValidateRes.isNeededToRun) {
     return minValidateRes.isNeededToRun
@@ -72,8 +87,13 @@ const handleSetTimer = (task) => {
   const { config } = task
   const splittedConfig = config.split('-')
   const res = validateConfigLength(splittedConfig)
+  const resTwo = isEmpty(splittedConfig)
+
   if (res.error) {
     throw Error(res.msg)
+  }
+  if (resTwo.error) {
+    throw Error(resTwo.msg)
   }
 
   // console.log('config :::', config)
@@ -96,8 +116,11 @@ const handleSetTimer = (task) => {
     // validate value in config field
     const convertedConfig = splittedConfig.map((item) => {
       const obj = converConfigValuesToObject(item)
+
       return obj
     })
+
+    // console.log('convertedConfig ::', convertedConfig)
 
     const minValidateRes = validateMin(convertedConfig[0])
 
