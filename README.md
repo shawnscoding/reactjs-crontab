@@ -5,7 +5,7 @@
 [![NPM](https://img.shields.io/npm/v/reactjs-crontab.svg)](https://www.npmjs.com/package/reactjs-crontab) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 **Demo** and **Crontab guide** at [https://d180vcwahe2y6s.cloudfront.net/build/index.html](https://d180vcwahe2y6s.cloudfront.net/index.html)
- 
+
 ![Crontab Guide Demo](https://raw.githubusercontent.com/shawnscoding/reactjs-crontab/HEAD/assets/cronGuide.png)
 
 ## Installation
@@ -14,16 +14,15 @@
 npm install --save reactjs-crontab
 ```
 
-## Just updated to 2.0.0
+## updated to 2.0.0
 
 - **No extra dependencies** except React
-- Very **light-weight**, only **vanilla css** is used to style the components 
+- Very **light-weight**, only **vanilla css** is used to style the components
 - Provide **specific error message**, you will find it so easy to debug.
 
 ## Inspired by
 
 - [Linux Crontab](https://www.geeksforgeeks.org/crontab-in-linux-with-examples)
-
 
 ## Crontab Config Format
 
@@ -49,11 +48,9 @@ MIN,MIN-HOUR,HOUR-DOM,DOM-MON,MON-DOW,DOW-TIMEZONE
 - Each sort of time value(s) must be separated by a hyphen '-'
 - Multiple values must be separated by comma ','
 
-
-## Basic Example
+## Usage
 
 Reactjs-crontab has very similar pattern to [Linux Crontab](https://www.geeksforgeeks.org/crontab-in-linux-with-examples)Except that this uses hyphen between arguments like this `*-*-*-*-*-utc`.
-
 
 ```jsx
 import React from 'react'
@@ -140,23 +137,10 @@ Copying and pasting above code will result something like this below
 
 And That's it. This will do what it says.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## Helper (Guide) Component
 
 Simply import CronGuide and css and that's all.
+
 ```jsx
 import React from 'react'
 import { CronGuide } from 'reactjs-crontab'
@@ -171,9 +155,8 @@ export default App
 
 ![Crontab Guide Demo](https://raw.githubusercontent.com/shawnscoding/reactjs-crontab/HEAD/assets/cronGuide.png)
 
-This component is created to help you understand how to configure your crontab. 
+This component is created to help you understand how to configure your crontab.
 Even if you are aware of such function, This would make it easier to set your crontab up and running.
-
 
 ## API
 
@@ -194,6 +177,7 @@ BasicCron Props {
 ```
 
 ## Important Note
+
 Unfortunately, We only support 'utc timezone' at the moment. But we're working hard to improve this.
 
 ## Note

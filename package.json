@@ -1,14 +1,20 @@
 {
   "name": "reactjs-crontab",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Light-weight Crontab for handling repetitive tasks",
   "author": "shawnscoding",
   "license": "MIT",
   "keywords": [
-    "React",
+    "react",
+    "reactjs",
     "crontab",
     "cron",
-    "repetitive-task"
+    "repetitive-task",
+    "react cron",
+    "react crontab",
+    "js",
+    "react cron generator",
+    "react scheduler"
   ],
   "repository": {
     "type": "git",
