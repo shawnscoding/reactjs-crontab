@@ -6,7 +6,8 @@ import {
   formatDOW,
   converConfigValuesToObject,
   convertToCronSyntax,
-  formatHour
+  formatHour,
+  getExplicitTz
 } from '../../../../common/utils/utils'
 import { ASTERISK } from '../../../../common/data/types'
 
@@ -110,10 +111,11 @@ const getHRtime = (config) => {
   return { hrTime }
 }
 
-const TextFieldForm = ({ select, handleSave }) => {
+const TextFieldForm = ({ select, handleSave, timeZone }) => {
   const value = convertToCronSyntax(select)
   const res = getHRtime(value)
-  const isSelected = value.slice(0, value.length - 4) !== '*-*-*-*-*'
+  const isSelected = value !== '*-*-*-*-*'
+  const tz = getExplicitTz(timeZone)
 
   return (
     <React.Fragment>
@@ -160,7 +162,7 @@ const TextFieldForm = ({ select, handleSave }) => {
             isSelected ? styles['hr-text--selected'] : styles['hr-text']
           }
         >
-          Execute: {res.hrTime} (UTC)
+          Execute: {res.hrTime} ({tz})
         </p>
       </div>
     </React.Fragment>

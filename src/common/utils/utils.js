@@ -532,9 +532,9 @@ export const isShouldBeOn = (value, fieldValue) => {
 }
 
 export const convertToCronSyntax = (select) => {
-  let res = `*-*-*-*-*-*`
+  let res = `*-*-*-*-*`
   const splitted = res.split('-')
-  const { min, hour, dow, dom, mon, tz } = select
+  const { min, hour, dow, dom, mon } = select
   if (min !== '*') {
     splitted[0] = min
   }
@@ -550,7 +550,6 @@ export const convertToCronSyntax = (select) => {
   if (dow !== '*') {
     splitted[4] = dow
   }
-  splitted[5] = tz
 
   res = splitted.join('-')
 

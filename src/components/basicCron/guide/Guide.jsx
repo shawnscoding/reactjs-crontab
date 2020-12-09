@@ -1,52 +1,9 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import styles from '../../../styles.module.css'
 import DropdownForm from './selectForm/DropdownForm'
 import TextFieldForm from './textFieldForm/TextFieldForm'
 import { convertToCronSyntax } from '../../../common/utils/utils'
-
-const getDefaultFnsWithSavedSelects = (savedSelects) => {
-  let output = ''
-  for (let i = 0; i < savedSelects.length; i++) {
-    output += `const function_${i + 1} = () => {};
-    
-`
-  }
-
-  return output
-}
-
-const getTaskObj = (select, index) => `
-  {
-    fn: function_${index + 1},
-    id: '${index + 1}',
-    config: '${select}',
-    name: '',
-    description: ''
-  }
-`
-
-const convertSavedSelectsToProps = (savedSelects) => {
-  if (savedSelects.length < 1) {
-    let output = ''
-    output = 'const tasks = ['
-    output += ']'
-    return output
-  }
-
-  const res = savedSelects.map((select, index) => {
-    const obj = getTaskObj(select, index)
-    let output = ''
-    if (index === 0) {
-      output = 'const tasks = ['
-    }
-    output += obj
-    if (index === savedSelects.length - 1) {
-      output += ']'
-    }
-    return output
-  })
-  return res
-}
+import Codebox from './codebox/Codebox'
 
 const Guide = () => {
   const [select, setSelect] = useState({
@@ -54,9 +11,9 @@ const Guide = () => {
     hour: '*',
     dom: '*',
     mon: '*',
-    dow: '*',
-    tz: 'utc'
+    dow: '*'
   })
+  const [timeZone, setTimeZone] = useState('utc')
 
   const [savedSelects, setSavedSelects] = useState([])
 
@@ -67,24 +24,13 @@ const Guide = () => {
     })
   }
 
-  const codeBoxTemplate = `import React from 'react'
-import { BasicCron } from 'reactjs-crontab'
-import 'reactjs-crontab/dist/index.css'
-//copy and paste this code and run!
-
-${getDefaultFnsWithSavedSelects(savedSelects)}
-
-${convertSavedSelectsToProps(savedSelects)}
-
-const App = () => {
-  return <BasicCron tasks={tasks} />
-}
-
-export default App
-`
-
   const handleResetCodeBox = () => {
     setSavedSelects([])
+  }
+
+  const handleTzChange = (e) => {
+    const value = e.target
+    setTimeZone(value)
   }
 
   const handleSelectChange = ({ fieldName, item }) => {
@@ -166,27 +112,24 @@ export default App
         </div>
         <div className={styles.guide__content}>
           <div className={styles['guide__left-content']}>
-            <TextFieldForm handleSave={handleSave} select={select} />
+            <TextFieldForm
+              timeZone={timeZone}
+              handleSave={handleSave}
+              select={select}
+            />
             <div className={styles.guide__divider} />
             <DropdownForm
               handleClickClose={handleClickClose}
               handleClear={handleClear}
               handleChange={handleSelectChange}
               select={select}
+              handleTzChange={handleTzChange}
             />
           </div>
-          <div className={styles.codebox__container}>
-            <pre className={styles.codebox}>{codeBoxTemplate}</pre>
-            <div className={styles.codebox__btngroup}>
-              <button
-                className={styles['guide__btn-reset']}
-                type='button'
-                onClick={handleResetCodeBox}
-              >
-                <span>Reset</span>
-              </button>
-            </div>
-          </div>
+          <Codebox
+            savedSelects={savedSelects}
+            handleResetCodeBox={handleResetCodeBox}
+          />
         </div>
       </div>
     </div>

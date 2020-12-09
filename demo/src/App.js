@@ -44,7 +44,7 @@ const tasks = [
 ]
 
 const App = () => {
-  return <BasicCron timeZone="local" tasks={tasks}   />
+  return <CronGuide    />
 }
 
 export default App

@@ -7,12 +7,15 @@ import DOMDropdown from './DOMDropdown'
 import DOWDropdown from './DOWDropdown'
 import HourDropdown from './HourDropdown'
 import { convertToCronSyntax } from '../../../../common/utils/utils'
+import TzSelect from '../select/TzSelect'
 
 const DropdownForm = ({
   handleClear,
+  handleTzChange,
   handleClickClose,
   handleChange,
-  select
+  select,
+  timeZone
 }) => {
   const handleAllClear = () => {
     const fieldName = ['mon', 'dow', 'dom', 'hour', 'min']
@@ -130,6 +133,21 @@ const DropdownForm = ({
             handleChange={handleChange}
           />
         </div>
+        <div className={styles.dropdown__container}>
+          <div className={styles['guide__helper-text-box']}>
+            <span
+              className={
+                min
+                  ? styles['guide__helper-text--selected']
+                  : styles['guide__helper-text']
+              }
+            >
+              :
+            </span>
+          </div>
+
+          <TzSelect timeZone={timeZone} handleChange={handleTzChange} />
+        </div>
       </div>
       <div className={styles['guide__clear-button__wrapper']}>
         <button
@@ -138,7 +156,7 @@ const DropdownForm = ({
           type='button'
           onClick={handleAllClear}
         >
-          <span>Reset</span>
+          <span>Clear</span>
         </button>
       </div>
     </form>
