@@ -4,10 +4,10 @@ import { BasicCronProvider } from './contexts/basic/BasicCronContext.jsx'
 import Guide from './components/basicCron/guide/Guide'
 import Dashboard from './components/basicCron/dashboard/Dashboard'
 
-export const BasicCron = ({ tasks }) => {
+export const BasicCron = ({ tasks, timeZone }) => {
   return (
     <div className={styles.global}>
-      <BasicCronProvider tasks={tasks}>
+      <BasicCronProvider tasks={tasks} timeZone={timeZone}>
         <Dashboard />
       </BasicCronProvider>
     </div>

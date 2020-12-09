@@ -63,12 +63,11 @@ export const validateValueTypes = (arr) => {
 
 export const validateConfigLength = (configArr) => {
   let msg = ''
-  if (configArr.length !== 6) {
-    msg = `Bad Config: Six parameters are required in config field`
-    return { error: true, msg }
+  if (configArr.length === 5 || configArr.length === 6) {
+    return { error: false, msg }
   }
-
-  return { error: false, msg }
+  msg = `Bad Config: Five or Six parameters are required in config field`
+  return { error: true, msg }
 }
 
 export const isEmpty = (configArr) => {

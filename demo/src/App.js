@@ -1,34 +1,50 @@
 import React from 'react'
-import { BasicCron } from 'reactjs-crontab'
+import { BasicCron, CronGuide } from 'reactjs-crontab'
 import 'reactjs-crontab/dist/index.css'
 //copy and paste this code and run!
 
-const function_1 = () => {};
-    
-const function_2 = () => {};
-    
+
+
+const sayHello = () => {
+  console.log('Hello')
+}
+
+const sayGoobye = () => {
+  console.log('Goodbye')
+}
+
+const RequestSomething = () => {
+  console.log('Api request has been sent')
+}
 
 
 const tasks = [
   {
-    fn: function_1,
+    fn: sayHello,
     id: '1',
-    config: '1,2-13-3,4-*-*-utc',
+    config: '*-*-*-*-*',
     name: '',
     description: ''
   }
 ,
   {
-    fn: function_2,
+    fn: sayGoobye,
     id: '2',
-    config: '1,2-13-3,4-1,2-*-utc',
+    config: '*-8-9-12-*',
+    name: '',
+    description: ''
+  },
+  {
+    fn: RequestSomething,
+    id: '1',
+    config: '25,26,27,28-8-9-12-*',
     name: '',
     description: ''
   }
 ]
 
 const App = () => {
-  return <BasicCron tasks={tasks} />
+  return <BasicCron timeZone="local" tasks={tasks}   />
 }
 
 export default App

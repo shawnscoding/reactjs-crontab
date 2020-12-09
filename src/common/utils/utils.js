@@ -569,3 +569,13 @@ export const convertToCronSyntax = (select) => {
 //   tempInput.setSelectionRange(0, 99999)
 //   document.execCommand('copy')
 // }
+
+export const getExplicitTz = (tz) => {
+  let explicitTz
+  if (tz === 'utc') {
+    explicitTz = 'UTC'
+  } else if (tz === 'local') {
+    explicitTz = Intl.DateTimeFormat().resolvedOptions().timeZone
+  }
+  return explicitTz
+}

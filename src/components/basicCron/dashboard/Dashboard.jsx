@@ -6,7 +6,8 @@ import {
   formatDOW,
   formatHour,
   formatMonth,
-  converConfigValuesToObject
+  converConfigValuesToObject,
+  getExplicitTz
 } from '../../../common/utils/utils'
 import { ASTERISK } from '../../../common/data/types'
 
@@ -122,9 +123,9 @@ const addHrTime = (tasks) => {
 }
 
 const Dashboard = (props) => {
-  const { tasks } = useContext(BasicCronContext)
+  const { tasks, timeZone } = useContext(BasicCronContext)
   // console.log('tasks in Dashboard', tasks)
-
+  const tz = getExplicitTz(timeZone)
   const crons = addHrTime(tasks)
   // console.log('crons :::')
   return (
@@ -133,7 +134,10 @@ const Dashboard = (props) => {
         <thead className={styles.dashboard__title__container}>
           <tr>
             <th colSpan='5' className={styles.dashboard__title}>
-              Dashboard
+              <div className={styles.dashboard__title__box}>
+                <span>Dashboard</span>
+                <span>{tz}</span>
+              </div>
             </th>
           </tr>
         </thead>
@@ -155,9 +159,9 @@ const Dashboard = (props) => {
                 <td>{cron.config}</td>
                 <td>
                   {`${cron.hrTime} `}
-                  <span className={styles['dashboard__tz-text']}>
+                  {/* <span className={styles['dashboard__tz-text']}>
                     (UTC)
-                  </span>{' '}
+                  </span>{' '} */}
                 </td>
                 <td>{cron.description}</td>
               </tr>
