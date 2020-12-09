@@ -103,6 +103,7 @@ const Guide = () => {
       })
     }
   }
+  console.log('hi')
 
   return (
     <div className={styles.guide}>
