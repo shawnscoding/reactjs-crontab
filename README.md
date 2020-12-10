@@ -19,6 +19,7 @@ npm install --save reactjs-crontab
 - **No extra dependencies** except React
 - Very **light-weight**, only **vanilla css** is used to style the components
 - Provide **specific error message**, you will find it so easy to debug.
+- Provide **Dashboard** to easily view what time your crontab runs. It can be hidden if you want.
 
 ## Inspired by
 
