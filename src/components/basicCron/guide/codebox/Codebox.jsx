@@ -6,7 +6,7 @@ import {
   getDefaultFnsWithSavedSelects
 } from './helper'
 
-const codeBoxTemplate = (savedSelects) => {
+const codeBoxTemplate = (savedSelects, tzValue) => {
   return `import React from 'react'
 import { BasicCron } from 'reactjs-crontab'
 import 'reactjs-crontab/dist/index.css'
@@ -15,19 +15,33 @@ import 'reactjs-crontab/dist/index.css'
 ${getDefaultFnsWithSavedSelects(savedSelects)}
     
 ${convertSavedSelectsToProps(savedSelects)}
+
+const settings = {
+  hidden: false
+}
+
+const timeZone = "${tzValue === 'default' ? 'UTC' : tzValue}"
     
 const App = () => {
-    return <BasicCron tasks={tasks} />
+    return (
+      <BasicCron 
+        tasks={tasks}
+        timeZone={timeZone}
+        dashboard={settings}
+      />
+    )
 }
     
 export default App
 `
 }
 
-const Codebox = ({ handleResetCodeBox, savedSelects }) => {
+const Codebox = ({ handleResetCodeBox, savedSelects, tzValue }) => {
   return (
     <div className={styles.codebox__container}>
-      <pre className={styles.codebox}>{codeBoxTemplate(savedSelects)}</pre>
+      <pre className={styles.codebox}>
+        {codeBoxTemplate(savedSelects, tzValue)}
+      </pre>
       <div className={styles.codebox__btngroup}>
         <button
           className={styles['guide__btn-reset']}

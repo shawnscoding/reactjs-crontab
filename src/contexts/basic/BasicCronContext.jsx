@@ -13,7 +13,6 @@ import {
   validateDow,
   IsNeededToRunNow
 } from '../../common/utils/validateTime'
-import defaultTasks from '../../common/data/BasicCronDefaultProps'
 import { converConfigValuesToObject } from '../../common/utils/utils'
 
 const foramtDow = (dow) => {
@@ -29,7 +28,7 @@ const timerDuration = 60000
 const detectTaskTime = (convertedConfigArr, timeZone) => {
   let now
 
-  if (timeZone === 'utc') {
+  if (timeZone === 'UTC') {
     now = new Date(new Date().toUTCString().slice(0, -3))
   } else if (timeZone === 'local') {
     now = new Date()
@@ -200,12 +199,8 @@ const BasicCronProvider = ({ children, tasks, timeZone }) => {
 }
 
 BasicCronProvider.propTypes = {
-  tasks: PropTypes.array.isRequired
-}
-
-BasicCronProvider.defaultProps = {
-  tasks: defaultTasks,
-  timeZone: 'utc'
+  tasks: PropTypes.array.isRequired,
+  timeZone: PropTypes.string.isRequired
 }
 
 export { BasicCronProvider, BasicCronContext }

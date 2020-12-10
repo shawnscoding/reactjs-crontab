@@ -4,6 +4,7 @@ import DropdownForm from './selectForm/DropdownForm'
 import TextFieldForm from './textFieldForm/TextFieldForm'
 import { convertToCronSyntax } from '../../../common/utils/utils'
 import Codebox from './codebox/Codebox'
+import TzSelect from './select/TzSelect'
 
 const Guide = () => {
   const [select, setSelect] = useState({
@@ -13,7 +14,11 @@ const Guide = () => {
     mon: '*',
     dow: '*'
   })
-  const [timeZone, setTimeZone] = useState('utc')
+  const [timeZone, setTimeZone] = useState({
+    value: 'default',
+    label: 'Coordinated Universal Time (UTC)',
+    id: 'default'
+  })
 
   const [savedSelects, setSavedSelects] = useState([])
 
@@ -28,9 +33,16 @@ const Guide = () => {
     setSavedSelects([])
   }
 
-  const handleTzChange = (e) => {
-    const value = e.target
-    setTimeZone(value)
+  const handleTzChange = (obj) => {
+    setTimeZone(obj)
+  }
+
+  const handleTzReset = () => {
+    setTimeZone({
+      value: 'default',
+      label: 'UTC',
+      id: 'default'
+    })
   }
 
   const handleSelectChange = ({ fieldName, item }) => {
@@ -103,7 +115,6 @@ const Guide = () => {
       })
     }
   }
-  console.log('hi')
 
   return (
     <div className={styles.guide}>
@@ -118,16 +129,21 @@ const Guide = () => {
               handleSave={handleSave}
               select={select}
             />
+            <TzSelect
+              handleReset={handleTzReset}
+              handleChange={handleTzChange}
+              timeZone={timeZone}
+            />
             <div className={styles.guide__divider} />
             <DropdownForm
               handleClickClose={handleClickClose}
               handleClear={handleClear}
               handleChange={handleSelectChange}
               select={select}
-              handleTzChange={handleTzChange}
             />
           </div>
           <Codebox
+            tzValue={timeZone.value}
             savedSelects={savedSelects}
             handleResetCodeBox={handleResetCodeBox}
           />

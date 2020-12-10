@@ -6,8 +6,7 @@ import {
   formatDOW,
   formatHour,
   formatMonth,
-  converConfigValuesToObject,
-  getExplicitTz
+  converConfigValuesToObject
 } from '../../../common/utils/utils'
 import { ASTERISK } from '../../../common/data/types'
 
@@ -125,8 +124,8 @@ const addHrTime = (tasks) => {
 const Dashboard = (props) => {
   const { tasks, timeZone } = useContext(BasicCronContext)
   // console.log('tasks in Dashboard', tasks)
-  const tz = getExplicitTz(timeZone)
   const crons = addHrTime(tasks)
+  const tzText = timeZone === 'local' ? 'Local' : timeZone
   // console.log('crons :::')
   return (
     <div className={styles.dashboard}>
@@ -136,7 +135,7 @@ const Dashboard = (props) => {
             <th colSpan='5' className={styles.dashboard__title}>
               <div className={styles.dashboard__title__box}>
                 <span>Dashboard</span>
-                <span>{tz}</span>
+                <span>Timezone: {tzText}</span>
               </div>
             </th>
           </tr>
@@ -145,8 +144,8 @@ const Dashboard = (props) => {
           <tr>
             <th>ID</th>
             <th>Name</th>
+            <th>Configuration</th>
             <th>Schedule</th>
-            <th>Schedule (HR)</th>
             <th>Description</th>
           </tr>
         </thead>
@@ -157,12 +156,7 @@ const Dashboard = (props) => {
                 <td>{cron.id}</td>
                 <td>{cron.name}</td>
                 <td>{cron.config}</td>
-                <td>
-                  {`${cron.hrTime} `}
-                  {/* <span className={styles['dashboard__tz-text']}>
-                    (UTC)
-                  </span>{' '} */}
-                </td>
+                <td>{`${cron.hrTime} `}</td>
                 <td>{cron.description}</td>
               </tr>
             </tbody>
