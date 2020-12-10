@@ -121,9 +121,8 @@ const addHrTime = (tasks) => {
   return result
 }
 
-const Dashboard = (props) => {
+const Dashboard = () => {
   const { tasks } = useContext(BasicCronContext)
-  // console.log('tasks in Dashboard', tasks)
 
   const crons = addHrTime(tasks)
   // console.log('crons :::')
