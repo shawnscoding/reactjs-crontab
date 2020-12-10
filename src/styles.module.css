@@ -21,8 +21,6 @@
   --border-grey: rgb(224 224 224 / 70%);
 }
 
-
-
 .global {
   font-family: var(--font-family-default);
   box-sizing: border-box;
@@ -304,8 +302,6 @@ th {
   padding: 10px 11px;
 }
 
-
-
 .guide__divider {
   margin: 10px 0 36px 0;
   top: 50%;
@@ -352,14 +348,14 @@ th {
   cursor: pointer;
   border-radius: 3px;
   text-transform: uppercase;
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }
 
 .guide__btn--clear:hover {
   background-color: rgba(0, 0, 0, 0.04);
 }
-
-
 
 .guide__button--store {
   transform: scale(0.8) translate(0px, 7px);
@@ -373,8 +369,11 @@ th {
   cursor: pointer;
   border-radius: 9px;
   text-transform: uppercase;
-  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }
 
 .guide__button--store:hover {
@@ -400,27 +399,31 @@ th {
 .guide__btn-copy {
   background-color: #fff;
   color: #000;
-margin: 4px 10px;
-    width: 5em;
-    height: 30px;
-    font-size: 1.4em;
-    cursor: pointer;
-    border-radius: 3px;
-    text-transform: uppercase;
-    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  margin: 4px 10px;
+  width: 5em;
+  height: 30px;
+  font-size: 1.4em;
+  cursor: pointer;
+  border-radius: 3px;
+  text-transform: uppercase;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }
 
 .guide__btn-reset {
   background-color: #fff;
-  color:  var(--text-warning);
-margin: 4px 10px;
-    width: 5em;
-    height: 30px;
-    font-size: 1.2em;
-    cursor: pointer;
-    border-radius: 3px;
-    text-transform: uppercase;
-    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  color: var(--text-warning);
+  margin: 4px 10px;
+  width: 5em;
+  height: 30px;
+  font-size: 1.2em;
+  cursor: pointer;
+  border-radius: 3px;
+  text-transform: uppercase;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }
 
 .guide__btn-copy:hover {
@@ -1008,18 +1011,10 @@ margin: 4px 10px;
 .codebox {
   width: 100%;
   height: 93%;
-    overflow-y: auto;
-    background-color: #eff0f1;
-    padding: 10px;
-    font-size: 1.1em;
-    display: inline-block;
-    border-bottom: 1px solid var(--border-grey)
+  overflow-y: auto;
+  background-color: #eff0f1;
+  padding: 10px;
+  font-size: 1.1em;
+  display: inline-block;
+  border-bottom: 1px solid var(--border-grey);
 }
-
-
-
-
-
-
-
-

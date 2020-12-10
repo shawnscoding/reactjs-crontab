@@ -3,9 +3,14 @@ import { BasicCron } from 'reactjs-crontab'
 import 'reactjs-crontab/dist/index.css'
 //copy and paste this code and run!
 
-const function_1 = () => {};
+const function_1 = () => {
+  console.log("called")
+};
     
-const function_2 = () => {};
+const function_2 = () => {
+  console.log("called 2")
+
+};
     
 
 
@@ -13,7 +18,7 @@ const tasks = [
   {
     fn: function_1,
     id: '1',
-    config: '1,2-13-3,4-*-*-utc',
+    config: '*-*-10-12-*-utc',
     name: '',
     description: ''
   }
@@ -21,14 +26,18 @@ const tasks = [
   {
     fn: function_2,
     id: '2',
-    config: '1,2-13-3,4-1,2-*-utc',
+    config: '*-6-10-12-*-utc',
     name: '',
     description: ''
-  }
+  },
 ]
 
+const settings = {
+  hidden: true
+}
+
 const App = () => {
-  return <BasicCron tasks={tasks} />
+  return <BasicCron dashboard={settings} tasks={tasks} />
 }
 
 export default App

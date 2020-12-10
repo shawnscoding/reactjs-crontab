@@ -44,9 +44,9 @@ MIN,MIN-HOUR,HOUR-DOM,DOM-MON,MON-DOW,DOW-TIMEZONE
 - DOM represents day of month, can be 1 through 31. `*` means every day
 - MON represents month, can be 1 through 12. `*` means every month
 - DOW represents day of week, can be 1 through 7. 1 is Monday, 2 is Tusday and so on. `*` means every day
-- TIMEZONE represent the timezone that crontab will refer to when it triggers tasks. Unfortunately, We only support 'utc timezone'. But we're working hard to improve this.
-- Each sort of time value(s) must be separated by a hyphen '-'
-- Multiple values must be separated by comma ','
+- TIMEZONE represent the timezone that crontab will refer to when it triggers tasks. Unfortunately, We only support `utc timezone`. But we're working hard to improve this.
+- Each sort of time value(s) must be separated by a hyphen `-`
+- Multiple values must be separated by comma `,`
 
 ## Usage
 
@@ -125,7 +125,7 @@ const tasks = [
 
 const App = () => {
   // this will scheduled tasks
-  return <BasicCron tasks={tasks} />
+  return <BasicCron tasks={tasks} dashboard={{ hidden: false }} />
 }
 
 export default App
@@ -162,7 +162,7 @@ Even if you are aware of such function, This would make it easier to set your cr
 
 ```
 BasicCron Props {
-  tasks [
+  tasks: [
     {
       fn: yourFn, // (required field) type function
       id: '1', // (required field) type string
@@ -170,9 +170,19 @@ BasicCron Props {
       name: 'logUserOut', // (optional field) type string
       description: 'Send API' // (optional field) type string
     }
-  ]
+  ],
+  dashboard: {
+    hidden: false
+    // if true, dashboard is hidden
+  }
 }
 
+BasicCron.defaultProps = {
+  tasks: [],
+  dashboard: {
+    hidden: false
+  },
+}
 
 ```
 

@@ -13,7 +13,6 @@ import {
   validateDow,
   IsNeededToRunNow
 } from '../../common/utils/validateTime'
-import defaultTasks from '../../common/data/BasicCronDefaultProps'
 import { converConfigValuesToObject } from '../../common/utils/utils'
 
 const foramtDow = (dow) => {
@@ -190,10 +189,6 @@ const BasicCronProvider = ({ children, tasks }) => {
 
 BasicCronProvider.propTypes = {
   tasks: PropTypes.array.isRequired
-}
-
-BasicCronProvider.defaultProps = {
-  tasks: defaultTasks
 }
 
 export { BasicCronProvider, BasicCronContext }
