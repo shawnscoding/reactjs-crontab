@@ -123,11 +123,13 @@ const tasks = [
   }
 ]
 
-const App = () => {
-  // this will scheduled tasks
-  return <BasicCron tasks={tasks} dashboard={{ hidden: false }} />
+const settings = {
+  hidden: false
 }
 
+const App = () => {
+  return <BasicCron dashboard={settings} tasks={tasks} />
+}
 export default App
 ```
 
