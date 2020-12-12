@@ -50,14 +50,6 @@ const detectTaskTime = (convertedConfigArr, timeZone) => {
   }
 
   // Bonus: You can also put Date object to first arg
-  const date = new Date()
-  const Vientiane = convertTZ(date, 'Asia/Vientiane') // current date-time in Asia/Vientiane.
-  const Tripoli = convertTZ(date, 'Africa/Tripoli') // current date-time in Africa/Tripoli.
-  const Seoul = convertTZ(date, 'Asia/Seoul') // current date-time in Seoul.
-
-  console.log('Vientiane ::', Vientiane)
-  console.log('Tripoli ::', Tripoli)
-  console.log('Seoul ::', Seoul)
 
   const currentMin = now.getMinutes()
   const currentHour = now.getHours()
