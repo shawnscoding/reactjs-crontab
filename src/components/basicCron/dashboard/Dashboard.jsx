@@ -121,11 +121,22 @@ const addHrTime = (tasks) => {
   return result
 }
 
+const handleFormatTz = (tz) => {
+  if (typeof tz === typeof 'String') {
+    if (tz === 'local') {
+      return 'LOCAL'
+    }
+    return tz
+  } else {
+    return tz.set
+  }
+}
+
 const Dashboard = (props) => {
   const { tasks, timeZone } = useContext(BasicCronContext)
   // console.log('tasks in Dashboard', tasks)
   const crons = addHrTime(tasks)
-  const tzText = timeZone === 'local' ? 'Local' : timeZone
+  const tzText = handleFormatTz(timeZone)
   // console.log('crons :::')
   return (
     <div className={styles.dashboard}>

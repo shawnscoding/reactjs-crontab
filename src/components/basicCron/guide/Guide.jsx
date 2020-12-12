@@ -14,6 +14,7 @@ const Guide = () => {
     mon: '*',
     dow: '*'
   })
+
   const [timeZone, setTimeZone] = useState({
     value: 'default',
     label: 'Coordinated Universal Time (UTC)',
@@ -21,6 +22,8 @@ const Guide = () => {
   })
 
   const [savedSelects, setSavedSelects] = useState([])
+
+  const [openOtherTzList, setOpenOtherTzList] = useState(false)
 
   const handleSave = () => {
     const res = convertToCronSyntax(select)
@@ -34,7 +37,26 @@ const Guide = () => {
   }
 
   const handleTzChange = (obj) => {
-    setTimeZone(obj)
+    const { subList } = obj
+    if (subList === false) {
+      // means utc or local
+      setOpenOtherTzList(false)
+      setTimeZone(obj)
+    } else if (subList === true) {
+      // means other clicked !
+      if (openOtherTzList) {
+        setOpenOtherTzList(false)
+      } else {
+        setOpenOtherTzList(true)
+        setTimeZone({
+          value: 'default',
+          label: 'UTC',
+          id: 'default'
+        })
+      }
+    } else {
+      setTimeZone(obj)
+    }
   }
 
   const handleTzReset = () => {
@@ -130,6 +152,7 @@ const Guide = () => {
               select={select}
             />
             <TzSelect
+              openOtherTzList={openOtherTzList}
               handleReset={handleTzReset}
               handleChange={handleTzChange}
               timeZone={timeZone}

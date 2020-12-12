@@ -1,7 +1,6 @@
 import React from 'react'
 import styles from './styles.module.css'
 import { BasicCronProvider } from './contexts/basic/BasicCronContext.jsx'
-import Guide from './components/basicCron/guide/Guide'
 import Dashboard from './components/basicCron/dashboard/Dashboard'
 import PropTypes from 'prop-types'
 import defaultTasks from './common/data/BasicCronDefaultProps'
@@ -36,7 +35,7 @@ BasicCron.propTypes = {
   dashboard: PropTypes.shape({
     hidden: PropTypes.bool
   }),
-  timeZone: PropTypes.string
+  timeZone: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
 }
 
 BasicCron.defaultProps = {
@@ -45,12 +44,4 @@ BasicCron.defaultProps = {
     hidden: false
   },
   timeZone: 'UTC'
-}
-
-export const CronGuide = () => {
-  return (
-    <div className={styles.global}>
-      <Guide />
-    </div>
-  )
 }
