@@ -28,7 +28,7 @@ npm install --save reactjs-crontab
 ## Crontab Config Format
 
 ```
-MIN-HOUR-DOM-MON-DOW-TIMEZONE
+MIN-HOUR-DOM-MON-DOW
 ```
 
 OR
@@ -36,7 +36,7 @@ OR
 Can be multiple values like this
 
 ```
-MIN,MIN-HOUR,HOUR-DOM,DOM-MON,MON-DOW,DOW-TIMEZONE
+MIN,MIN-HOUR,HOUR-DOM,DOM-MON,MON-DOW,DOW
 ```
 
 - MIN represents minute(s), can be 0 through 59
@@ -45,7 +45,6 @@ MIN,MIN-HOUR,HOUR-DOM,DOM-MON,MON-DOW,DOW-TIMEZONE
 - DOM represents day of month, can be 1 through 31. `*` means every day
 - MON represents month, can be 1 through 12. `*` means every month
 - DOW represents day of week, can be 1 through 7. 1 is Monday, 2 is Tusday and so on. `*` means every day
-- TIMEZONE represent the timezone that crontab will refer to when it triggers tasks. Unfortunately, We only support `utc timezone`. But we're working hard to improve this.
 - Each sort of time value(s) must be separated by a hyphen `-`
 - Multiple values must be separated by comma `,`
 
@@ -85,7 +84,7 @@ const tasks = [
   {
     fn: sayHello,
     id: '1',
-    config: '*-*-*-*-*-utc',
+    config: '*-*-*-*-*',
     // Execute every minutes
     name: 'Say Hello',
     description: 'Say Hello on console'
@@ -93,7 +92,7 @@ const tasks = [
   {
     fn: sayGoobye,
     id: '2',
-    config: '5-7-12-11-*-utc',
+    config: '5-7-12-11-*',
     // Execute In November on 12th At 7AM and At 5 minute(s)
 
     name: 'Say Goodbye',
@@ -102,7 +101,7 @@ const tasks = [
   {
     fn: RequestSomething,
     id: '3',
-    config: '*-15,19-*-11,12-*-utc',
+    config: '*-15,19-*-11,12-*',
     // Execute In November, December At 3PM, 7PM every minute
     name: 'Request Something',
     description: 'Send API'
@@ -110,7 +109,7 @@ const tasks = [
   {
     fn: sendNotification,
     id: '4',
-    config: '10-11-18-7-*-utc',
+    config: '10-11-18-7-*',
     // Execute In July on 18th At 11AM and At 10 minute(s)
     name: 'Send Notification',
     description: 'Send Event Notification'
@@ -118,18 +117,21 @@ const tasks = [
   {
     fn: logUserOut,
     id: '5',
-    config: '*-16-*-10-1-utc',
+    config: '*-16-*-10-1',
     // Execute In October on Monday At 4PM every minute
     name: 'Log user out'
   }
 ]
+
+const timeZone = 'UTC'
+// UTC or local
 
 const settings = {
   hidden: false
 }
 
 const App = () => {
-  return <BasicCron dashboard={settings} tasks={tasks} />
+  return <BasicCron tasks={tasks} timeZone={timeZone} dashboard={settings} />
 }
 export default App
 ```
@@ -167,35 +169,54 @@ Even if you are aware of such function, This would make it easier to set your cr
 BasicCron Props {
   tasks: [
     {
-      fn: yourFn, // (required field) type function
-      id: '1', // (required field) type string
-      config: '*-11-18-10,13-*-utc', // (required field) type string
-      name: 'logUserOut', // (optional field) type string
-      description: 'Send API' // (optional field) type string
+      fn: yourFn,
+      id: '1',
+      config: '*-11-18-10,13-*',
+      name: 'logUserOut',
+      description: 'Send API'
     }
   ],
+  timeZone: "UTC",
   dashboard: {
     hidden: false
     // if true, dashboard is hidden
   }
 }
 
+BasicCron.propTypes = {
+  tasks: PropTypes.arrayOf(
+    PropTypes.shape({
+      fn: PropTypes.func.isRequired,
+      id: PropTypes.string.isRequired,
+      config: PropTypes.string.isRequired,
+      name: PropTypes.string,
+      description: PropTypes.string
+    })
+  ),
+  dashboard: PropTypes.shape({
+    hidden: PropTypes.bool
+  }),
+  timeZone: PropTypes.string
+}
+
 BasicCron.defaultProps = {
-  tasks: [],
+  tasks: defaultTasks,
   dashboard: {
     hidden: false
   },
+  timeZone: 'UTC'
 }
 
 ```
 
 ## Important Note
 
-Unfortunately, We only support 'utc timezone' at the moment. But we're working hard to improve this.
+Unfortunately, We only support `UTC` and `local` timezone' at the moment. But we're working hard to release improved version very soon.
 
 ## Note
 
 - feel free to open issue. [Reactjs-crontab Github repo](https://github.com/shawnscoding/reactjs-crontab). Any idea that could improve this package or bug report will be highly appreciated.
+- We'll highly appreciate it if you promote this package to other devs in any way. We believe the appropriate usage of this package will save loads of thier time.
 
 ## License
 

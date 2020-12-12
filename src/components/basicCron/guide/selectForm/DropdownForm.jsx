@@ -138,7 +138,7 @@ const DropdownForm = ({
           type='button'
           onClick={handleAllClear}
         >
-          <span>Reset</span>
+          <span>Clear</span>
         </button>
       </div>
     </form>

@@ -25,22 +25,45 @@ const foramtDow = (dow) => {
 
 const timerDuration = 60000
 
-const detectTaskTime = (convertedConfigArr) => {
-  const utcTime = new Date(new Date().toUTCString().slice(0, -3))
+function convertTZ(date, tzString) {
+  return new Date(
+    (typeof date === 'string' ? new Date(date) : date).toLocaleString('en-US', {
+      timeZone: tzString
+    })
+  )
+}
 
-  const currentMin = utcTime.getMinutes()
-  const currentHour = utcTime.getHours()
-  const currentDom = utcTime.getDate()
-  const Mon = utcTime.getMonth() // beware: January = 0; February = 1, etc.
-  const Dow = utcTime.getDay()
+// usage: Asia/Jakarta is GMT+7
+const resofstring = convertTZ('2012/04/10 10:10:30 +0000', 'Asia/Jakarta') // Tue Apr 10 2012 17:10:30 GMT+0700 (Western Indonesia Time)
+
+const detectTaskTime = (convertedConfigArr, timeZone) => {
+  let now
+
+  if (timeZone === 'UTC') {
+    now = new Date(new Date().toUTCString().slice(0, -3))
+  } else if (timeZone === 'local') {
+    now = new Date()
+  } else if (timeZone === undefined) {
+    throw Error(`timeZone props is required`)
+  } else {
+    throw Error(`Unsupported timezone: ${timeZone}`)
+  }
+
+  // Bonus: You can also put Date object to first arg
+
+  const currentMin = now.getMinutes()
+  const currentHour = now.getHours()
+  const currentDom = now.getDate()
+  const Mon = now.getMonth() // beware: January = 0; February = 1, etc.
+  const Dow = now.getDay()
   const currentMon = Mon + 1
   const currentDow = foramtDow(Dow) // Sunday = 0, Monday = 1, etc.
-  // console.log('utcTime::', utcTime)
-  // console.log('utcTime currentMin::', currentMin)
-  // console.log('utcTime currentHour::', currentHour)
-  // console.log('utcTime currentDom::', currentDom)
-  // console.log('utcTime currentMon::', currentMon)
-  // console.log('utcTime currentDow::', currentDow)
+  // console.log('now::', now)
+  // console.log('now currentMin::', currentMin)
+  // console.log('now currentHour::', currentHour)
+  // console.log('now currentDom::', currentDom)
+  // console.log('now currentMon::', currentMon)
+  // console.log('now currentDow::', currentDow)
 
   const min = convertedConfigArr[0]
   const hour = convertedConfigArr[1]
@@ -82,7 +105,7 @@ const detectTaskTime = (convertedConfigArr) => {
   return true
 }
 
-const handleSetTimer = (task) => {
+const handleSetTimer = (task, timeZone) => {
   const { config } = task
   const splittedConfig = config.split('-')
   const res = validateConfigLength(splittedConfig)
@@ -150,14 +173,14 @@ const handleSetTimer = (task) => {
 
     const { fn } = task
 
-    const isNeededToRun = detectTaskTime(convertedConfig)
+    const isNeededToRun = detectTaskTime(convertedConfig, timeZone)
     if (isNeededToRun) {
       // console.log('isNeededToRun ::', isNeededToRun)
       fn()
     }
 
     setInterval(() => {
-      const isNeededToRun = detectTaskTime(convertedConfig)
+      const isNeededToRun = detectTaskTime(convertedConfig, timeZone)
       if (isNeededToRun) {
         fn()
       }
@@ -166,19 +189,20 @@ const handleSetTimer = (task) => {
 }
 const BasicCronContext = createContext(null)
 
-const BasicCronProvider = ({ children, tasks }) => {
+const BasicCronProvider = ({ children, tasks, timeZone }) => {
   useEffect(() => {
     if (tasks.length) {
       const validatedTasks = validateValueTypes(tasks)
 
       for (const item of validatedTasks) {
-        handleSetTimer(item)
+        handleSetTimer(item, timeZone)
       }
     }
   }, [tasks])
 
   const store = {
-    tasks
+    tasks,
+    timeZone
   }
   return (
     <BasicCronContext.Provider value={store}>
@@ -188,7 +212,8 @@ const BasicCronProvider = ({ children, tasks }) => {
 }
 
 BasicCronProvider.propTypes = {
-  tasks: PropTypes.array.isRequired
+  tasks: PropTypes.array.isRequired,
+  timeZone: PropTypes.string.isRequired
 }
 
 export { BasicCronProvider, BasicCronContext }

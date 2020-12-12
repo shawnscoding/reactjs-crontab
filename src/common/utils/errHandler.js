@@ -63,12 +63,16 @@ export const validateValueTypes = (arr) => {
 
 export const validateConfigLength = (configArr) => {
   let msg = ''
-  if (configArr.length !== 6) {
-    msg = `Bad Config: Six parameters are required in config field`
-    return { error: true, msg }
+  if (configArr.length === 5) {
+    return { error: false, msg }
   }
-
-  return { error: false, msg }
+  if (configArr.length === 6) {
+    msg = `Bad Config: Timezone value in config field is deprecated, remove it so it's five values separated by hyphen "*-*-*-*-*". visit to see breaking changes https://www.npmjs.com/package/reactjs-crontab`
+    console.error(msg)
+    return { error: false, msg }
+  }
+  msg = `Bad Config: Five parameters are required in config field`
+  return { error: true, msg }
 }
 
 export const isEmpty = (configArr) => {

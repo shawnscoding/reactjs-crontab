@@ -193,6 +193,19 @@ th {
   color: #000;
 }
 
+.dashboard__title__box {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dashboard__title__box span:last-child {
+  color: black;
+  font-size: 15px;
+  letter-spacing: 0.4px;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
 .dashboard__title {
   margin: 0;
   text-align: left;
@@ -251,7 +264,7 @@ th {
 .guide__hr-text__container {
   display: flex;
   justify-content: space-between;
-  margin: 3em 0 4em 0;
+  margin: 2.5em 0 3.5em 0;
 }
 
 .guide__text-field__label {
@@ -1017,4 +1030,43 @@ th {
   font-size: 1.1em;
   display: inline-block;
   border-bottom: 1px solid var(--border-grey);
+}
+
+.select__input-text {
+  display: inline-block;
+  padding-left: 21px;
+  padding-right: 12px;
+  font-size: 1.6em;
+  line-height: 2.5em;
+  color: var(--text-grey);
+}
+
+.select__input-text--selected {
+  display: inline-block;
+  padding-left: 21px;
+  padding-right: 12px;
+  font-size: 1.6em;
+  line-height: 2.5em;
+}
+
+.tz-select__container {
+  display: flex;
+  justify-content: flex-start;
+  margin: 2em 0 3.5em 0;
+}
+
+.tz-select__label {
+  width: 20%;
+  font-weight: 550;
+  font-size: 1.7em;
+  color: var(--text-grey);
+  line-height: 35px;
+}
+
+.tz-select__label--selected {
+  width: 20%;
+  font-weight: 550;
+  font-size: 1.7em;
+  color: var(--text-primary);
+  line-height: 35px;
 }
