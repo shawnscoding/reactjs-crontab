@@ -36,7 +36,7 @@ const function_1 = () => {
           {
             fn: function_2,
             id: '2',
-            config: '*-21-*-12-6-utc',
+            config: '*-6-*-12-6',
             name: '',
             description: ''
           }
@@ -44,7 +44,7 @@ const function_1 = () => {
           {
             fn: function_3,
             id: '3',
-            config: '*-21-*-12-6',
+            config: '*-6-*-12-6',
             name: '',
             description: ''
           }
@@ -52,7 +52,7 @@ const function_1 = () => {
           {
             fn: function_4,
             id: '4',
-            config: '*-21-*-12-6-utc',
+            config: '*-6-*-12-6',
             name: '',
             description: ''
           }
@@ -62,7 +62,7 @@ const function_1 = () => {
       hidden: false
     }
     
-    const timeZone = 'local'
+    const timeZone = {set: "America/Chicago"}
         
     const App = () => {
         return (

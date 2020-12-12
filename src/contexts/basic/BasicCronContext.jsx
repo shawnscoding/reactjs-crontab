@@ -59,6 +59,7 @@ const detectTaskTime = (convertedConfigArr, timeZone) => {
   const Dow = now.getDay()
   const currentMon = Mon + 1
   const currentDow = foramtDow(Dow) // Sunday = 0, Monday = 1, etc.
+  // console.log('now ::', now)
   // console.log('now currentMin::', currentMin)
   // console.log('now currentHour::', currentHour)
   // console.log('now currentDom::', currentDom)
