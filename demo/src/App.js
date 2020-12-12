@@ -1,5 +1,5 @@
 import React from 'react'
-import { BasicCron } from 'reactjs-crontab'
+import { BasicCron, CronGuide } from 'reactjs-crontab'
 import 'reactjs-crontab/dist/index.css'
 //copy and paste this code and run!
     
