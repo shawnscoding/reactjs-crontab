@@ -2,9 +2,11 @@ import React from 'react'
 import styles from '../../../../styles.module.css'
 import BtnGroup from './BtnGroup'
 import Checkbox from '../selectForm/Checkbox'
-import tzList from './data'
+import SelectCheckbox from './Checkbox'
+import { basicTzList, otherTzList } from '../utils/data'
+import { getIsOn } from '../utils/helper'
 
-const TzSelect = ({ timeZone, handleChange, handleReset }) => {
+const TzSelect = ({ timeZone, handleChange, handleReset, openOtherTzList }) => {
   const { value, label } = timeZone
   const isSelected = value !== 'default'
 
@@ -53,9 +55,9 @@ const TzSelect = ({ timeZone, handleChange, handleReset }) => {
               </div>
               <BtnGroup handleReset={handleReset} isSelected={isSelected} />
             </div>
-            <ul className={styles.dropdown__list}>
-              {tzList.map((item) => {
-                const isOn = value === item.value
+            <ul className={styles['tz-select__list']}>
+              {basicTzList.map((item) => {
+                const isOn = getIsOn(value, item.value, openOtherTzList)
 
                 return (
                   <li
@@ -73,10 +75,60 @@ const TzSelect = ({ timeZone, handleChange, handleReset }) => {
                           : styles.dropdown__option__input
                       }
                     />
-                    <Checkbox id={item.id} isOn={isOn} />
+                    {item.subList ? (
+                      <button
+                        className={
+                          openOtherTzList
+                            ? styles['tz-select__arrow-btn--open']
+                            : styles['tz-select__arrow-btn']
+                        }
+                        type='button'
+                        aria-label='Open'
+                        title='Open'
+                      >
+                        <span className={styles['MuiIconButton-label']}>
+                          <svg
+                            className={styles['tz-select__icon-svg']}
+                            viewBox='0 0 24 24'
+                            aria-hidden
+                          >
+                            <path d='M7 10l5 5 5-5z' />
+                          </svg>
+                        </span>
+                        <span className={styles['btn-group__btn-foot']} />
+                      </button>
+                    ) : (
+                      <Checkbox id={item.id} isOn={isOn} />
+                    )}
                   </li>
                 )
               })}
+              {openOtherTzList &&
+                otherTzList.map((item) => {
+                  const isOtherOn = value === item.value
+
+                  return (
+                    <li
+                      onClick={() => handleChange(item)}
+                      key={item.value}
+                      className={styles['dropdown__list-item']}
+                    >
+                      <div className={styles['tz-select__sub-option']}>
+                        {item.label}
+                      </div>
+                      <input
+                        value={`- ${item.label}`}
+                        readOnly
+                        className={
+                          isOtherOn
+                            ? styles['tz-select__sub-option__input--selected']
+                            : styles['tz-select__sub-option__input']
+                        }
+                      />
+                      <SelectCheckbox id={item.id} isOn={isOtherOn} />
+                    </li>
+                  )
+                })}
             </ul>
           </div>
         </div>

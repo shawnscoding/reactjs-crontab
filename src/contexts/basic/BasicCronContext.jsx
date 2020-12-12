@@ -25,31 +25,32 @@ const foramtDow = (dow) => {
 
 const timerDuration = 60000
 
-function convertTZ(date, tzString) {
-  return new Date(
-    (typeof date === 'string' ? new Date(date) : date).toLocaleString('en-US', {
-      timeZone: tzString
-    })
-  )
-}
-
-// usage: Asia/Jakarta is GMT+7
-const resofstring = convertTZ('2012/04/10 10:10:30 +0000', 'Asia/Jakarta') // Tue Apr 10 2012 17:10:30 GMT+0700 (Western Indonesia Time)
-
 const detectTaskTime = (convertedConfigArr, timeZone) => {
   let now
+
+  // console.log('timeZone ::', timeZone)
 
   if (timeZone === 'UTC') {
     now = new Date(new Date().toUTCString().slice(0, -3))
   } else if (timeZone === 'local') {
     now = new Date()
+  } else if (timeZone !== undefined) {
+    if (timeZone.set !== undefined) {
+      const date = new Date()
+      now = new Date(
+        date.toLocaleString('en-US', {
+          timeZone: timeZone.set
+        })
+      )
+    } else {
+      const keyArr = Object.keys(timeZone)
+      throw Error(`Unsupported Keys: ${keyArr[0]}`)
+    }
   } else if (timeZone === undefined) {
     throw Error(`timeZone props is required`)
   } else {
     throw Error(`Unsupported timezone: ${timeZone}`)
   }
-
-  // Bonus: You can also put Date object to first arg
 
   const currentMin = now.getMinutes()
   const currentHour = now.getHours()
@@ -58,7 +59,6 @@ const detectTaskTime = (convertedConfigArr, timeZone) => {
   const Dow = now.getDay()
   const currentMon = Mon + 1
   const currentDow = foramtDow(Dow) // Sunday = 0, Monday = 1, etc.
-  // console.log('now::', now)
   // console.log('now currentMin::', currentMin)
   // console.log('now currentHour::', currentHour)
   // console.log('now currentDom::', currentDom)
@@ -213,7 +213,7 @@ const BasicCronProvider = ({ children, tasks, timeZone }) => {
 
 BasicCronProvider.propTypes = {
   tasks: PropTypes.array.isRequired,
-  timeZone: PropTypes.string.isRequired
+  timeZone: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired
 }
 
 export { BasicCronProvider, BasicCronContext }

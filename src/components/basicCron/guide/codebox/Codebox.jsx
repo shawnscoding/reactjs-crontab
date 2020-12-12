@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 import styles from '../../../../styles.module.css'
 import {
   convertSavedSelectsToProps,
-  getDefaultFnsWithSavedSelects
-} from './helper'
+  getDefaultFnsWithSavedSelects,
+  getTzVariableText
+} from './../utils/helper'
 
 const codeBoxTemplate = (savedSelects, tzValue) => {
   return `import React from 'react'
@@ -20,7 +21,7 @@ const settings = {
   hidden: false
 }
 
-const timeZone = "${tzValue === 'default' ? 'UTC' : tzValue}"
+${getTzVariableText(tzValue)}
     
 const App = () => {
     return (

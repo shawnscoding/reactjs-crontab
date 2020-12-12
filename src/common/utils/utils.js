@@ -509,27 +509,27 @@ export const converConfigValuesToObject = (str) => {
   }
 }
 
-export const isShouldBeOn = (value, fieldValue) => {
-  const splitted = fieldValue.split(',')
+// export const isShouldBeOn = (value, fieldValue) => {
+//   const splitted = fieldValue.split(',')
 
-  if (fieldValue === '*') {
-    return false
-  } else if (splitted.length === 1) {
-    if (fieldValue === value) {
-      return true
-    } else {
-      return false
-    }
-  } else if (splitted.length > 1) {
-    const found = splitted.find((val) => val === value)
+//   if (fieldValue === '*') {
+//     return false
+//   } else if (splitted.length === 1) {
+//     if (fieldValue === value) {
+//       return true
+//     } else {
+//       return false
+//     }
+//   } else if (splitted.length > 1) {
+//     const found = splitted.find((val) => val === value)
 
-    if (found) {
-      return true
-    } else {
-      return false
-    }
-  }
-}
+//     if (found) {
+//       return true
+//     } else {
+//       return false
+//     }
+//   }
+// }
 
 export const convertToCronSyntax = (select) => {
   let res = `*-*-*-*-*`

@@ -6,7 +6,11 @@ const Checkbox = ({ isOn }) => {
   return (
     <span className={styles.checkbox__wrapper} aria-disabled='false'>
       <span
-        className={`${isOn ? styles['checkbox--checked'] : styles.checkbox}`}
+        className={`${
+          isOn
+            ? styles['tz-sub-select__checkbox--checked']
+            : styles['tz-sub-select__checkbox']
+        }`}
       >
         <input
           className={`${styles.checkbox__input}`}
@@ -16,7 +20,7 @@ const Checkbox = ({ isOn }) => {
         />
         <svg
           className={`${
-            isOn ? styles['checkbox__icon--checked'] : styles.checkbox__icon
+            isOn ? styles['tz-sub-select--checkbox'] : styles['tz-sub-select']
           }`}
           viewBox='0 0 24 24'
           aria-hidden
