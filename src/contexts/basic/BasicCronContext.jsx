@@ -25,6 +25,17 @@ const foramtDow = (dow) => {
 
 const timerDuration = 60000
 
+function convertTZ(date, tzString) {
+  return new Date(
+    (typeof date === 'string' ? new Date(date) : date).toLocaleString('en-US', {
+      timeZone: tzString
+    })
+  )
+}
+
+// usage: Asia/Jakarta is GMT+7
+const resofstring = convertTZ('2012/04/10 10:10:30 +0000', 'Asia/Jakarta') // Tue Apr 10 2012 17:10:30 GMT+0700 (Western Indonesia Time)
+
 const detectTaskTime = (convertedConfigArr, timeZone) => {
   let now
 
@@ -37,6 +48,16 @@ const detectTaskTime = (convertedConfigArr, timeZone) => {
   } else {
     throw Error(`Unsupported timezone: ${timeZone}`)
   }
+
+  // Bonus: You can also put Date object to first arg
+  const date = new Date()
+  const Vientiane = convertTZ(date, 'Asia/Vientiane') // current date-time in Asia/Vientiane.
+  const Tripoli = convertTZ(date, 'Africa/Tripoli') // current date-time in Africa/Tripoli.
+  const Seoul = convertTZ(date, 'Asia/Seoul') // current date-time in Seoul.
+
+  console.log('Vientiane ::', Vientiane)
+  console.log('Tripoli ::', Tripoli)
+  console.log('Seoul ::', Seoul)
 
   const currentMin = now.getMinutes()
   const currentHour = now.getHours()
