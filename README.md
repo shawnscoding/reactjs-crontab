@@ -14,6 +14,9 @@
 - Named import as `<BasicCron />` is deprecated.
   use default import as `<Crontab />` to use crontab
 
+Nevertheless, if you just follow the instruction and code example below,
+you won't encounter any bug or issue
+
 ## Features
 
 - **Supports All Timezones**
