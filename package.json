@@ -1,6 +1,6 @@
 {
   "name": "reactjs-crontab",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "Light-weight Crontab for handling repetitive tasks",
   "author": "shawnscoding",
   "license": "MIT",
