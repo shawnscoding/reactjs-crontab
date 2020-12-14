@@ -199,6 +199,10 @@ const App = () => {
 export default App
 ```
 
+Copying and pasting above code will render '<MorningMsg />' if it's 08:00 like the screenshot below
+
+![usage 2 demo](https://raw.githubusercontent.com/shawnscoding/reactjs-crontab/HEAD/assets/usage_2_demo.png)
+
 ## API
 
 ```
