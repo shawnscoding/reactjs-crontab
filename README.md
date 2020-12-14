@@ -8,13 +8,13 @@
 
 ![Crontab Guide Demo](https://raw.githubusercontent.com/shawnscoding/reactjs-crontab/HEAD/assets/cronGuide.png)
 
-## Installation
+## Breaking Changes in 3.0.0
 
-```bash
-npm install --save reactjs-crontab
-```
+- Timezone value in config field is deprecated. remove it so it contains five values separated by hyphen like this `"*-*-*-*-*"`.
+- Name inport as `<BasicCron />` is deprecated.
+  use default import as `<Crontab />`
 
-## updated to 3.0.0
+## Features
 
 - **Supports All Timezones**
 - **No extra dependencies** except React
@@ -22,6 +22,12 @@ npm install --save reactjs-crontab
 - Provide **specific error message**, you will find it so easy to debug.
 - Provide **Dashboard** which enables easy monitoring of your crontab
 - Provide Demo website which helps you to easily set up your crontab
+
+## Installation
+
+```bash
+npm install --save reactjs-crontab
+```
 
 ## Inspired by
 
@@ -240,10 +246,6 @@ Crontab.defaultProps = {
 }
 
 ```
-
-## Important Note
-
-- Timezone value in config field is deprecated, remove it so it contains five values separated by hyphen `"*-*-*-*-*"`.
 
 ## Note
 
