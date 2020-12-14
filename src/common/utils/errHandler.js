@@ -67,7 +67,7 @@ export const validateConfigLength = (configArr) => {
     return { error: false, msg }
   }
   if (configArr.length === 6) {
-    msg = `Bad Config: Timezone value in config field is deprecated, remove it so it's five values separated by hyphen "*-*-*-*-*". visit to see breaking changes https://www.npmjs.com/package/reactjs-crontab`
+    msg = `Bad Config: Timezone value in config field is deprecated, remove it so it contains five values separated by hyphen "*-*-*-*-*". visit to see breaking changes https://www.npmjs.com/package/reactjs-crontab`
     console.error(msg)
     return { error: false, msg }
   }

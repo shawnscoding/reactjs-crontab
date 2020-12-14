@@ -7,6 +7,8 @@ import defaultTasks from './common/data/BasicCronDefaultProps'
 
 export const BasicCron = ({ timeZone, tasks, dashboard }) => {
   const { hidden } = dashboard
+
+  // console.log('[BasicCron] rendered')
   if (!hidden)
     return (
       <div className={styles.global}>

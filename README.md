@@ -54,6 +54,8 @@ MIN,MIN-HOUR,HOUR-DOM,DOM-MON,MON-DOW,DOW
 
 Reactjs-crontab has very similar pattern to [Linux Crontab](https://www.geeksforgeeks.org/crontab-in-linux-with-examples)Except that this uses hyphen between arguments like this `*-*-*-*-*-utc`.
 
+This code is useful when you need to implement some function like api call at a particular time.
+
 ```jsx
 import React from 'react'
 import { BasicCron } from 'reactjs-crontab'
@@ -69,14 +71,6 @@ const sayGoobye = () => {
 
 const RequestSomething = () => {
   console.log('Api request has been sent')
-}
-
-const sendNotification = () => {
-  console.log('Send Event Notification')
-}
-
-const logUserOut = () => {
-  console.log('log user out')
 }
 
 // these are the functions which will run according to your settings
@@ -96,7 +90,6 @@ const tasks = [
     id: '2',
     config: '5-7-12-11-*',
     // Execute In November on 12th At 7AM and At 5 minute(s)
-
     name: 'Say Goodbye',
     description: 'Say Goodbye on console'
   },
@@ -105,23 +98,9 @@ const tasks = [
     id: '3',
     config: '*-15,19-*-11,12-*',
     // Execute In November, December At 3PM, 7PM every minute
+    // Note that this is implemented in two different hour
     name: 'Request Something',
     description: 'Send API'
-  },
-  {
-    fn: sendNotification,
-    id: '4',
-    config: '10-11-18-7-*',
-    // Execute In July on 18th At 11AM and At 10 minute(s)
-    name: 'Send Notification',
-    description: 'Send Event Notification'
-  },
-  {
-    fn: logUserOut,
-    id: '5',
-    config: '*-16-*-10-1',
-    // Execute In October on Monday At 4PM every minute
-    name: 'Log user out'
   }
 ]
 
@@ -149,27 +128,6 @@ Copying and pasting above code will result something like this below
 ![Dashboard Demo](https://raw.githubusercontent.com/shawnscoding/reactjs-crontab/HEAD/assets/dashboard.png)
 
 And That's it. This will do what it says.
-
-## Helper (Guide) Component
-
-Simply import CronGuide and css and that's all.
-
-```jsx
-import React from 'react'
-import { CronGuide } from 'reactjs-crontab'
-import 'reactjs-crontab/dist/index.css'
-
-const App = () => {
-  return <CronGuide />
-}
-
-export default App
-```
-
-![Crontab Guide Demo](https://raw.githubusercontent.com/shawnscoding/reactjs-crontab/HEAD/assets/cronGuide.png)
-
-This component is created to help you understand how to configure your crontab.
-Even if you are aware of such function, This would make it easier to set your crontab up and running.
 
 ## API
 
@@ -221,7 +179,7 @@ BasicCron.defaultProps = {
 
 ## Important Note
 
-Unfortunately, We only support `UTC` and `local` timezone' at the moment. But we're working hard to release improved version very soon.
+- Timezone value in config field is deprecated, remove it so it contains five values separated by hyphen `"*-*-*-*-*"`.
 
 ## Note
 

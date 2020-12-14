@@ -1,77 +1,90 @@
 import React from 'react'
-import { BasicCron, CronGuide } from 'reactjs-crontab'
+// import Notification from './component/Notification';
+import { BasicCron } from "reactjs-crontab"
 import 'reactjs-crontab/dist/index.css'
-//copy and paste this code and run!
-    
-const function_1 = () => {
-  console.log("called fn 1")
-};
-        
-    const function_2 = () => {
-      console.log("called fn 2")
-    };
-        
-    const function_3 = () => {
-      console.log("called fn 3")
-    };
-        
-    const function_4 = () => {
-      console.log("called fn 4")
-    };
-        
-    
-   
+
+const content = {}
+
+
+const Test = () => {
+  return <div>hi</div>
+}
+
+
+
+const dashboardSetting = {
+  hidden: false
+}
+
+
+
+function App() {
+  const [ notification, setNotification ] = React.useState({
+    open: false,
+    content: "",
+    btns: []
+  })
+  const [ msg, setMsg ] = React.useState(null)
+
+  const function_1 = () => {
+    setNotification({
+      open: true,
+      content: "Hello User! \n our jackets are in 50% sale! \n Check it out! ",
+      btns: [{ content: "", url: "https://" }]
+    })
+
+    console.log("[function_1] called")
+  };
       
-    
-        
-    const tasks = [
-          {
-            fn: function_1,
-            id: '1',
-            config: '*-*-*-*-*',
-            name: '',
-            description: ''
-          }
-        ,
-          {
-            fn: function_2,
-            id: '2',
-            config: '*-6-*-12-6',
-            name: '',
-            description: ''
-          }
-        ,
-          {
-            fn: function_3,
-            id: '3',
-            config: '*-6-*-12-6',
-            name: '',
-            description: ''
-          }
-        ,
-          {
-            fn: function_4,
-            id: '4',
-            config: '*-6-*-12-6',
-            name: '',
-            description: ''
-          }
-        ]
-    
-    const settings = {
-      hidden: false
+  const function_2 = () => {
+    setMsg("text")
+    console.log("[function_2] called")
+  };
+  
+  const tasks = [
+    {
+      fn: function_1,
+      id: '2',
+      config: '*-*-*-*-*',
+      name: '',
+      description: ''
+    },
+    {
+      fn: function_2,
+      id: '2',
+      config: '*-*-14-12-*',
+      name: '',
+      description: ''
     }
+  ]
+
+  
     
-    const timeZone = {set: "America/Chicago"}
-        
-    const App = () => {
-        return (
-          <BasicCron 
-            tasks={tasks}
-            timeZone={timeZone}
-            dashboard={settings}
-          />
-        )
-    }
-        
-    export default App
+
+  // React.useEffect(() => {
+  //   setInterval(() => {
+
+  //     setNotification({
+  //       open: true,
+  //       content: "test",
+  //       btns: []
+  //     })
+  //   }, 5000)
+  // }, [])
+
+  console.log("[App] rendered")
+  
+
+  return (
+    <div className="App">
+      <BasicCron timeZone="local" tasks={tasks} dashboard={dashboardSetting}  />
+      {notification.open && (
+      <div>{notification.content}</div>
+      // <Notification content={content} />
+      )}
+      {msg && <div>{msg}</div>}
+    </div>
+  );
+}
+
+export default App;

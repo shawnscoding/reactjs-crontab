@@ -130,6 +130,7 @@ const handleSetTimer = (task, timeZone) => {
     // means this is all *
     // console.log('isNotAsterisk ::', isNotAsterisk)
     const { fn } = task
+
     fn()
     setInterval(() => {
       fn()
@@ -199,7 +200,7 @@ const BasicCronProvider = ({ children, tasks, timeZone }) => {
         handleSetTimer(item, timeZone)
       }
     }
-  }, [tasks])
+  }, [])
 
   const store = {
     tasks,
