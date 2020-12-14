@@ -11,7 +11,7 @@
 ## Breaking Changes in 3.0.0
 
 - Timezone value in config field is deprecated. remove it so it contains five values separated by hyphen like this `"*-*-*-*-*"`.
-- Name inport as `<BasicCron />` is deprecated.
+- Name import as `<BasicCron />` is deprecated.
   use default import as `<Crontab />`
 
 ## Features
