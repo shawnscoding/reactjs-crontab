@@ -219,7 +219,7 @@ Crontab Props {
       description: 'Send API'
     }
   ],
-  timeZone: "UTC", "local" or { set: "YOUR PREFERRED TIMEZONE" },
+  timeZone: "UTC", "local" or "YOUR PREFERRED TIMEZONE",
   // you can check out supported timezone list here
   // https://github.com/shawnscoding/reactjs-crontab/blob/master/TIMEZONES.md
   dashboard: {
