@@ -34,20 +34,13 @@ const detectTaskTime = (convertedConfigArr, timeZone) => {
     now = new Date(new Date().toUTCString().slice(0, -3))
   } else if (timeZone === 'local') {
     now = new Date()
-  } else if (timeZone !== undefined) {
-    if (timeZone.set !== undefined) {
-      const date = new Date()
-      now = new Date(
-        date.toLocaleString('en-US', {
-          timeZone: timeZone.set
-        })
-      )
-    } else {
-      const keyArr = Object.keys(timeZone)
-      throw Error(`Unsupported Keys: ${keyArr[0]}`)
-    }
-  } else if (timeZone === undefined) {
-    throw Error(`timeZone props is required`)
+  } else if (typeof timeZone === typeof '') {
+    const date = new Date()
+    now = new Date(
+      date.toLocaleString('en-US', {
+        timeZone: timeZone
+      })
+    )
   } else {
     throw Error(`Unsupported timezone: ${timeZone}`)
   }
@@ -130,6 +123,7 @@ const handleSetTimer = (task, timeZone) => {
     // means this is all *
     // console.log('isNotAsterisk ::', isNotAsterisk)
     const { fn } = task
+
     fn()
     setInterval(() => {
       fn()
@@ -199,7 +193,7 @@ const BasicCronProvider = ({ children, tasks, timeZone }) => {
         handleSetTimer(item, timeZone)
       }
     }
-  }, [tasks])
+  }, [])
 
   const store = {
     tasks,
@@ -214,7 +208,7 @@ const BasicCronProvider = ({ children, tasks, timeZone }) => {
 
 BasicCronProvider.propTypes = {
   tasks: PropTypes.array.isRequired,
-  timeZone: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired
+  timeZone: PropTypes.string.isRequired
 }
 
 export { BasicCronProvider, BasicCronContext }
