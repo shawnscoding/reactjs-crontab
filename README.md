@@ -6,13 +6,16 @@
 
 **Demo** and **Crontab guide** at [https://d180vcwahe2y6s.cloudfront.net/build/index.html](https://d180vcwahe2y6s.cloudfront.net/index.html)
 
-![Crontab Guide Demo](https://raw.githubusercontent.com/shawnscoding/reactjs-crontab/HEAD/assets/cronGuide.png)
+![Crontab Guide Demo](./assets/cronGuide.png)
 
 ## Breaking Changes in 3.0.0
 
 - Timezone value in config field is deprecated. remove it so it contains five values separated by hyphen like this `"*-*-*-*-*"`.
 - Named import as `<BasicCron />` is deprecated.
   use default import as `<Crontab />` to use crontab
+
+Nevertheless, if you just follow the instruction and code example below,
+you won't encounter any bug or issue
 
 ## Features
 
@@ -127,7 +130,7 @@ export default App
 
 Copying and pasting above code will result something like this below
 
-![Dashboard Demo](https://raw.githubusercontent.com/shawnscoding/reactjs-crontab/HEAD/assets/dashboard.png)
+![Dashboard Demo](./assets/dashboard.png)
 
 This will do what it says at the requested time(s).
 
@@ -201,7 +204,7 @@ export default App
 
 Copying and pasting above code will render '<MorningMsg />' if it's 08:00 like the screenshot below
 
-![usage 2 demo](https://raw.githubusercontent.com/shawnscoding/reactjs-crontab/HEAD/assets/usage_2_demo.png)
+![usage 2 demo](./assets/usage_2_demo.png)
 
 ## API
 
