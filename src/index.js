@@ -3,12 +3,11 @@ import styles from './styles.module.css'
 import { BasicCronProvider } from './contexts/basic/BasicCronContext.jsx'
 import Dashboard from './components/basicCron/dashboard/Dashboard'
 import PropTypes from 'prop-types'
-import defaultTasks from './common/data/BasicCronDefaultProps'
 
-export const BasicCron = ({ timeZone, tasks, dashboard }) => {
+const Crontab = ({ timeZone, tasks, dashboard }) => {
   const { hidden } = dashboard
 
-  // console.log('[BasicCron] rendered')
+  // console.log('[Crontab] rendered')
   if (!hidden)
     return (
       <div className={styles.global}>
@@ -24,7 +23,7 @@ export const BasicCron = ({ timeZone, tasks, dashboard }) => {
   )
 }
 
-BasicCron.propTypes = {
+Crontab.propTypes = {
   tasks: PropTypes.arrayOf(
     PropTypes.shape({
       fn: PropTypes.func.isRequired,
@@ -35,15 +34,17 @@ BasicCron.propTypes = {
     })
   ),
   dashboard: PropTypes.shape({
-    hidden: PropTypes.bool
+    hidden: PropTypes.bool.isRequired
   }),
-  timeZone: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+  timeZone: PropTypes.string.isRequired
 }
 
-BasicCron.defaultProps = {
-  tasks: defaultTasks,
+Crontab.defaultProps = {
+  tasks: [],
   dashboard: {
     hidden: false
   },
   timeZone: 'UTC'
 }
+
+export default Crontab

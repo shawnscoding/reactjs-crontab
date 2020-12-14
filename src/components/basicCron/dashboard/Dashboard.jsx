@@ -122,14 +122,10 @@ const addHrTime = (tasks) => {
 }
 
 const handleFormatTz = (tz) => {
-  if (typeof tz === typeof 'String') {
-    if (tz === 'local') {
-      return 'LOCAL'
-    }
-    return tz
-  } else {
-    return tz.set
+  if (tz === 'local') {
+    return 'LOCAL'
   }
+  return tz
 }
 
 const Dashboard = (props) => {

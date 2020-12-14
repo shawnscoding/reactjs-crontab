@@ -50,15 +50,15 @@ MIN,MIN-HOUR,HOUR-DOM,DOM-MON,MON-DOW,DOW
 - Each sort of time value(s) must be separated by a hyphen `-`
 - Multiple values must be separated by comma `,`
 
-## Usage
+## Usage 1
 
 Reactjs-crontab has very similar pattern to [Linux Crontab](https://www.geeksforgeeks.org/crontab-in-linux-with-examples)Except that this uses hyphen between arguments like this `*-*-*-*-*-utc`.
 
-This code is useful when you need to implement some function like api call at a particular time.
+This is useful when you need to implement some function like api call at particular time.
 
 ```jsx
 import React from 'react'
-import { BasicCron } from 'reactjs-crontab'
+import Crontab from 'reactjs-crontab'
 import 'reactjs-crontab/dist/index.css'
 
 const sayHello = () => {
@@ -76,7 +76,7 @@ const RequestSomething = () => {
 // these are the functions which will run according to your settings
 
 const tasks = [
-  // just put this array into BasicCron component as a props and it will work like magic!
+  // just put this array into <Crontab /> component as a props and it will work like magic!
   {
     fn: sayHello,
     id: '1',
@@ -89,7 +89,7 @@ const tasks = [
     fn: sayGoobye,
     id: '2',
     config: '5-7-12-11-*',
-    // Execute In November on 12th At 7AM and At 5 minute(s)
+    // Execute In November on 12th At 07:05
     name: 'Say Goodbye',
     description: 'Say Goodbye on console'
   },
@@ -97,7 +97,7 @@ const tasks = [
     fn: RequestSomething,
     id: '3',
     config: '*-15,19-*-11,12-*',
-    // Execute In November, December At 3PM, 7PM every minute
+    // Execute In November, December At 3PM and 7PM every minute
     // Note that this is implemented in two different hour
     name: 'Request Something',
     description: 'Send API'
@@ -113,11 +113,7 @@ const dashBoardSettings = {
 
 const App = () => {
   return (
-    <BasicCron
-      tasks={tasks}
-      timeZone={timeZone}
-      dashboard={dashBoardSettings}
-    />
+    <Crontab tasks={tasks} timeZone={timeZone} dashboard={dashBoardSettings} />
   )
 }
 export default App
@@ -127,12 +123,80 @@ Copying and pasting above code will result something like this below
 
 ![Dashboard Demo](https://raw.githubusercontent.com/shawnscoding/reactjs-crontab/HEAD/assets/dashboard.png)
 
-And That's it. This will do what it says.
+This will do what it says at the requested time(s).
+
+## Usage 2
+
+This is useful when you need to render component
+at particular time
+
+```jsx
+import React from 'react'
+import Crontab from 'reactjs-crontab'
+import 'reactjs-crontab/dist/index.css'
+
+const MorningMsg = () => {
+  return <div>Good Morning !</div>
+}
+
+const NightMsg = () => {
+  return <div>Good Night!</div>
+}
+
+const timeZone = 'local'
+
+const dashboardSetting = {
+  hidden: true
+  // if true, dashboard is hidden
+}
+
+const App = () => {
+  const [openMorningMsg, setOpenMoringMsg] = React.useState(null)
+  const [openNightMsg, setOpenNightMsg] = React.useState(null)
+
+  const sayGoodMorning = () => {
+    setOpenMoringMsg(true)
+  }
+
+  const sayGoodNight = () => {
+    setOpenNightMsg(true)
+  }
+
+  const tasks = [
+    {
+      fn: sayGoodMorning,
+      id: '1',
+      config: '0-8-*-*-*',
+      // this will run at 08:00 everyday
+      name: '',
+      description: ''
+    },
+    {
+      fn: sayGoodNight,
+      id: '2',
+      config: '0-21-*-*-*',
+      // this will run at 21:00 everyday
+      name: '',
+      description: ''
+    }
+  ]
+
+  return (
+    <div className='App'>
+      <Crontab timeZone={timeZone} tasks={tasks} dashboard={dashboardSetting} />
+      {openMorningMsg && <MorningMsg />}
+      {openNightMsg && <NightMsg />}
+    </div>
+  )
+}
+
+export default App
+```
 
 ## API
 
 ```
-BasicCron Props {
+Crontab Props {
   tasks: [
     {
       fn: yourFn,
@@ -151,7 +215,7 @@ BasicCron Props {
   }
 }
 
-BasicCron.propTypes = {
+Crontab.propTypes = {
   tasks: PropTypes.arrayOf(
     PropTypes.shape({
       fn: PropTypes.func.isRequired,
@@ -162,13 +226,13 @@ BasicCron.propTypes = {
     })
   ),
   dashboard: PropTypes.shape({
-    hidden: PropTypes.bool
+    hidden: PropTypes.bool.isRequired
   }),
-  timeZone: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired
+  timeZone: PropTypes.string.isRequired
 }
 
-BasicCron.defaultProps = {
-  tasks: defaultTasks,
+Crontab.defaultProps = {
+  tasks: [],
   dashboard: {
     hidden: false
   },
