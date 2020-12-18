@@ -6,7 +6,9 @@ import {
   formatDOW,
   formatHour,
   formatMonth,
-  converConfigValuesToObject
+  converConfigValuesToObject,
+  getCurrentTime,
+  formatMonthInDashboard
 } from '../../../common/utils/utils'
 import { ASTERISK } from '../../../common/data/types'
 
@@ -131,6 +133,12 @@ const handleFormatTz = (tz) => {
 const Dashboard = (props) => {
   const { tasks, timeZone } = useContext(BasicCronContext)
   // console.log('tasks in Dashboard', tasks)
+  const now = getCurrentTime(timeZone)
+
+  const currentDom = now.getDate()
+  const Mon = now.getMonth() // beware: January = 0; February = 1, etc.
+  const currentMon = Mon + 1
+  const formattedMonth = formatMonthInDashboard(currentMon.toString())
   const crons = addHrTime(tasks)
   const tzText = handleFormatTz(timeZone)
   // console.log('crons :::')
@@ -142,7 +150,9 @@ const Dashboard = (props) => {
             <th colSpan='5' className={styles.dashboard__title}>
               <div className={styles.dashboard__title__box}>
                 <span>Dashboard</span>
-                <span>Timezone: {tzText}</span>
+                <span>
+                  {`Today: ${formattedMonth} ${currentDom}th / TZ: ${tzText}`}
+                </span>
               </div>
             </th>
           </tr>

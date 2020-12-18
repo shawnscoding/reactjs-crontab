@@ -20,6 +20,7 @@ you won't encounter any bug or issue
 ## Features
 
 - **Supports All Timezones**
+- **Supports All modern browsers**
 - **No extra dependencies** except React
 - **No style library** is used to style the components. **vanilla css** is used.
 - Provide **specific error message**, you will find it so easy to debug.
@@ -59,9 +60,88 @@ MIN,MIN-HOUR,HOUR-DOM,DOM-MON,MON-DOW,DOW
 - Each sort of time value(s) must be separated by a hyphen `-`
 - Multiple values must be separated by comma `,`
 
+## Important note
+
+- Note that the function might not be triggered as soon as the time condition becomes met. It might be after several seconds or even 50 or 55 seconds but definitely before the 59 seconds as we don't configure second. It's very random but doesn't really make it bad.
+
 ## Usage 1
 
 Reactjs-crontab has very similar pattern to [Linux Crontab](https://www.geeksforgeeks.org/crontab-in-linux-with-examples)Except that this uses hyphen between arguments like this `*-*-*-*-*-utc`.
+
+This is useful when you need to render component
+at particular time
+
+```jsx
+import React from 'react'
+import Crontab from 'reactjs-crontab'
+import 'reactjs-crontab/dist/index.css'
+
+const MorningMsg = () => {
+  return <div>Good Morning !</div>
+}
+
+const NightMsg = () => {
+  return <div>Good Night!</div>
+}
+
+const timeZone = 'local'
+// timezone is client-side local timezone.
+
+const dashboardSetting = {
+  hidden: true
+  // if true, dashboard is hidden
+}
+
+const App = () => {
+  const [openMorningMsg, setOpenMoringMsg] = React.useState(null)
+  const [openNightMsg, setOpenNightMsg] = React.useState(null)
+
+  const sayGoodMorning = () => {
+    setOpenMoringMsg(true)
+  }
+
+  const sayGoodNight = () => {
+    setOpenNightMsg(true)
+  }
+  // these are the functions which will run according to your settings
+
+  const tasks = [
+    // just put this array into <Crontab /> component as a props and it will work like magic!
+    {
+      fn: sayGoodMorning,
+      id: '1',
+      config: '0-8-*-*-*',
+      // this will run at 08:00 everyday
+      name: '',
+      description: ''
+    },
+    {
+      fn: sayGoodNight,
+      id: '2',
+      config: '0-21-*-*-*',
+      // this will run at 21:00 everyday
+      name: '',
+      description: ''
+    }
+  ]
+
+  return (
+    <div className='App'>
+      <Crontab timeZone={timeZone} tasks={tasks} dashboard={dashboardSetting} />
+      {openMorningMsg && <MorningMsg />}
+      {openNightMsg && <NightMsg />}
+    </div>
+  )
+}
+
+export default App
+```
+
+Copying and pasting above code will render '<MorningMsg />' if it's 08:00 like the screenshot below
+
+![usage 2 demo](https://raw.githubusercontent.com/shawnscoding/reactjs-crontab/HEAD/assets/usage_2_demo.png)
+
+## Usage 2
 
 This is useful when you need to implement some function like api call at particular time.
 
@@ -114,6 +194,7 @@ const tasks = [
 ]
 
 const timeZone = 'UTC'
+// timezone is utc
 
 const dashBoardSettings = {
   hidden: false
@@ -133,78 +214,6 @@ Copying and pasting above code will result something like this below
 ![Dashboard Demo](https://raw.githubusercontent.com/shawnscoding/reactjs-crontab/HEAD/assets/dashboard.png)
 
 This will do what it says at the requested time(s).
-
-## Usage 2
-
-This is useful when you need to render component
-at particular time
-
-```jsx
-import React from 'react'
-import Crontab from 'reactjs-crontab'
-import 'reactjs-crontab/dist/index.css'
-
-const MorningMsg = () => {
-  return <div>Good Morning !</div>
-}
-
-const NightMsg = () => {
-  return <div>Good Night!</div>
-}
-
-const timeZone = 'local'
-
-const dashboardSetting = {
-  hidden: true
-  // if true, dashboard is hidden
-}
-
-const App = () => {
-  const [openMorningMsg, setOpenMoringMsg] = React.useState(null)
-  const [openNightMsg, setOpenNightMsg] = React.useState(null)
-
-  const sayGoodMorning = () => {
-    setOpenMoringMsg(true)
-  }
-
-  const sayGoodNight = () => {
-    setOpenNightMsg(true)
-  }
-
-  const tasks = [
-    {
-      fn: sayGoodMorning,
-      id: '1',
-      config: '0-8-*-*-*',
-      // this will run at 08:00 everyday
-      name: '',
-      description: ''
-    },
-    {
-      fn: sayGoodNight,
-      id: '2',
-      config: '0-21-*-*-*',
-      // this will run at 21:00 everyday
-      name: '',
-      description: ''
-    }
-  ]
-
-  return (
-    <div className='App'>
-      <Crontab timeZone={timeZone} tasks={tasks} dashboard={dashboardSetting} />
-      {openMorningMsg && <MorningMsg />}
-      {openNightMsg && <NightMsg />}
-    </div>
-  )
-}
-
-export default App
-```
-
-Copying and pasting above code will render '<MorningMsg />' if it's 08:00 like the screenshot below
-
-![usage 2 demo](https://raw.githubusercontent.com/shawnscoding/reactjs-crontab/HEAD/assets/usage_2_demo.png)
 
 ## API
 
@@ -253,6 +262,15 @@ Crontab.defaultProps = {
 }
 
 ```
+
+## brief tutorial
+
+[Brief project based tutorial](https://shawnscoding.medium.com/the-easiest-way-to-automate-or-schedule-component-rendering-in-react-app-f4df7784e1ea)
+[간단한 프로젝트 베이스 튜토리얼](https://shawnscoding.medium.com/%EB%A6%AC%EC%95%A1%ED%8A%B8-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EB%A0%8C%EB%8D%94%EB%A7%81-%EC%9E%90%EB%8F%99%ED%99%94-%EC%8A%A4%EC%BC%80%EC%A4%84%EB%A7%81-e8c7c9198132)
+
+## Supported browsers
+
+We use [browserslist](https://github.com/browserslist/browserslist) config to state the browser support for this lib, so check it out on [browserslist.dev](https://browserslist.dev/?q=ZGVmYXVsdHM%3D).
 
 ## Note
 

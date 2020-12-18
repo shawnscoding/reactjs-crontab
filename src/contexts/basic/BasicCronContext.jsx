@@ -13,7 +13,10 @@ import {
   validateDow,
   IsNeededToRunNow
 } from '../../common/utils/validateTime'
-import { converConfigValuesToObject } from '../../common/utils/utils'
+import {
+  converConfigValuesToObject,
+  getCurrentTime
+} from '../../common/utils/utils'
 
 const foramtDow = (dow) => {
   if (dow === 0) {
@@ -26,24 +29,8 @@ const foramtDow = (dow) => {
 const timerDuration = 60000
 
 const detectTaskTime = (convertedConfigArr, timeZone) => {
-  let now
-
   // console.log('timeZone ::', timeZone)
-
-  if (timeZone === 'UTC') {
-    now = new Date(new Date().toUTCString().slice(0, -3))
-  } else if (timeZone === 'local') {
-    now = new Date()
-  } else if (typeof timeZone === typeof '') {
-    const date = new Date()
-    now = new Date(
-      date.toLocaleString('en-US', {
-        timeZone: timeZone
-      })
-    )
-  } else {
-    throw Error(`Unsupported timezone: ${timeZone}`)
-  }
+  const now = getCurrentTime(timeZone)
 
   const currentMin = now.getMinutes()
   const currentHour = now.getHours()

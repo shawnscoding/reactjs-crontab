@@ -351,39 +351,36 @@ export const formatMonth = (mon) => {
   return result
 }
 
-export const formatMonthInGudie = (mons) => {
-  const msg = `Bad config, month is required to be less than 13`
-  const formatted = mons.map((value) => {
-    switch (value) {
-      case '1':
-        return { hrText: 'January', value }
-      case '2':
-        return { hrText: 'Faburary', value }
-      case '3':
-        return { hrText: 'March', value }
-      case '4':
-        return { hrText: 'April', value }
-      case '5':
-        return { hrText: 'May', value }
-      case '6':
-        return { hrText: 'June', value }
-      case '7':
-        return { hrText: 'July', value }
-      case '8':
-        return { hrText: 'Augest', value }
-      case '9':
-        return { hrText: 'September', value }
-      case '10':
-        return { hrText: 'October', value }
-      case '11':
-        return { hrText: 'November', value }
-      case '12':
-        return { hrText: 'December', value }
-      default:
-        throw Error(msg)
-    }
-  })
-  return formatted
+export const formatMonthInDashboard = (val) => {
+  switch (val) {
+    case '*':
+      return '*'
+    case '1':
+      return 'January'
+    case '2':
+      return 'Faburary'
+    case '3':
+      return 'March'
+    case '4':
+      return 'April'
+    case '5':
+      return 'May'
+    case '6':
+      return 'June'
+    case '7':
+      return 'July'
+    case '8':
+      return 'Augest'
+    case '9':
+      return 'September'
+    case '10':
+      return 'October'
+    case '11':
+      return 'November'
+    case '12':
+      return 'December'
+    default:
+  }
 }
 
 export const formatDOW = (dow) => {
@@ -577,4 +574,24 @@ export const getExplicitTz = (tz) => {
     explicitTz = Intl.DateTimeFormat().resolvedOptions().timeZone
   }
   return explicitTz
+}
+
+export const getCurrentTime = (timeZone) => {
+  let now
+  if (timeZone === 'UTC') {
+    now = new Date(new Date().toUTCString().slice(0, -3))
+  } else if (timeZone === 'local') {
+    now = new Date()
+  } else if (typeof timeZone === typeof '') {
+    const date = new Date()
+    now = new Date(
+      date.toLocaleString('en-US', {
+        timeZone: timeZone
+      })
+    )
+  } else {
+    throw Error(`Unsupported timezone: ${timeZone}`)
+  }
+
+  return now
 }
