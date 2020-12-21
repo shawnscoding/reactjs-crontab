@@ -2,60 +2,69 @@ import React from 'react'
 import Crontab from 'reactjs-crontab'
 import 'reactjs-crontab/dist/index.css'
 
-const sayHello = () => {
-  console.log('Hello')
-}
-
-const sayGoobye = () => {
-  console.log('Goodbye')
-}
-
-const RequestSomething = () => {
-  console.log('Api request has been sent')
-}
-
-// these are the functions which will run according to your settings
-
-const tasks = [
-  // just put this array into <Crontab /> component as a props and it will work like magic!
-  {
-    fn: sayHello,
-    id: '1',
-    config: '*-*-*-*-*',
-    // Execute every minutes
-    name: 'Say Hello',
-    description: 'Say Hello on console'
-  },
-  {
-    fn: sayGoobye,
-    id: '2',
-    config: '*-*-*-12-*',
-    // Execute In November on 12th At 07:05
-    name: 'Say Goodbye',
-    description: 'Say Goodbye on console'
-  },
-  {
-    fn: RequestSomething,
-    id: '3',
-    config: '*-15,19-*-11,12-*',
-    // Execute In November, December At 3PM and 7PM every minute
-    // Note that this is implemented in two different hour
-    name: 'Request Something',
-    description: 'Send API'
+const styles = {
+  text: {
+    margin: '70px',
+    color: 'skyblue'
   }
-]
+}
 
-const timeZone = 'Asia/Seoul'
-// timezone is utc
+const MorningMsg = () => {
+  return <h1 style={styles.text}>Good Morning !</h1>
+}
 
-const dashBoardSettings = {
-  hidden: false
-  // if true, dashboard gets hidden
+const NightMsg = () => {
+  return <h1 style={styles.text}>Good Night!</h1>
+}
+
+const timeZone = 'local'
+// timezone is client-side local timezone.
+
+const dashboardSetting = {
+  hidden: true
+  // if true, dashboard is hidden
 }
 
 const App = () => {
+  const [morningMsgOpen, setMoringMsgOpen] = React.useState(null)
+  const [nightMsgOpen, setNightMsgOpen] = React.useState(null)
+
+  const sayGoodMorning = () => {
+    setMoringMsgOpen(true)
+  }
+
+  const sayGoodNight = () => {
+    setNightMsgOpen(true)
+  }
+  // these are the functions which will run according to your settings
+
+  const tasks = [
+    // just put this array into <Crontab /> component as a props and it will work like magic!
+    {
+      fn: sayGoodMorning,
+      id: '1',
+      config: '*-*-*-*-*',
+      // this runs every minutes
+      name: '',
+      description: ''
+    },
+    {
+      fn: sayGoodNight,
+      id: '2',
+      config: '0-21-*-*-*',
+      // this will run at 21:00 everyday
+      name: '',
+      description: ''
+    }
+  ]
+
   return (
-    <Crontab tasks={tasks} timeZone={timeZone} dashboard={dashBoardSettings} />
+    <div>
+      <Crontab timeZone={timeZone} tasks={tasks} dashboard={dashboardSetting} />
+      {morningMsgOpen && <MorningMsg />}
+      {nightMsgOpen && <NightMsg />}
+    </div>
   )
 }
+
 export default App

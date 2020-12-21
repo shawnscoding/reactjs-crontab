@@ -68,12 +68,19 @@ import React from 'react'
 import Crontab from 'reactjs-crontab'
 import 'reactjs-crontab/dist/index.css'
 
+const styles = {
+  text: {
+    margin: '70px',
+    color: 'skyblue'
+  }
+}
+
 const MorningMsg = () => {
-  return <div>Good Morning !</div>
+  return <h1 style={styles.text}>Good Morning !</h1>
 }
 
 const NightMsg = () => {
-  return <div>Good Night!</div>
+  return <h1 style={styles.text}>Good Night!</h1>
 }
 
 const timeZone = 'local'
@@ -85,15 +92,15 @@ const dashboardSetting = {
 }
 
 const App = () => {
-  const [openMorningMsg, setOpenMoringMsg] = React.useState(null)
-  const [openNightMsg, setOpenNightMsg] = React.useState(null)
+  const [morningMsgOpen, setMoringMsgOpen] = React.useState(null)
+  const [nightMsgOpen, setNightMsgOpen] = React.useState(null)
 
   const sayGoodMorning = () => {
-    setOpenMoringMsg(true)
+    setMoringMsgOpen(true)
   }
 
   const sayGoodNight = () => {
-    setOpenNightMsg(true)
+    setNightMsgOpen(true)
   }
   // these are the functions which will run according to your settings
 
@@ -102,8 +109,8 @@ const App = () => {
     {
       fn: sayGoodMorning,
       id: '1',
-      config: '0-8-*-*-*',
-      // this will run at 08:00 everyday
+      config: '*-*-*-*-*',
+      // this runs every minutes
       name: '',
       description: ''
     },
@@ -118,10 +125,10 @@ const App = () => {
   ]
 
   return (
-    <div className='App'>
+    <div>
       <Crontab timeZone={timeZone} tasks={tasks} dashboard={dashboardSetting} />
-      {openMorningMsg && <MorningMsg />}
-      {openNightMsg && <NightMsg />}
+      {morningMsgOpen && <MorningMsg />}
+      {nightMsgOpen && <NightMsg />}
     </div>
   )
 }
