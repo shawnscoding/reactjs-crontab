@@ -13,9 +13,6 @@
 - Named import as `<BasicCron />` is deprecated.
   use default import as `<Crontab />` to use crontab
 
-Nevertheless, if you just follow the instruction and code example below,
-you won't encounter any bug or issue
-
 ## Features
 
 - **Supports All Timezones**
@@ -58,10 +55,6 @@ MIN,MIN-HOUR,HOUR-DOM,DOM-MON,MON-DOW,DOW
 - DOW represents day of week, can be 1 through 7. 1 is Monday, 2 is Tusday and so on. `*` means every day
 - Each sort of time value(s) must be separated by a hyphen `-`
 - Multiple values must be separated by comma `,`
-
-## Important note
-
-- Note that the function might not be triggered as soon as the time condition becomes met. It might be after several seconds or even 50 or 55 seconds but definitely before the 59 seconds as we don't configure second. It's very random but doesn't really make it bad.
 
 ## Usage 1
 
@@ -262,7 +255,11 @@ Crontab.defaultProps = {
 
 ```
 
-## brief tutorial
+## Important note
+
+- Note that Crontab runs only once per minute. The exact second it runs varies from 0 to 59 seconds. Thus, don't be surprised if it doesn't run as soon as the time condition met.
+
+## tutorial
 
 - [Brief project based tutorial](https://shawnscoding.medium.com/the-easiest-way-to-automate-or-schedule-component-rendering-in-react-app-f4df7784e1ea)
 - [간단한 프로젝트 베이스 튜토리얼](https://shawnscoding.medium.com/%EB%A6%AC%EC%95%A1%ED%8A%B8-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EB%A0%8C%EB%8D%94%EB%A7%81-%EC%9E%90%EB%8F%99%ED%99%94-%EC%8A%A4%EC%BC%80%EC%A4%84%EB%A7%81-e8c7c9198132)
