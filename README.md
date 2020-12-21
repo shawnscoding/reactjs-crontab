@@ -1,64 +1,20 @@
 # reactjs-crontab
 
-> Light-weight crontab for handling repetitive tasks in React js
+The reactjs-crontab module is very light-weight task scheduler in reactjs based on linux crontab. This module allows you to schedule task in reactjs.
 
 [![NPM](https://img.shields.io/npm/v/reactjs-crontab.svg)](https://www.npmjs.com/package/reactjs-crontab) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-**Demo** and **Crontab guide** at [https://d180vcwahe2y6s.cloudfront.net/build/index.html](https://d180vcwahe2y6s.cloudfront.net/index.html)
+**Crontab Syntax Guide** at [https://d180vcwahe2y6s.cloudfront.net/build/index.html](https://d180vcwahe2y6s.cloudfront.net/index.html)
 
 ![Crontab Guide Demo](https://raw.githubusercontent.com/shawnscoding/reactjs-crontab/HEAD/assets/cronGuide.png)
 
-## Breaking Changes in 3.0.0
-
-- Named import as `<BasicCron />` is deprecated.
-  use default import as `<Crontab />` to use crontab
-
-## Features
-
-- **Supports All Timezones**
-- **Supports All modern browsers**
-- **No extra dependencies** except React
-- **No style library** is used to style the components. **vanilla css** is used.
-- Provide **specific error message**, you will find it so easy to debug.
-- Provide **Dashboard** which enables easy monitoring of your crontab
-- Provide Demo website which helps you to easily set up your crontab
-
-## Installation
+## Getting Started
 
 ```bash
 npm install --save reactjs-crontab
 ```
 
-## Inspired by
-
-- [Linux Crontab](https://www.geeksforgeeks.org/crontab-in-linux-with-examples)
-
-## Crontab Config Format
-
-```
-MIN-HOUR-DOM-MON-DOW
-```
-
-OR
-
-Can be multiple values like this
-
-```
-MIN,MIN-HOUR,HOUR-DOM,DOM-MON,MON-DOW,DOW
-```
-
-- MIN represents minute(s), can be 0 through 59
-  . `*` means every minute
-- HOUR represents hour(s) of a day, can be 0 through 23. `*` means every hour
-- DOM represents day of month, can be 1 through 31. `*` means every day
-- MON represents month, can be 1 through 12. `*` means every month
-- DOW represents day of week, can be 1 through 7. 1 is Monday, 2 is Tusday and so on. `*` means every day
-- Each sort of time value(s) must be separated by a hyphen `-`
-- Multiple values must be separated by comma `,`
-
 ## Usage 1
-
-Reactjs-crontab has very similar pattern to [Linux Crontab](https://www.geeksforgeeks.org/crontab-in-linux-with-examples)Except that this uses hyphen between arguments like this `*-*-*-*-*-utc`.
 
 This is useful when you need to render component
 at particular time
@@ -79,33 +35,15 @@ const MorningMsg = () => {
   return <h1 style={styles.text}>Good Morning !</h1>
 }
 
-const NightMsg = () => {
-  return <h1 style={styles.text}>Good Night!</h1>
-}
-
-const timeZone = 'local'
-// timezone is client-side local timezone.
-
-const dashboardSetting = {
-  hidden: true
-  // if true, dashboard is hidden
-}
-
 const App = () => {
-  const [morningMsgOpen, setMoringMsgOpen] = React.useState(null)
-  const [nightMsgOpen, setNightMsgOpen] = React.useState(null)
+  const [open, setOpen] = React.useState(null)
 
   const sayGoodMorning = () => {
-    setMoringMsgOpen(true)
+    setOpen(true)
   }
-
-  const sayGoodNight = () => {
-    setNightMsgOpen(true)
-  }
-  // these are the functions which will run according to your settings
+  // this is the function which will run according to your settings
 
   const tasks = [
-    // just put this array into <Crontab /> component as a props and it will work like magic!
     {
       fn: sayGoodMorning,
       id: '1',
@@ -113,22 +51,21 @@ const App = () => {
       // this runs every minutes
       name: '',
       description: ''
-    },
-    {
-      fn: sayGoodNight,
-      id: '2',
-      config: '0-21-*-*-*',
-      // this will run at 21:00 everyday
-      name: '',
-      description: ''
     }
   ]
 
   return (
     <div>
-      <Crontab timeZone={timeZone} tasks={tasks} dashboard={dashboardSetting} />
-      {morningMsgOpen && <MorningMsg />}
-      {nightMsgOpen && <NightMsg />}
+      <Crontab
+        tasks={tasks}
+        timeZone='local'
+        // timezone is PC local timezone.
+        dashboard={{
+          hidden: false
+          // if true, dashboard is hidden
+        }}
+      />
+      {open && <MorningMsg />}
     </div>
   )
 }
@@ -153,18 +90,13 @@ const sayHello = () => {
   console.log('Hello')
 }
 
-const sayGoobye = () => {
-  console.log('Goodbye')
-}
-
 const RequestSomething = () => {
   console.log('Api request has been sent')
 }
 
-// these are the functions which will run according to your settings
+// these are the functions which will run according to the config
 
 const tasks = [
-  // just put this array into <Crontab /> component as a props and it will work like magic!
   {
     fn: sayHello,
     id: '1',
@@ -174,35 +106,26 @@ const tasks = [
     description: 'Say Hello on console'
   },
   {
-    fn: sayGoobye,
-    id: '2',
-    config: '5-7-12-11-*',
-    // Execute In November on 12th At 07:05
-    name: 'Say Goodbye',
-    description: 'Say Goodbye on console'
-  },
-  {
     fn: RequestSomething,
     id: '3',
     config: '*-15,19-*-11,12-*',
     // Execute In November, December At 3PM and 7PM every minute
-    // Note that this is implemented in two different hour
     name: 'Request Something',
     description: 'Send API'
   }
 ]
 
-const timeZone = 'UTC'
-// timezone is utc
-
-const dashBoardSettings = {
-  hidden: false
-  // if true, dashboard gets hidden
-}
-
 const App = () => {
   return (
-    <Crontab tasks={tasks} timeZone={timeZone} dashboard={dashBoardSettings} />
+    <Crontab
+      tasks={tasks}
+      timeZone='UTC'
+      // timezone is UTC timezone.
+      dashboard={{
+        hidden: false
+        // if true, dashboard is hidden
+      }}
+    />
   )
 }
 export default App
@@ -213,6 +136,64 @@ Copying and pasting above code will result something like this below
 ![Dashboard Demo](https://raw.githubusercontent.com/shawnscoding/reactjs-crontab/HEAD/assets/dashboard.png)
 
 This will do what it says at the requested time(s).
+
+## Inspired by
+
+- [Linux Crontab](https://www.geeksforgeeks.org/crontab-in-linux-with-examples)
+
+## Features
+
+- **Supports All Timezones**
+- **Supports All modern browsers**
+- **No extra dependencies** except React
+- **No style library** is used to style the components. **vanilla css** is used.
+- Provide **specific error message**, you will find it so easy to debug.
+- Provide **Dashboard** which enables easy monitoring of your crontab
+- Provide Demo website which helps you to easily set up your crontab
+
+## Cron Syntax
+
+```
+ # ┌──────────── minute
+ # │ ┌────────── hour
+ # │ │ ┌──────── day of month
+ # │ │ │ ┌────── month
+ # │ │ │ │ ┌──── day of week
+ # │ │ │ │ │
+ # *-*-*-*-*
+```
+
+```
+MIN-HOUR-DOM-MON-DOW
+```
+
+OR
+
+Can be multiple values like this
+
+```
+ # ┌──────────── minute
+ # │   ┌────────── hour
+ # │   │   ┌──────── day of month
+ # │   │   │ ┌────── month
+ # │   │   │ │ ┌──── day of week
+ # │   │   │ │ │
+ # 1,2-6,7-*-*-*
+```
+
+```
+MIN,MIN-HOUR,HOUR-DOM,DOM-MON,MON-DOW,DOW
+```
+
+### Allowed values
+
+| field        | value             |
+| ------------ | ----------------- |
+| minute       | 0-59              |
+| hour         | 0-23              |
+| day of month | 1-31              |
+| month        | 1-12              |
+| day of week  | 1-7 (7 is sunday) |
 
 ## API
 
@@ -228,7 +209,7 @@ Crontab Props {
     }
   ],
   timeZone: "UTC", "local" or "YOUR PREFERRED TIMEZONE",
-  // you can check out supported timezone list here
+  // supported timezone list here
   // https://github.com/shawnscoding/reactjs-crontab/blob/master/TIMEZONES.md
   dashboard: {
     hidden: false
@@ -264,7 +245,12 @@ Crontab.defaultProps = {
 
 ## Important note
 
-- Note that Crontab runs only once per minute. The exact second it runs varies from 0 to 59 seconds. Thus, don't be surprised if it doesn't run as soon as the time condition met.
+- Note that Crontab is triggered only once per minute. The seconds that is triggered is different everytime you run your reactjs app. It varies from 0s to 59s. This is because we don't configure seconds. Thus, don't be surprised if it doesn't run as soon as the time condition met.
+
+## Breaking Changes in 3.0.0
+
+- Named import as `<BasicCron />` is deprecated.
+  use default import as `<Crontab />` to use crontab
 
 ## tutorial
 
@@ -274,6 +260,10 @@ Crontab.defaultProps = {
 ## Supported browsers
 
 We use [browserslist](https://github.com/browserslist/browserslist) config to state the browser support for this lib, so check it out on [browserslist.dev](https://browserslist.dev/?q=ZGVmYXVsdHM%3D).
+
+## Supported Timezones
+
+supported timezone list [here](https://github.com/shawnscoding/reactjs-crontab/blob/master/TIMEZONES.md)
 
 ## Note
 

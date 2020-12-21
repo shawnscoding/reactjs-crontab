@@ -13,33 +13,16 @@ const MorningMsg = () => {
   return <h1 style={styles.text}>Good Morning !</h1>
 }
 
-const NightMsg = () => {
-  return <h1 style={styles.text}>Good Night!</h1>
-}
-
-const timeZone = 'local'
-// timezone is client-side local timezone.
-
-const dashboardSetting = {
-  hidden: true
-  // if true, dashboard is hidden
-}
-
 const App = () => {
-  const [morningMsgOpen, setMoringMsgOpen] = React.useState(null)
-  const [nightMsgOpen, setNightMsgOpen] = React.useState(null)
+  const [ open, setOpen ] = React.useState(null)
 
   const sayGoodMorning = () => {
-    setMoringMsgOpen(true)
+    setOpen(true)
   }
+  // this is the function which will run according to your settings
 
-  const sayGoodNight = () => {
-    setNightMsgOpen(true)
-  }
-  // these are the functions which will run according to your settings
 
   const tasks = [
-    // just put this array into <Crontab /> component as a props and it will work like magic!
     {
       fn: sayGoodMorning,
       id: '1',
@@ -48,21 +31,20 @@ const App = () => {
       name: '',
       description: ''
     },
-    {
-      fn: sayGoodNight,
-      id: '2',
-      config: '0-21-*-*-*',
-      // this will run at 21:00 everyday
-      name: '',
-      description: ''
-    }
   ]
 
   return (
     <div>
-      <Crontab timeZone={timeZone} tasks={tasks} dashboard={dashboardSetting} />
-      {morningMsgOpen && <MorningMsg />}
-      {nightMsgOpen && <NightMsg />}
+      <Crontab 
+        tasks={tasks}
+        timeZone="local" 
+        // current timezone is client-side local timezone.
+        dashboard={{ 
+          hidden: false
+          // if true, dashboard is hidden
+        }} 
+      />
+      {open && <MorningMsg />}
     </div>
   )
 }
