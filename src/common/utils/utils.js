@@ -1,4 +1,3 @@
-import { clearConfigCache } from 'prettier'
 import { ONE_NUMBER, ASTERISK, SEVERAL_NUMBERS } from '../data/types'
 
 export const getHRtime = (hrTime, conditions, hourFormat) => {
@@ -527,31 +526,6 @@ export const converConfigValuesToObject = (str) => {
 //     }
 //   }
 // }
-
-export const convertToCronSyntax = (select) => {
-  let res = `*-*-*-*-*`
-  const splitted = res.split('-')
-  const { min, hour, dow, dom, mon } = select
-  if (min !== '*') {
-    splitted[0] = min
-  }
-  if (hour !== '*') {
-    splitted[1] = hour
-  }
-  if (dom !== '*') {
-    splitted[2] = dom
-  }
-  if (mon !== '*') {
-    splitted[3] = mon
-  }
-  if (dow !== '*') {
-    splitted[4] = dow
-  }
-
-  res = splitted.join('-')
-
-  return res
-}
 
 //  const preEl = useRef(null)
 // const handleCopyText = (e) => {

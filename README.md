@@ -1,6 +1,6 @@
 # reactjs-crontab
 
-The reactjs-crontab module is very light-weight task scheduler in reactjs based on linux crontab. This module allows you to schedule task in reactjs.
+The reactjs-crontab module is very light-weight task scheduler in reactjs based on [linux crontab](https://www.geeksforgeeks.org/crontab-in-linux-with-examples). This module allows you to schedule task in reactjs.
 
 [![NPM](https://img.shields.io/npm/v/reactjs-crontab.svg)](https://www.npmjs.com/package/reactjs-crontab) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
@@ -31,23 +31,23 @@ const styles = {
   }
 }
 
-const MorningMsg = () => {
-  return <h1 style={styles.text}>Good Morning !</h1>
+const HelloMsg = () => {
+  return <h1 style={styles.text}>Hello!</h1>
 }
 
 const App = () => {
   const [open, setOpen] = React.useState(null)
 
-  const sayGoodMorning = () => {
+  const sayHello = () => {
     setOpen(true)
   }
   // this is the function which will run according to your settings
 
   const tasks = [
     {
-      fn: sayGoodMorning,
+      fn: sayHello,
       id: '1',
-      config: '*-*-*-*-*',
+      config: '* * * * *',
       // this runs every minutes
       name: '',
       description: ''
@@ -65,7 +65,7 @@ const App = () => {
           // if true, dashboard is hidden
         }}
       />
-      {open && <MorningMsg />}
+      {open && <HelloMsg />}
     </div>
   )
 }
@@ -73,7 +73,7 @@ const App = () => {
 export default App
 ```
 
-Copying and pasting above code will render '<MorningMsg />' if it's 08:00 like the screenshot below
+Copying and pasting above code will render '<HelloMsg />' if it's 08:00 like the screenshot below
 
 ![usage 2 demo](https://raw.githubusercontent.com/shawnscoding/reactjs-crontab/HEAD/assets/usage_2_demo.png)
 
@@ -100,7 +100,7 @@ const tasks = [
   {
     fn: sayHello,
     id: '1',
-    config: '*-*-*-*-*',
+    config: '* * * * *',
     // Execute every minutes
     name: 'Say Hello',
     description: 'Say Hello on console'
@@ -108,7 +108,7 @@ const tasks = [
   {
     fn: RequestSomething,
     id: '3',
-    config: '*-15,19-*-11,12-*',
+    config: '* 15,19 * 11,12 *',
     // Execute In November, December At 3PM and 7PM every minute
     name: 'Request Something',
     description: 'Send API'
@@ -137,10 +137,6 @@ Copying and pasting above code will result something like this below
 
 This will do what it says at the requested time(s).
 
-## Inspired by
-
-- [Linux Crontab](https://www.geeksforgeeks.org/crontab-in-linux-with-examples)
-
 ## Features
 
 - **Supports All Timezones**
@@ -160,11 +156,11 @@ This will do what it says at the requested time(s).
  # │ │ │ ┌────── month
  # │ │ │ │ ┌──── day of week
  # │ │ │ │ │
- # *-*-*-*-*
+ # * * * * *
 ```
 
 ```
-MIN-HOUR-DOM-MON-DOW
+MIN HOUR DOM MON DOW
 ```
 
 OR
@@ -178,11 +174,11 @@ Can be multiple values like this
  # │   │   │ ┌────── month
  # │   │   │ │ ┌──── day of week
  # │   │   │ │ │
- # 1,2-6,7-*-*-*
+ # 1,2 6,7 * * *
 ```
 
 ```
-MIN,MIN-HOUR,HOUR-DOM,DOM-MON,MON-DOW,DOW
+MIN,MIN HOUR,HOUR DOM,DOM MON,MON DOW,DOW
 ```
 
 ### Allowed values
@@ -193,7 +189,7 @@ MIN,MIN-HOUR,HOUR-DOM,DOM-MON,MON-DOW,DOW
 | hour         | 0-23              |
 | day of month | 1-31              |
 | month        | 1-12              |
-| day of week  | 1-7 (7 is sunday) |
+| day of week  | 1-7 (7 is Sunday) |
 
 ## API
 
@@ -203,7 +199,7 @@ Crontab Props {
     {
       fn: yourFn,
       id: '1',
-      config: '*-11-18-10,13-*',
+      config: '* 11 18 10,13 *',
       name: 'logUserOut',
       description: 'Send API'
     }

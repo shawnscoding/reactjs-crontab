@@ -66,12 +66,8 @@ export const validateConfigLength = (configArr) => {
   if (configArr.length === 5) {
     return { error: false, msg }
   }
-  if (configArr.length === 6) {
-    msg = `Bad Config: Timezone value in config field is deprecated, remove it so it contains five values separated by hyphen like this "*-*-*-*-*". visit to see breaking changes https://www.npmjs.com/package/reactjs-crontab`
-    console.error(msg)
-    return { error: false, msg }
-  }
-  msg = `Bad Config: Five parameters are required in config field`
+  const leng = configArr.length
+  msg = `Bad format: Five values are required in config field but received ${leng.toString()}`
   return { error: true, msg }
 }
 
@@ -80,7 +76,7 @@ export const isEmpty = (configArr) => {
 
   for (let i = 0; i < configArr.length; i++) {
     if (configArr[i] === '') {
-      msg = `Bad Config: White space is not allowed in config field`
+      msg = `Bad Config: Unnecessary white space`
       return { error: true, msg }
     }
   }

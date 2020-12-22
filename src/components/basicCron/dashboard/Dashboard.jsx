@@ -17,7 +17,7 @@ const addHrTime = (tasks) => {
   const result = tasks.map((task) => {
     // let year = "2020";
     const { config } = task
-    const splittedConfig = config.split('-')
+    const splittedConfig = config.split(' ')
     const convertedConfig = splittedConfig.map((item) => {
       const obj = converConfigValuesToObject(item)
       return obj

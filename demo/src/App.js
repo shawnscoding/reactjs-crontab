@@ -1,52 +1,62 @@
 import React from 'react'
 import Crontab from 'reactjs-crontab'
 import 'reactjs-crontab/dist/index.css'
+//copy and paste this code and run!
+    
+const function_1 = () => {
+  console.log("called 1")
+};
+  
+const function_2 = () => {
+  console.log("called 2")
+};
+  
+const function_3 = () => {
+  console.log("called 3")
+};
+  
 
-const styles = {
-  text: {
-    margin: '70px',
-    color: 'skyblue'
-  }
+    
+const tasks = [
+      {
+        fn: function_1,
+        id: '1',
+        config: '* * * 12 *',
+        name: '',
+        description: ''
+      }
+    ,
+      {
+        fn: function_2,
+        id: '2',
+        config: '* 15 * 12 1',
+        name: '',
+        description: ''
+      }
+    ,
+      {
+        fn: function_3,
+        id: '3',
+        config: '11,7,9 15 * 12 1',
+        name: '',
+        description: ''
+      }
+    ]
+
+const settings = {
+  hidden: false
 }
 
-const MorningMsg = () => {
-  return <h1 style={styles.text}>Good Morning !</h1>
-}
-
+const timeZone = 'Asia/Seoul'
+    
 const App = () => {
-  const [ open, setOpen ] = React.useState(null)
-
-  const sayGoodMorning = () => {
-    setOpen(true)
-  }
-  // this is the function which will run according to your settings
-
-
-  const tasks = [
-    {
-      fn: sayGoodMorning,
-      id: '1',
-      config: '*-*-*-*-*',
-      // this runs every minutes
-      name: '',
-      description: ''
-    },
-  ]
-
-  return (
-    <div>
+    return (
       <Crontab 
         tasks={tasks}
-        timeZone="local" 
-        // current timezone is client-side local timezone.
-        dashboard={{ 
-          hidden: false
-          // if true, dashboard is hidden
-        }} 
+        timeZone={timeZone}
+        dashboard={settings}
       />
-      {open && <MorningMsg />}
-    </div>
-  )
+    )
 }
-
+    
 export default App

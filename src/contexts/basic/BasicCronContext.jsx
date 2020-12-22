@@ -88,7 +88,7 @@ const detectTaskTime = (convertedConfigArr, timeZone) => {
 
 const handleSetTimer = (task, timeZone) => {
   const { config } = task
-  const splittedConfig = config.split('-')
+  const splittedConfig = config.split(' ')
   const res = validateConfigLength(splittedConfig)
   const resTwo = isEmpty(splittedConfig)
 
