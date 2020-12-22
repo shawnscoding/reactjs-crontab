@@ -243,10 +243,9 @@ Crontab.defaultProps = {
 
 - Note that Crontab is triggered only once per minute. The seconds that is triggered is different everytime you run your reactjs app. It varies from 0s to 59s. This is because we don't configure seconds. Thus, don't be surprised if it doesn't run as soon as the time condition met.
 
-## Breaking Changes in 3.0.0
+## Breaking Changes in 4.0.0
 
-- Named import as `<BasicCron />` is deprecated.
-  use default import as `<Crontab />` to use crontab
+- The hyphon between values in config field has replaced by white space just like [linux crontab](https://www.geeksforgeeks.org/crontab-in-linux-with-examples)
 
 ## tutorial
 
