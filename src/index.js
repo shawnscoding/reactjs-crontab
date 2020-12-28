@@ -29,8 +29,7 @@ Crontab.propTypes = {
       fn: PropTypes.func.isRequired,
       id: PropTypes.string.isRequired,
       config: PropTypes.string.isRequired,
-      name: PropTypes.string,
-      description: PropTypes.string
+      name: PropTypes.string
     })
   ),
   dashboard: PropTypes.shape({

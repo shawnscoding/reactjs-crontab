@@ -163,7 +163,6 @@ const Dashboard = (props) => {
             <th>Name</th>
             <th>Configuration</th>
             <th>Schedule</th>
-            <th>Description</th>
           </tr>
         </thead>
         {crons.length &&
@@ -174,7 +173,6 @@ const Dashboard = (props) => {
                 <td>{cron.name}</td>
                 <td>{cron.config}</td>
                 <td>{`${cron.hrTime} `}</td>
-                <td>{cron.description}</td>
               </tr>
             </tbody>
           ))}

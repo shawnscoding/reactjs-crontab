@@ -16,8 +16,7 @@ npm install --save reactjs-crontab
 
 ## Usage 1
 
-This is useful when you need to render component
-at particular time
+To schedule component, this code would be useful
 
 ```jsx
 import React from 'react'
@@ -47,10 +46,8 @@ const App = () => {
     {
       fn: sayHello,
       id: '1',
-      config: '* * * * *',
+      config: '* * * * *'
       // this runs every minutes
-      name: '',
-      description: ''
     }
   ]
 
@@ -73,13 +70,13 @@ const App = () => {
 export default App
 ```
 
-Copying and pasting above code will render '<HelloMsg />' if it's 08:00 like the screenshot below
+Copying and pasting above code will render `<HelloMsg />`
 
 ![usage 2 demo](https://raw.githubusercontent.com/shawnscoding/reactjs-crontab/HEAD/assets/usage_2_demo.png)
 
 ## Usage 2
 
-This is useful when you need to implement some function like api call at particular time.
+To schedule function, this code would be useful
 
 ```jsx
 import React from 'react'
@@ -102,16 +99,14 @@ const tasks = [
     id: '1',
     config: '* * * * *',
     // Execute every minutes
-    name: 'Say Hello',
-    description: 'Say Hello on console'
+    name: 'Say Hello'
   },
   {
     fn: RequestSomething,
     id: '3',
     config: '* 15,19 * 11,12 *',
     // Execute In November, December At 3PM and 7PM every minute
-    name: 'Request Something',
-    description: 'Send API'
+    name: 'Request Something'
   }
 ]
 
@@ -135,7 +130,7 @@ Copying and pasting above code will result something like this below
 
 ![Dashboard Demo](https://raw.githubusercontent.com/shawnscoding/reactjs-crontab/HEAD/assets/dashboard.png)
 
-This will do what it says at the requested time(s).
+This will do what it says at the scheduled time.
 
 ## Features
 
@@ -200,8 +195,7 @@ Crontab Props {
       fn: yourFn,
       id: '1',
       config: '* 11 18 10,13 *',
-      name: 'logUserOut',
-      description: 'Send API'
+      name: 'logUserOut'
     }
   ],
   timeZone: "UTC", "local" or "YOUR PREFERRED TIMEZONE",
@@ -219,8 +213,7 @@ Crontab.propTypes = {
       fn: PropTypes.func.isRequired,
       id: PropTypes.string.isRequired,
       config: PropTypes.string.isRequired,
-      name: PropTypes.string,
-      description: PropTypes.string
+      name: PropTypes.string
     })
   ),
   dashboard: PropTypes.shape({
