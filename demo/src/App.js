@@ -1,40 +1,49 @@
 import React from 'react'
 import Crontab from 'reactjs-crontab'
 import 'reactjs-crontab/dist/index.css'
-//copy and paste this code and run!
-    
-const function_1 = () => {};
-  
-const function_2 = () => {};
-  
 
-    
-const tasks = [
-      {
-        fn: function_1,
-        id: '1',
-        config: '* * * 2,3 *',
-        name: '',
-        description: ''
-      }
-    ,
-      {
-        fn: function_2,
-        id: '2',
-        config: '* * * 2,3 *',
-        name: '',
-        description: ''
-      }
-    ]
-    
-const App = () => {
-    return (
-      <Crontab 
-        tasks={tasks}
-        timeZone='Africa/Khartoum'
-        dashboard={{ hidden: false }}
-      />
-    )
+const sayHello = () => {
+  console.log('Hello')
 }
-    
+
+const RequestSomething = () => {
+  console.log('Api request has been sent')
+}
+
+// these are the functions which will run according to the config
+
+const App = () => {
+  const tasks = React.useMemo(
+    () => [
+      {
+        fn: sayHello,
+        id: '1',
+        config: '* * * * *',
+        // Execute every minutes
+        name: 'Say Hello'
+      },
+      {
+        fn: RequestSomething,
+        id: '3',
+        config: '* 15,19 * 11,12 *',
+        // Execute In November, December At 3PM and 7PM every minute
+        name: 'Request Something'
+      }
+    ],
+    []
+  )
+  // tasks should be memoized
+
+  return (
+    <Crontab
+      tasks={tasks}
+      timeZone='UTC'
+      // timezone is UTC timezone.
+      dashboard={{
+        hidden: false
+        // if true, dashboard is hidden
+      }}
+    />
+  )
+}
 export default App
