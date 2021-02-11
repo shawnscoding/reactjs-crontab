@@ -181,7 +181,7 @@ const BasicCronProvider = ({ children, tasks, timeZone }) => {
       }
     }
   }, [])
-
+  // console.log('[BasicCronContext] rendered ')
   const store = {
     tasks,
     timeZone

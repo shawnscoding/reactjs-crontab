@@ -16,7 +16,7 @@ npm install --save reactjs-crontab
 
 ## Usage 1
 
-To schedule component, this code would be useful
+To schedule component,
 
 ```jsx
 import React from 'react'
@@ -42,14 +42,18 @@ const App = () => {
   }
   // this is the function which will run according to your settings
 
-  const tasks = [
-    {
-      fn: sayHello,
-      id: '1',
-      config: '* * * * *'
-      // this runs every minutes
-    }
-  ]
+  const tasks = React.useMemo(
+    () => [
+      {
+        fn: sayHello,
+        id: '1',
+        config: '* * * * *'
+        // this runs every minutes
+      }
+    ],
+    []
+  )
+  // tasks should be memoized
 
   return (
     <div>
@@ -70,13 +74,13 @@ const App = () => {
 export default App
 ```
 
-Copying and pasting above code will render `<HelloMsg />`
+Copying and pasting code above will render `<HelloMsg />`
 
 ![usage 2 demo](https://raw.githubusercontent.com/shawnscoding/reactjs-crontab/HEAD/assets/usage_2_demo.png)
 
 ## Usage 2
 
-To schedule function, this code would be useful
+To schedule function,
 
 ```jsx
 import React from 'react'
@@ -93,24 +97,28 @@ const RequestSomething = () => {
 
 // these are the functions which will run according to the config
 
-const tasks = [
-  {
-    fn: sayHello,
-    id: '1',
-    config: '* * * * *',
-    // Execute every minutes
-    name: 'Say Hello'
-  },
-  {
-    fn: RequestSomething,
-    id: '3',
-    config: '* 15,19 * 11,12 *',
-    // Execute In November, December At 3PM and 7PM every minute
-    name: 'Request Something'
-  }
-]
-
 const App = () => {
+  const tasks = React.useMemo(
+    () => [
+      {
+        fn: sayHello,
+        id: '1',
+        config: '* * * * *',
+        // Execute every minutes
+        name: 'Say Hello'
+      },
+      {
+        fn: RequestSomething,
+        id: '3',
+        config: '* 15,19 * 11,12 *',
+        // Execute In November, December At 3PM and 7PM every minute
+        name: 'Request Something'
+      }
+    ],
+    []
+  )
+  // tasks should be memoized
+
   return (
     <Crontab
       tasks={tasks}
@@ -126,7 +134,7 @@ const App = () => {
 export default App
 ```
 
-Copying and pasting above code will result something like this below
+Copying and pasting code above will result something like this below
 
 ![Dashboard Demo](https://raw.githubusercontent.com/shawnscoding/reactjs-crontab/HEAD/assets/dashboard.png)
 
@@ -238,7 +246,7 @@ Crontab.defaultProps = {
 
 ## Breaking Changes in 4.0.0
 
-- The hyphon between values in config field has replaced by white space just like [linux crontab](https://www.geeksforgeeks.org/crontab-in-linux-with-examples)
+- The hyphon `-` between crons in config field has replaced by white white space ` `. Now the syntax is just like [linux crontab](https://www.geeksforgeeks.org/crontab-in-linux-with-examples)
 
 ## tutorial
 

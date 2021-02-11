@@ -4,7 +4,11 @@ import { BasicCronProvider } from './contexts/basic/BasicCronContext.jsx'
 import Dashboard from './components/basicCron/dashboard/Dashboard'
 import PropTypes from 'prop-types'
 
-const Crontab = ({ timeZone, tasks, dashboard }) => {
+const comparisonFn = function (prevProps, nextProps) {
+  return true
+}
+
+const Crontab = React.memo(({ timeZone, tasks, dashboard }) => {
   const { hidden } = dashboard
 
   // console.log('[Crontab] rendered')
@@ -21,7 +25,7 @@ const Crontab = ({ timeZone, tasks, dashboard }) => {
       <BasicCronProvider timeZone={timeZone} tasks={tasks} />
     </div>
   )
-}
+}, comparisonFn)
 
 Crontab.propTypes = {
   tasks: PropTypes.arrayOf(
