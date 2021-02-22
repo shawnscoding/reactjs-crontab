@@ -35,15 +35,33 @@ const App = () => {
   // tasks should be memoized
 
   return (
-    <Crontab
-      tasks={tasks}
-      timeZone='UTC'
-      // timezone is UTC timezone.
-      dashboard={{
-        hidden: false
-        // if true, dashboard is hidden
-      }}
-    />
+    <>
+      <Crontab
+        tasks={tasks}
+        timeZone='UTC'
+        // timezone is UTC timezone.
+        dashboard={{
+          hidden: false
+          // if true, dashboard is hidden
+        }}
+      />
+      {/* <table>
+        <thead>
+          <tr>
+            <th>dsa</th>
+            <th>dsa</th>
+            <th>dsa</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>dsa</th>
+            <th>dsa</th>
+            <th>dsa</th>
+          </tr>
+        </tbody>
+      </table> */}
+    </>
   )
 }
 export default App

@@ -146,7 +146,7 @@ const Dashboard = (props) => {
     <div className={styles.dashboard}>
       <table className={styles.dashboard__container}>
         <thead className={styles.dashboard__title__container}>
-          <tr>
+          <tr className={styles.tr}>
             <th colSpan='5' className={styles.dashboard__title}>
               <div className={styles.dashboard__title__box}>
                 <span>Dashboard</span>
@@ -158,21 +158,21 @@ const Dashboard = (props) => {
           </tr>
         </thead>
         <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Configuration</th>
-            <th>Schedule</th>
+          <tr className={styles.tr}>
+            <th className={styles.th}>ID</th>
+            <th className={styles.th}>Name</th>
+            <th className={styles.th}>Configuration</th>
+            <th className={styles.th}>Schedule</th>
           </tr>
         </thead>
         {crons.length &&
           crons.map((cron, index) => (
             <tbody key={index}>
-              <tr>
-                <td>{cron.id}</td>
-                <td>{cron.name}</td>
-                <td>{cron.config}</td>
-                <td>{`${cron.hrTime} `}</td>
+              <tr className={styles.tr}>
+                <td className={styles.td}>{cron.id}</td>
+                <td className={styles.td}>{cron.name}</td>
+                <td className={styles.td}>{cron.config}</td>
+                <td className={styles.td}>{`${cron.hrTime} `}</td>
               </tr>
             </tbody>
           ))}
