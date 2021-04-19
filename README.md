@@ -46,9 +46,13 @@ const App = () => {
     () => [
       {
         fn: sayHello,
-        id: '1',
         config: '* * * * *'
         // this runs every minutes
+      },
+      {
+        fn: sayHello,
+        config: '35,36 9 * 4 *'
+        // In April At 9AM and At 35 minute(s), 36 minute(s)
       }
     ],
     []
@@ -59,8 +63,8 @@ const App = () => {
     <div>
       <Crontab
         tasks={tasks}
-        timeZone='local'
-        // timezone is PC local timezone.
+        timeZone='UTC'
+        // timezone is UTC timezone.
         dashboard={{
           hidden: false
           // if true, dashboard is hidden
@@ -102,17 +106,17 @@ const App = () => {
     () => [
       {
         fn: sayHello,
-        id: '1',
         config: '* * * * *',
         // Execute every minutes
-        name: 'Say Hello'
+        id: '1', // optional
+        name: 'Say Hello' // optional
       },
       {
         fn: RequestSomething,
-        id: '3',
         config: '* 15,19 * 11,12 *',
         // Execute In November, December At 3PM and 7PM every minute
-        name: 'Request Something'
+        id: '2', // optional
+        name: 'Request Something' // optional
       }
     ],
     []
@@ -219,8 +223,8 @@ Crontab.propTypes = {
   tasks: PropTypes.arrayOf(
     PropTypes.shape({
       fn: PropTypes.func.isRequired,
-      id: PropTypes.string.isRequired,
       config: PropTypes.string.isRequired,
+      id: PropTypes.string,
       name: PropTypes.string
     })
   ),

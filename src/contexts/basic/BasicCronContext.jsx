@@ -179,7 +179,6 @@ const BasicCronProvider = ({ children, tasks, timeZone }) => {
     }
     return item
   })
-  console.log('tasks ', tasks)
   useEffect(() => {
     if (tasks.length) {
       const validatedTasks = validateValueTypes(tasks)
