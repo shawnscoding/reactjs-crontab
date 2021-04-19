@@ -2,41 +2,32 @@ import React from 'react'
 import Crontab from 'reactjs-crontab'
 import 'reactjs-crontab/dist/index.css'
 
-const styles = {
-  text: {
-    margin: '70px',
-    color: 'skyblue'
-  }
+const sayHello = () => {
+  console.log('Hello')
 }
 
 const RequestSomething = () => {
   console.log('Api request has been sent')
 }
 
-const HelloMsg = () => {
-  return <h1 style={styles.text}>Hello!</h1>
-}
+// these are the functions which will run according to the config
 
 const App = () => {
-  const [open, setOpen] = React.useState(null)
-
-  const sayHello = () => {
-    setOpen(true)
-  }
-  // this is the function which will run according to your settings
-
   const tasks = React.useMemo(
     () => [
       {
         fn: sayHello,
-        config: '* * * * *'
-        // this runs every minutes
+        config: '* * * * *',
+        // Execute every minutes
+        id: '1', // optional
+        name: 'Say Hello' // optional
       },
       {
         fn: RequestSomething,
-        config: '38,39 9 * 4 *'
+        config: '* 15,19 * 11,12 *',
         // Execute In November, December At 3PM and 7PM every minute
-        // name: 'Request Something'
+        id: '2', // optional
+        name: 'Request Something' // optional
       }
     ],
     []
@@ -44,19 +35,15 @@ const App = () => {
   // tasks should be memoized
 
   return (
-    <div>
-      <Crontab
-        tasks={tasks}
-        timeZone='utc'
-        // timezone is UTC timezone.
-        dashboard={{
-          hidden: false
-          // if true, dashboard is hidden
-        }}
-      />
-      {open && <HelloMsg />}
-    </div>
+    <Crontab
+      tasks={tasks}
+      timeZone='UTC'
+      // timezone is UTC timezone.
+      dashboard={{
+        hidden: false
+        // if true, dashboard is hidden
+      }}
+    />
   )
 }
-
 export default App
