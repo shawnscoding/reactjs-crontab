@@ -147,9 +147,9 @@ const Dashboard = (props) => {
       <table className={styles.dashboard__container}>
         <thead className={styles.dashboard__title__container}>
           <tr className={styles.tr}>
-            <th colSpan='5' className={styles.dashboard__title}>
+            <th colSpan='5' className={styles['dashboard__title-row']}>
               <div className={styles.dashboard__title__box}>
-                <span>Dashboard</span>
+                <span className={styles.dashboard__title}>Dashboard</span>
                 <span>
                   {`Today: ${formattedMonth} ${currentDom}th / TZ: ${tzText}`}
                 </span>
