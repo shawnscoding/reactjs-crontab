@@ -6,7 +6,7 @@ The reactjs-crontab module is very light-weight task scheduler in reactjs based 
 
 **Cron Syntax Guide** at [link](https://d180vcwahe2y6s.cloudfront.net/index.html)
 
-[![Cron Guide Demo](https://raw.githubusercontent.com/shawnscoding/reactjs-crontab/HEAD/assets/cronGuide.png)](https://d180vcwahe2y6s.cloudfront.net/index.html)
+[![Cron Guide Demo](https://github.com/shawnscoding/reactjs-crontab/blob/master/assets/crontab.gif)](https://d180vcwahe2y6s.cloudfront.net/index.html)
 
 ## Getting Started
 
