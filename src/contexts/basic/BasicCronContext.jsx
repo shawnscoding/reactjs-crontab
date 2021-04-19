@@ -172,6 +172,14 @@ const handleSetTimer = (task, timeZone) => {
 const BasicCronContext = createContext(null)
 
 const BasicCronProvider = ({ children, tasks, timeZone }) => {
+  tasks = tasks.map((item, i) => {
+    if (!item.id) {
+      item.id = (i + 1).toString()
+      return item
+    }
+    return item
+  })
+  console.log('tasks ', tasks)
   useEffect(() => {
     if (tasks.length) {
       const validatedTasks = validateValueTypes(tasks)

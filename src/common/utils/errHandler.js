@@ -1,8 +1,9 @@
 const handleNoneExistField = (task, keys) => {
-  const { id, name, config, description, fn } = keys
+  const { name, config, description, fn } = keys
   //   is undedined if user didn't specify
-  if (!id || !config || !fn) {
-    throw Error('Id, Config, Fn are required fields in tasks props')
+  // if (!id || !config || !fn) {
+  if (!config || !fn) {
+    throw Error('Config, Fn are required fields in tasks props')
   }
   if (!name) {
     task.name = '*'
