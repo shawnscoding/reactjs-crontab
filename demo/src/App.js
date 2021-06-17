@@ -16,7 +16,7 @@ const App = () => {
   const tasks = React.useMemo(
     () => [
       {
-        fn: sayHello,
+        fn: '',
         config: '* * * * *',
         // Execute every minutes
         id: '1', // optional

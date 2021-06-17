@@ -1,65 +1,39 @@
-const handleNoneExistField = (task, keys) => {
-  const { name, config, description, fn } = keys
-  //   is undedined if user didn't specify
-  // if (!id || !config || !fn) {
-  if (!config || !fn) {
-    console.error('Config, Fn are required fields in tasks props')
-  }
-  if (!name) {
-    task.name = '*'
-  }
-  if (!description) {
-    task.description = '*'
-  }
-  return task
-}
-
 const isFunction = (functionToCheck) => {
   return (
     functionToCheck && {}.toString.call(functionToCheck) === '[object Function]'
   )
 }
 
-export const validateValueTypes = (arr) => {
-  return arr.map((task) => {
-    const keysInObj = {}
-
-    for (const key in task) {
-      // console error if value is not string
-      if (key === 'fn') {
-        const isfn = isFunction(task[key])
-        if (!isfn) {
-          console.error('Type error in fn field')
-        }
-      } else if (typeof task[key] === typeof '') {
-        // console.log(`field of ${key} is string`)
-      } else {
-        console.error(`Type error in ${key} field`)
-      }
-
-      // find out how many and what field it contains
-
-      if (key === 'id') {
-        keysInObj.id = true
-      }
-      if (key === 'name') {
-        keysInObj.name = true
-      }
-      if (key === 'config') {
-        keysInObj.config = true
-      }
-      if (key === 'description') {
-        keysInObj.description = true
-      }
-      if (key === 'fn') {
-        keysInObj.fn = true
-      }
+export const validateValueTypes = (task) => {
+  if (task.fn === undefined) {
+    task.valid = false
+    console.error('Invalid, fn field is required')
+    task.config = 'Invalid, fn field is required'
+    return task
+  }
+  if (task.config === undefined) {
+    task.valid = false
+    console.error('Invalid, config field is required')
+    task.config = 'Invalid, config field is required'
+    return task
+  }
+  for (const key in task) {
+    // console error if value is not string
+    if (key === 'fn' && !isFunction(task[key])) {
+      console.error('Type error in fn field')
+      task.valid = false
+      task.config = 'Invalid, Type Function is required in fn field'
+      return task
+    } else if (typeof task[key] !== typeof '') {
+      console.log(`Invalid, Type String is required in ${key} field `)
+      task.valid = true
+      task[key] = `Invalid, Type String is required in ${key} field `
     }
+    // find out how many and what field it contains
+  }
 
-    const res = handleNoneExistField(task, keysInObj)
-    return res
-    // handle  nonexistent field
-  })
+  return task
+  // handle  nonexistent field
 }
 
 export const validateConfigLength = (configArr) => {

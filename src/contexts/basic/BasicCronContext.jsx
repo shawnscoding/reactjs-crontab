@@ -172,16 +172,21 @@ const handleSetTimer = (task, timeZone) => {
 const BasicCronContext = createContext(null)
 
 const BasicCronProvider = ({ children, tasks, timeZone }) => {
+  // console.log('[BasicCronContext] rendered ')
+
   useEffect(() => {
     if (tasks.length) {
-      const validatedTasks = validateValueTypes(tasks)
-
-      for (const item of validatedTasks) {
-        handleSetTimer(item, timeZone)
+      const validatedTask = []
+      for (const item of tasks) {
+        const task = validateValueTypes(item)
+        validatedTask.push(task)
       }
+      console.log('validatedTask ::', validatedTask)
+      // for (const item of validatedTask) {
+      //   handleSetTimer(item, timeZone)
+      // }
     }
   }, [])
-  // console.log('[BasicCronContext] rendered ')
   const store = {
     tasks,
     timeZone
