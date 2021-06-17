@@ -40,7 +40,8 @@ const App = () => {
       timeZone='UTC'
       // timezone is UTC timezone.
       dashboard={{
-        hidden: false
+        hidden: false,
+        route: '/test/test'
         // if true, dashboard is hidden
       }}
     />

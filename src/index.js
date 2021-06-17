@@ -11,6 +11,13 @@ const comparisonFn = function (prevProps, nextProps) {
 const Crontab = React.memo(({ timeZone, tasks, dashboard }) => {
   const { hidden, route } = dashboard
 
+  tasks = tasks.map((item, i) => {
+    if (!item.id) {
+      item.id = (i + 1).toString()
+      return item
+    }
+    return item
+  })
   // console.log('window.location ::', window.location)
 
   if (!hidden && route) {

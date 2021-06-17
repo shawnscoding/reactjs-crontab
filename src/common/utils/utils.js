@@ -285,14 +285,14 @@ export const getHRtime = (hrTime, conditions, hourFormat) => {
     hrTime += `at ${hour}${hourFormat} every minute as long as it's ${dow} in ${mon}`
   } else {
     // there is 1 possibility I can't think of
-    throw Error('Sorry, something went wrong in config key of task object')
+    console.error('Sorry, something went wrong in config key of task object')
   }
   // console.log('hrTime::', hrTime)
   return hrTime
 }
 
 export const formatHour = (hourStr) => {
-  if (typeof hourStr !== typeof '') throw Error('Bad arg')
+  if (typeof hourStr !== typeof '') console.error('Bad arg')
 
   let hourFormat = ''
 
@@ -310,7 +310,7 @@ export const formatHour = (hourStr) => {
 }
 
 export const formatMonth = (mon) => {
-  if (typeof mon !== typeof {}) throw Error('Bad argument')
+  if (typeof mon !== typeof {}) console.error('Bad argument')
   const { value } = mon
 
   const msg = `Bad config, month is required to be less than 13`
@@ -343,7 +343,7 @@ export const formatMonth = (mon) => {
       case '12':
         return 'December'
       default:
-        throw Error(msg)
+        console.error(msg)
     }
   })
   const result = { ...mon, value: formatted }
@@ -383,7 +383,7 @@ export const formatMonthInDashboard = (val) => {
 }
 
 export const formatDOW = (dow) => {
-  if (typeof dow !== typeof {}) throw Error('Bad args')
+  if (typeof dow !== typeof {}) console.error('Bad args')
   const msg = 'Bad config, dow is required to be less than 8'
   const { value } = dow
   const formatted = value.map((val) => {
@@ -405,7 +405,7 @@ export const formatDOW = (dow) => {
       case '7':
         return 'Sunday'
       default:
-        throw Error(msg)
+        console.error(msg)
     }
   })
   const result = { ...dow, value: formatted }
@@ -431,7 +431,7 @@ export const formatDOWGudie = (dows) => {
       case '7':
         return { hrText: 'Sunday', value }
       default:
-        throw Error(msg)
+        console.error(msg)
     }
   })
   return formatted
@@ -501,7 +501,7 @@ export const converConfigValuesToObject = (str) => {
       value
     }
   } else {
-    throw Error('Bad Settings')
+    console.error('Bad Settings')
   }
 }
 
@@ -564,7 +564,7 @@ export const getCurrentTime = (timeZone) => {
       })
     )
   } else {
-    throw Error(`Unsupported timezone: ${timeZone}`)
+    console.error(`Unsupported timezone: ${timeZone}`)
   }
 
   return now

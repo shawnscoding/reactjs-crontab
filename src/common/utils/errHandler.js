@@ -3,7 +3,7 @@ const handleNoneExistField = (task, keys) => {
   //   is undedined if user didn't specify
   // if (!id || !config || !fn) {
   if (!config || !fn) {
-    throw Error('Config, Fn are required fields in tasks props')
+    console.error('Config, Fn are required fields in tasks props')
   }
   if (!name) {
     task.name = '*'
@@ -25,16 +25,16 @@ export const validateValueTypes = (arr) => {
     const keysInObj = {}
 
     for (const key in task) {
-      // throw error if value is not string
+      // console error if value is not string
       if (key === 'fn') {
         const isfn = isFunction(task[key])
         if (!isfn) {
-          throw Error('Type error in fn field')
+          console.error('Type error in fn field')
         }
       } else if (typeof task[key] === typeof '') {
         // console.log(`field of ${key} is string`)
       } else {
-        throw Error(`Type error in ${key} field`)
+        console.error(`Type error in ${key} field`)
       }
 
       // find out how many and what field it contains

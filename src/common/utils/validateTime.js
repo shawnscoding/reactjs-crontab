@@ -1,7 +1,7 @@
 import { SEVERAL_NUMBERS, ONE_NUMBER, ASTERISK } from '../data/types'
 
 export const IsNeededToRunNow = (time, currentTime) => {
-  if (typeof time !== typeof {}) throw Error('Bad Arg')
+  if (typeof time !== typeof {}) console.error('Bad Arg')
   const { type, value } = time
   if (type === ASTERISK) {
     return { isNeededToRun: true }
@@ -25,7 +25,7 @@ export const IsNeededToRunNow = (time, currentTime) => {
 
 export const validateMin = (min) => {
   // could be *, one num or several
-  if (typeof min !== typeof {}) throw Error('Bad Arg')
+  if (typeof min !== typeof {}) console.error('Bad Arg')
   let msg = ''
 
   if (min.type === ASTERISK) {
@@ -54,7 +54,7 @@ export const validateMin = (min) => {
 
 export const validateHour = (hour) => {
   // could be *, one num or several
-  if (typeof hour !== typeof {}) throw Error('Bad Arg')
+  if (typeof hour !== typeof {}) console.error('Bad Arg')
   let msg = ''
   if (hour.type === ASTERISK) {
     return { error: false, msg }
@@ -82,7 +82,7 @@ export const validateHour = (hour) => {
 
 export const validateDom = (dom) => {
   // could be *, one num or several
-  if (typeof dom !== typeof {}) throw Error('Bad Arg')
+  if (typeof dom !== typeof {}) console.error('Bad Arg')
   let msg = ''
 
   if (dom.type === ASTERISK) {
@@ -111,7 +111,7 @@ export const validateDom = (dom) => {
 
 export const validateMon = (mon) => {
   // could be *, one num or several
-  if (typeof mon !== typeof {}) throw Error('Bad Arg')
+  if (typeof mon !== typeof {}) console.error('Bad Arg')
   let msg = ''
 
   if (mon.type === ASTERISK) {
@@ -142,7 +142,7 @@ export const validateMon = (mon) => {
 
 export const validateDow = (dow) => {
   // could be *, one num or several
-  if (typeof dow !== typeof {}) throw Error('Bad Arg')
+  if (typeof dow !== typeof {}) console.error('Bad Arg')
   let msg = ''
 
   if (dow.type === ASTERISK) {

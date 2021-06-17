@@ -93,10 +93,10 @@ const handleSetTimer = (task, timeZone) => {
   const resTwo = isEmpty(splittedConfig)
 
   if (res.error) {
-    throw Error(res.msg)
+    console.error(res.msg)
   }
   if (resTwo.error) {
-    throw Error(resTwo.msg)
+    console.error(resTwo.msg)
   }
 
   // console.log('config :::', config)
@@ -138,19 +138,19 @@ const handleSetTimer = (task, timeZone) => {
 
     if (minValidateRes.error) {
       const { msg } = minValidateRes
-      throw Error(msg)
+      console.error(msg)
     } else if (hourValidateRes.error) {
       const { msg } = hourValidateRes
-      throw Error(msg)
+      console.error(msg)
     } else if (domValidateRes.error) {
       const { msg } = domValidateRes
-      throw Error(msg)
+      console.error(msg)
     } else if (monValidateRes.error) {
       const { msg } = monValidateRes
-      throw Error(msg)
+      console.error(msg)
     } else if (dowValidateRes.error) {
       const { msg } = dowValidateRes
-      throw Error(msg)
+      console.error(msg)
     }
 
     const { fn } = task
@@ -172,13 +172,6 @@ const handleSetTimer = (task, timeZone) => {
 const BasicCronContext = createContext(null)
 
 const BasicCronProvider = ({ children, tasks, timeZone }) => {
-  tasks = tasks.map((item, i) => {
-    if (!item.id) {
-      item.id = (i + 1).toString()
-      return item
-    }
-    return item
-  })
   useEffect(() => {
     if (tasks.length) {
       const validatedTasks = validateValueTypes(tasks)
