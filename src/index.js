@@ -9,7 +9,27 @@ const comparisonFn = function (prevProps, nextProps) {
 }
 
 const Crontab = React.memo(({ timeZone, tasks, dashboard }) => {
-  const { hidden } = dashboard
+  const { hidden, route } = dashboard
+
+  // console.log('window.location ::', window.location)
+
+  if (!hidden && route) {
+    if (window.location.pathname === route) {
+      return (
+        <div className={styles.global}>
+          <BasicCronProvider timeZone={timeZone} tasks={tasks}>
+            <Dashboard />
+          </BasicCronProvider>
+        </div>
+      )
+    } else {
+      return (
+        <div className={styles.global}>
+          <BasicCronProvider timeZone={timeZone} tasks={tasks} />
+        </div>
+      )
+    }
+  }
 
   // console.log('[Crontab] rendered')
   if (!hidden)
@@ -46,7 +66,8 @@ Crontab.propTypes = {
 Crontab.defaultProps = {
   tasks: [],
   dashboard: {
-    hidden: false
+    hidden: false,
+    route: undefined
   },
   timeZone: 'UTC'
 }
