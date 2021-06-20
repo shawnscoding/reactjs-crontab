@@ -8,13 +8,13 @@ export const validateValueTypes = (task) => {
   if (task.fn === undefined) {
     task.valid = false
     console.error('Invalid, fn field is required')
-    task.config = 'Invalid, fn field is required'
+    // task.config = 'Invalid, fn field is required'
     return task
   }
   if (task.config === undefined) {
     task.valid = false
     console.error('Invalid, config field is required')
-    task.config = 'Invalid, config field is required'
+    // task.config = 'Invalid, config field is required'
     return task
   }
   for (const key in task) {
@@ -22,39 +22,46 @@ export const validateValueTypes = (task) => {
     if (key === 'fn' && !isFunction(task[key])) {
       console.error('Type error in fn field')
       task.valid = false
-      task.config = 'Invalid, Type Function is required in fn field'
+      // task.config = 'Invalid, Type Function is required in fn field'
       return task
-    } else if (typeof task[key] !== typeof '') {
-      console.log(`Invalid, Type String is required in ${key} field `)
-      task.valid = true
-      task[key] = `Invalid, Type String is required in ${key} field `
+    } else if (key !== 'fn' && typeof task[key] !== typeof '') {
+      console.error(`Invalid, Type String is required in ${key} field `)
+      // task[key] = `Invalid, Type String is required in ${key} field `
     }
     // find out how many and what field it contains
   }
+  const { config } = task
+  const splitted = config.split(' ')
+  if (!validateConfigLength(splitted)) {
+    task.valid = false
+    return task
+  }
+  if (isRedundantSpace(splitted)) {
+    task.valid = false
+    return task
+  }
 
+  task.valid = true
   return task
   // handle  nonexistent field
 }
 
-export const validateConfigLength = (configArr) => {
-  let msg = ''
-  if (configArr.length === 5) {
-    return { error: false, msg }
+const validateConfigLength = (configArr) => {
+  if (configArr.length !== 5) {
+    console.error(
+      `Bad format: Five values are required in config field but received ${configArr.length.toString()}`
+    )
+    return false
   }
-  const leng = configArr.length
-  msg = `Bad format: Five values are required in config field but received ${leng.toString()}`
-  return { error: true, msg }
+  return true
 }
-
-export const isEmpty = (configArr) => {
-  let msg = ''
-
+// 1 2 3 4,2 1, 5
+const isRedundantSpace = (configArr) => {
   for (let i = 0; i < configArr.length; i++) {
     if (configArr[i] === '') {
-      msg = `Bad Config: Unnecessary white space`
-      return { error: true, msg }
+      console.error(`Bad Config: Unnecessary white space`)
+      return true
     }
   }
-
-  return { error: false, msg }
+  return false
 }

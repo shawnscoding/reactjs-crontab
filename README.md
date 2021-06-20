@@ -51,7 +51,7 @@ const App = () => {
       },
       {
         fn: sayHello,
-        config: '35,36 9 * 4 *'
+        config: '* 13,14 10 4 *'
         // In April At 9AM and At 35 minute(s), 36 minute(s)
       }
     ],
@@ -63,11 +63,10 @@ const App = () => {
     <div>
       <Crontab
         tasks={tasks}
-        timeZone='UTC'
-        // timezone is UTC timezone.
+        timeZone='UTC' // UTC timezone.
         dashboard={{
-          hidden: false
-          // if true, dashboard is hidden
+          hidden: false, // if true, dashboard is hidden
+          route: '/crontab' // dashboard will only appear in /crontab route
         }}
       />
       {open && <HelloMsg />}
@@ -229,7 +228,8 @@ Crontab.propTypes = {
     })
   ),
   dashboard: PropTypes.shape({
-    hidden: PropTypes.bool.isRequired
+    hidden: PropTypes.bool.isRequired,
+     route: PropTypes.string
   }),
   timeZone: PropTypes.string.isRequired
 }
@@ -237,7 +237,8 @@ Crontab.propTypes = {
 Crontab.defaultProps = {
   tasks: [],
   dashboard: {
-    hidden: false
+    hidden: false,
+    route: undefined
   },
   timeZone: 'UTC'
 }
@@ -246,7 +247,7 @@ Crontab.defaultProps = {
 
 ## Important note
 
-- Note that Crontab is triggered only once per minute. The seconds that is triggered is different everytime you run your reactjs app. It varies from 0s to 59s. This is because we don't configure seconds. Thus, don't be surprised if it doesn't run as soon as the time condition met.
+- Note that Crontab does not specify the second at which it runs the function. In other words, Ramdom second will be picked. Thus, don't be surprised if it doesn't run as soon as the time condition met.
 
 ## Breaking Changes in 4.0.0
 

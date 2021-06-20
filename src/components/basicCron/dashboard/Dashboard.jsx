@@ -1,6 +1,5 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { BasicCronContext } from '../../../contexts/basic/BasicCronContext'
 import styles from '../../../styles.module.css'
 import {
   formatDOW,
@@ -16,7 +15,11 @@ const addHrTime = (tasks) => {
   if (!tasks.length) return []
   const result = tasks.map((task) => {
     // let year = "2020";
-    const { config } = task
+    const { config, valid } = task
+    if (!valid)
+      return {
+        id: 'Invalid'
+      }
     const splittedConfig = config.split(' ')
     const convertedConfig = splittedConfig.map((item) => {
       const obj = converConfigValuesToObject(item)
@@ -130,8 +133,7 @@ const handleFormatTz = (tz) => {
   return tz
 }
 
-const Dashboard = (props) => {
-  const { tasks, timeZone } = useContext(BasicCronContext)
+const Dashboard = ({ tasks, timeZone }) => {
   // console.log('tasks in Dashboard', tasks)
   const now = getCurrentTime(timeZone)
 
@@ -139,8 +141,9 @@ const Dashboard = (props) => {
   const Mon = now.getMonth() // beware: January = 0; February = 1, etc.
   const currentMon = Mon + 1
   const formattedMonth = formatMonthInDashboard(currentMon.toString())
-  const crons = addHrTime(tasks)
   const tzText = handleFormatTz(timeZone)
+
+  const crons = addHrTime(tasks)
   // console.log('crons :::')
   return (
     <div className={styles.dashboard}>
@@ -166,16 +169,31 @@ const Dashboard = (props) => {
           </tr>
         </thead>
         {crons.length &&
-          crons.map((cron, index) => (
-            <tbody key={index}>
-              <tr className={styles.tr}>
-                <td className={styles.td}>{cron.id}</td>
-                <td className={styles.td}>{cron.name}</td>
-                <td className={styles.td}>{cron.config}</td>
-                <td className={styles.td}>{`${cron.hrTime} `}</td>
-              </tr>
-            </tbody>
-          ))}
+          crons.map((cron, index) => {
+            if (cron.id === 'Invalid')
+              return (
+                <tbody key={index}>
+                  <tr className={styles.tr}>
+                    <td style={{ color: '#dc004e' }} className={styles.td}>
+                      {cron.id}
+                    </td>
+                    <td className={styles.td} />
+                    <td className={styles.td} />
+                    <td className={styles.td} />
+                  </tr>
+                </tbody>
+              )
+            return (
+              <tbody key={index}>
+                <tr className={styles.tr}>
+                  <td className={styles.td}>{cron.id}</td>
+                  <td className={styles.td}>{cron.name}</td>
+                  <td className={styles.td}>{cron.config}</td>
+                  <td className={styles.td}>{`${cron.hrTime} `}</td>
+                </tr>
+              </tbody>
+            )
+          })}
       </table>
     </div>
   )

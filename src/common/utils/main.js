@@ -1,10 +1,3 @@
-import React, { createContext, useEffect } from 'react'
-import PropTypes from 'prop-types'
-import {
-  validateValueTypes,
-  validateConfigLength,
-  isEmpty
-} from '../../common/utils/errHandler'
 import {
   validateMin,
   validateHour,
@@ -12,11 +5,8 @@ import {
   validateMon,
   validateDow,
   IsNeededToRunNow
-} from '../../common/utils/validateTime'
-import {
-  converConfigValuesToObject,
-  getCurrentTime
-} from '../../common/utils/utils'
+} from './validateTime'
+import { converConfigValuesToObject, getCurrentTime } from './utils'
 
 const foramtDow = (dow) => {
   if (dow === 0) {
@@ -86,18 +76,9 @@ const detectTaskTime = (convertedConfigArr, timeZone) => {
   return true
 }
 
-const handleSetTimer = (task, timeZone) => {
-  const { config } = task
+export const handleSetTimer = (task, timeZone) => {
+  const { config, fn } = task
   const splittedConfig = config.split(' ')
-  const res = validateConfigLength(splittedConfig)
-  const resTwo = isEmpty(splittedConfig)
-
-  if (res.error) {
-    console.error(res.msg)
-  }
-  if (resTwo.error) {
-    console.error(resTwo.msg)
-  }
 
   // console.log('config :::', config)
   // const utcTime = new Date(new Date().toUTCString().slice(0, -3))
@@ -109,7 +90,6 @@ const handleSetTimer = (task, timeZone) => {
   if (isNotAsterisk === undefined) {
     // means this is all *
     // console.log('isNotAsterisk ::', isNotAsterisk)
-    const { fn } = task
 
     fn()
     setInterval(() => {
@@ -136,71 +116,16 @@ const handleSetTimer = (task, timeZone) => {
 
     const dowValidateRes = validateDow(convertedConfig[4])
 
-    if (minValidateRes.error) {
-      const { msg } = minValidateRes
-      console.error(msg)
-    } else if (hourValidateRes.error) {
-      const { msg } = hourValidateRes
-      console.error(msg)
-    } else if (domValidateRes.error) {
-      const { msg } = domValidateRes
-      console.error(msg)
-    } else if (monValidateRes.error) {
-      const { msg } = monValidateRes
-      console.error(msg)
-    } else if (dowValidateRes.error) {
-      const { msg } = dowValidateRes
-      console.error(msg)
-    }
+    if (minValidateRes.error) return console.error(minValidateRes.msg)
+    else if (hourValidateRes.error) return console.error(hourValidateRes.msg)
+    else if (domValidateRes.error) return console.error(domValidateRes.msg)
+    else if (monValidateRes.error) return console.error(monValidateRes.msg)
+    else if (dowValidateRes.error) return console.error(dowValidateRes.msg)
 
-    const { fn } = task
-
-    const isNeededToRun = detectTaskTime(convertedConfig, timeZone)
-    if (isNeededToRun) {
-      // console.log('isNeededToRun ::', isNeededToRun)
-      fn()
-    }
+    if (detectTaskTime(convertedConfig, timeZone)) fn()
 
     setInterval(() => {
-      const isNeededToRun = detectTaskTime(convertedConfig, timeZone)
-      if (isNeededToRun) {
-        fn()
-      }
+      if (detectTaskTime(convertedConfig, timeZone)) fn()
     }, timerDuration)
   }
 }
-const BasicCronContext = createContext(null)
-
-const BasicCronProvider = ({ children, tasks, timeZone }) => {
-  // console.log('[BasicCronContext] rendered ')
-
-  useEffect(() => {
-    if (tasks.length) {
-      const validatedTask = []
-      for (const item of tasks) {
-        const task = validateValueTypes(item)
-        validatedTask.push(task)
-      }
-      console.log('validatedTask ::', validatedTask)
-      // for (const item of validatedTask) {
-      //   handleSetTimer(item, timeZone)
-      // }
-    }
-  }, [])
-  const store = {
-    tasks,
-    timeZone
-  }
-  return (
-    <BasicCronContext.Provider value={store}>
-      {children}
-    </BasicCronContext.Provider>
-  )
-}
-
-BasicCronProvider.propTypes = {
-  tasks: PropTypes.array.isRequired,
-  timeZone: PropTypes.string.isRequired
-}
-
-export { BasicCronProvider, BasicCronContext }
