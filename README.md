@@ -66,7 +66,7 @@ const App = () => {
         timeZone='UTC' // UTC timezone.
         dashboard={{
           hidden: false, // if true, dashboard is hidden
-          route: '/crontab' // dashboard will only appear in /crontab route
+          route: '/' // dashboard will only appear in '/' route
         }}
       />
       {open && <HelloMsg />}
