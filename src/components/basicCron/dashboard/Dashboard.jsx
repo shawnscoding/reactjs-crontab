@@ -5,7 +5,7 @@ import {
   formatDOW,
   formatHour,
   formatMonth,
-  converConfigValuesToObject,
+  convertConfigToObj,
   getCurrentTime,
   formatMonthInDashboard
 } from '../../../common/utils/utils'
@@ -22,7 +22,7 @@ const addHrTime = (tasks) => {
       }
     const splittedConfig = config.split(' ')
     const convertedConfig = splittedConfig.map((item) => {
-      const obj = converConfigValuesToObject(item)
+      const obj = convertConfigToObj(item)
       return obj
     })
     let hrTime = ''

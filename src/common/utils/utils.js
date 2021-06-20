@@ -454,7 +454,7 @@ export const insertZero = (arr) => {
   return result
 }
 
-export const converConfigValuesToObject = (str) => {
+export const convertConfigToObj = (str) => {
   const arr = str.split(',')
   if (arr[0] === '*') {
     return {
@@ -563,8 +563,6 @@ export const getCurrentTime = (timeZone) => {
         timeZone: timeZone
       })
     )
-  } else {
-    console.error(`Unsupported timezone: ${timeZone}`)
   }
 
   return now

@@ -6,47 +6,38 @@ import {
   validateDow,
   IsNeededToRunNow
 } from './validateTime'
-import { converConfigValuesToObject, getCurrentTime } from './utils'
+import { getCurrentTime } from './utils'
 
-const foramtDow = (dow) => {
-  if (dow === 0) {
-    return 7
-  } else {
-    return dow
-  }
+const formatDow = (dow) => {
+  if (dow === 0) return 7
+  else return dow
 }
 
-const timerDuration = 60000
+const detectTaskTime = (arr, tz) => {
+  // console.log('tz ::', tz)
+  const now = getCurrentTime(tz)
 
-const detectTaskTime = (convertedConfigArr, timeZone) => {
-  // console.log('timeZone ::', timeZone)
-  const now = getCurrentTime(timeZone)
-
-  const currentMin = now.getMinutes()
-  const currentHour = now.getHours()
-  const currentDom = now.getDate()
-  const Mon = now.getMonth() // beware: January = 0; February = 1, etc.
-  const Dow = now.getDay()
-  const currentMon = Mon + 1
-  const currentDow = foramtDow(Dow) // Sunday = 0, Monday = 1, etc.
-  // console.log('now ::', now)
-  // console.log('now currentMin::', currentMin)
+  //   console.log('now ::', now)
+  //   console.log('now currentMin::', currentMin)
   // console.log('now currentHour::', currentHour)
   // console.log('now currentDom::', currentDom)
   // console.log('now currentMon::', currentMon)
   // console.log('now currentDow::', currentDow)
 
-  const min = convertedConfigArr[0]
-  const hour = convertedConfigArr[1]
-  const dom = convertedConfigArr[2]
-  const mon = convertedConfigArr[3]
-  const dow = convertedConfigArr[4]
+  const min = arr[0]
+  const hour = arr[1]
+  const dom = arr[2]
+  const mon = arr[3]
+  const dow = arr[4]
 
-  const minValidateRes = IsNeededToRunNow(min, currentMin.toString())
-  const hourValidateRes = IsNeededToRunNow(hour, currentHour.toString())
-  const domValidateRes = IsNeededToRunNow(dom, currentDom.toString())
-  const monValidateRes = IsNeededToRunNow(mon, currentMon.toString())
-  const dowValidateRes = IsNeededToRunNow(dow, currentDow.toString())
+  const minValidateRes = IsNeededToRunNow(min, now.getMinutes().toString())
+  const hourValidateRes = IsNeededToRunNow(hour, now.getHours().toString())
+  const domValidateRes = IsNeededToRunNow(dom, now.getDate().toString())
+  const monValidateRes = IsNeededToRunNow(mon, (now.getMonth() + 1).toString())
+  const dowValidateRes = IsNeededToRunNow(
+    dow,
+    formatDow(now.getDay()).toString()
+  )
 
   if (!minValidateRes.isNeededToRun) {
     return minValidateRes.isNeededToRun
@@ -76,45 +67,28 @@ const detectTaskTime = (convertedConfigArr, timeZone) => {
   return true
 }
 
-export const handleSetTimer = (task, timeZone) => {
-  const { config, fn } = task
-  const splittedConfig = config.split(' ')
-
-  // console.log('config :::', config)
+export const runFn = (task, tz) => {
+  const { fn, splittedConf, objOfConf } = task
   // const utcTime = new Date(new Date().toUTCString().slice(0, -3))
   // console.log('utc::', utcTime)
 
-  const isNotAsterisk = splittedConfig
-    .slice(0, splittedConfig.length - 1)
+  const isNotAsterisk = splittedConf
+    .slice(0, splittedConf.length - 1)
     .find((item) => item !== '*')
-  if (isNotAsterisk === undefined) {
-    // means this is all *
-    // console.log('isNotAsterisk ::', isNotAsterisk)
 
-    fn()
-    setInterval(() => {
-      fn()
-    }, timerDuration)
-  } else {
-    // means there is something particular
-    // validate value in config field
-    const convertedConfig = splittedConfig.map((item) => {
-      const obj = converConfigValuesToObject(item)
+  if (isNotAsterisk === undefined) fn()
+  else {
+    // console.log('objOfConf ::', objOfConf)
 
-      return obj
-    })
+    const minValidateRes = validateMin(objOfConf[0])
 
-    // console.log('convertedConfig ::', convertedConfig)
+    const hourValidateRes = validateHour(objOfConf[1])
 
-    const minValidateRes = validateMin(convertedConfig[0])
+    const domValidateRes = validateDom(objOfConf[2])
 
-    const hourValidateRes = validateHour(convertedConfig[1])
+    const monValidateRes = validateMon(objOfConf[3])
 
-    const domValidateRes = validateDom(convertedConfig[2])
-
-    const monValidateRes = validateMon(convertedConfig[3])
-
-    const dowValidateRes = validateDow(convertedConfig[4])
+    const dowValidateRes = validateDow(objOfConf[4])
 
     if (minValidateRes.error) return console.error(minValidateRes.msg)
     else if (hourValidateRes.error) return console.error(hourValidateRes.msg)
@@ -122,10 +96,30 @@ export const handleSetTimer = (task, timeZone) => {
     else if (monValidateRes.error) return console.error(monValidateRes.msg)
     else if (dowValidateRes.error) return console.error(dowValidateRes.msg)
 
-    if (detectTaskTime(convertedConfig, timeZone)) fn()
-
-    setInterval(() => {
-      if (detectTaskTime(convertedConfig, timeZone)) fn()
-    }, timerDuration)
+    if (detectTaskTime(objOfConf, tz)) fn()
   }
+
+  return true
+}
+
+const callRepeater = (task, timeZone) => {
+  const { fn, objOfConf } = task
+  if (detectTaskTime(objOfConf, timeZone)) fn()
+  setInterval(() => {
+    // console.log('second interval :', getCurrentTime('UTC').getSeconds())
+    if (detectTaskTime(objOfConf, timeZone)) fn()
+  }, 60000)
+}
+
+export const repeatExecute = (arr, tz) => {
+  const killOnTime = setInterval(() => {
+    // console.log('first interval :', getCurrentTime(tz).getSeconds())
+
+    if (getCurrentTime(tz).getSeconds() === 0) {
+      for (const el of arr) {
+        if (el.valid) callRepeater(el, tz)
+      }
+      clearInterval(killOnTime)
+    }
+  }, 1000)
 }

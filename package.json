@@ -1,6 +1,6 @@
 {
   "name": "reactjs-crontab",
-  "version": "4.3.0",
+  "version": "4.4.0",
   "description": "React component that allow you to schedule task in reactjs",
   "author": "shawnscoding",
   "license": "MIT",

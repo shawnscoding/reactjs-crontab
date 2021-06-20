@@ -245,14 +245,6 @@ Crontab.defaultProps = {
 
 ```
 
-## Important note
-
-- Note that Crontab does not specify the second at which it runs the function. In other words, Ramdom second will be picked. Thus, don't be surprised if it doesn't run as soon as the time condition met.
-
-## Breaking Changes in 4.0.0
-
-- The hyphon `-` between crons in config field has replaced by white white space ` `. Now the syntax is just like [linux crontab](https://www.geeksforgeeks.org/crontab-in-linux-with-examples)
-
 ## tutorial
 
 - [Brief project based tutorial](https://shawnscoding.medium.com/the-easiest-way-to-automate-or-schedule-component-rendering-in-react-app-f4df7784e1ea)

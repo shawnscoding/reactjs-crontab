@@ -3,7 +3,8 @@ import styles from './styles.module.css'
 import Dashboard from './components/basicCron/dashboard/Dashboard'
 import PropTypes from 'prop-types'
 import { validateValueTypes } from './common/utils/errHandler'
-import { handleSetTimer } from './common/utils/main'
+import { repeatExecute, runFn } from './common/utils/main'
+import { convertConfigToObj } from './common/utils/utils'
 
 const comparisonFn = function (prevProps, nextProps) {
   return true
@@ -25,10 +26,24 @@ const Crontab = React.memo(({ timeZone, tasks, dashboard }) => {
         validatedTasks.push(task)
       }
       // console.log('validatedTasks ::', validatedTasks)
+      const executableTasks = []
       for (const item of validatedTasks) {
-        if (item.valid) handleSetTimer(item, timeZone)
+        if (item.valid) {
+          item.splittedConf = item.config.split(' ')
+
+          item.objOfConf = item.splittedConf.map((item) =>
+            convertConfigToObj(item)
+          )
+          const runned = runFn(item, timeZone)
+          if (runned) executableTasks.push(item)
+          else executableTasks.push({ ...item, valid: false })
+        } else executableTasks.push(item)
       }
-      setTasks(validatedTasks)
+
+      // console.log('executableTasks ::', executableTasks)
+
+      repeatExecute(executableTasks, timeZone)
+      setTasks(executableTasks)
     }
   }, [tasks])
 

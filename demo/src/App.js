@@ -2,36 +2,43 @@ import React from 'react'
 import Crontab from 'reactjs-crontab'
 import 'reactjs-crontab/dist/index.css'
 
-const styles = {
-  text: {
-    margin: '70px',
-    color: 'skyblue'
-  }
+const sayHello = () => {
+  console.log('Hello')
 }
 
-const HelloMsg = () => {
-  return <h1 style={styles.text}>Hello!</h1>
+const RequestSomething = () => {
+  console.log('Api request has been sent')
 }
+
+const RequestSomething2 = () => {
+  console.log('Api request has been sent 222')
+}
+
+// these are the functions which will run according to the config
 
 const App = () => {
-  const [open, setOpen] = React.useState(null)
-
-  const sayHello = () => {
-    setOpen(true)
-  }
-  // this is the function which will run according to your settings
-
   const tasks = React.useMemo(
     () => [
       {
         fn: sayHello,
-        config: '0,1 * * * *'
-        // this runs every minutes
+        config: '* * * * *',
+        // Execute every minutes
+        id: '1', // optional
+        name: 'Say Hello' // optional
       },
       {
-        fn: sayHello,
-        config: '* 13,14 10 4 *'
-        // In April At 9AM and At 35 minute(s), 36 minute(s)
+        fn: RequestSomething,
+        config: '* 22 * * *',
+        // Execute In November, December At 3PM and 7PM every minute
+        id: '2', // optional
+        name: 'Request Something' // optional
+      },
+      {
+        fn: RequestSomething2,
+        config: '25,26,27 * * * *',
+        // Execute In November, December At 3PM and 7PM every minute
+        id: '2', // optional
+        name: 'Request Something' // optional
       }
     ],
     []
@@ -39,17 +46,15 @@ const App = () => {
   // tasks should be memoized
 
   return (
-    <div>
-      <Crontab
-        tasks={tasks}
-        timeZone='UTC' // UTC timezone.
-        dashboard={{
-          hidden: false // if true, dashboard is hidden
-        }}
-      />
-      {open && <HelloMsg />}
-    </div>
+    <Crontab
+      tasks={tasks}
+      timeZone='local'
+      // timezone is UTC timezone.
+      dashboard={{
+        hidden: false
+        // if true, dashboard is hidden
+      }}
+    />
   )
 }
-
 export default App
