@@ -44,8 +44,7 @@ const App = () => {
         tasks={tasks}
         timeZone='UTC' // UTC timezone.
         dashboard={{
-          hidden: false, // if true, dashboard is hidden
-          route: '/crontab' // dashboard will only appear in /crontab route
+          hidden: false // if true, dashboard is hidden
         }}
       />
       {open && <HelloMsg />}
